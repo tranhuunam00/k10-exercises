@@ -98,6 +98,11 @@ const validate = (
   return error;
 };
 
+//...
+
+
+
+// Hàm kiểm tra lỗi và enable/disable button submit
 const checkSubmit = () => {
   if (
     listError.userName ||
@@ -109,7 +114,8 @@ const checkSubmit = () => {
     !formValue.dob ||
     !formValue.confirmPw ||
     !formValue.email ||
-    !formValue.password
+    !formValue.password ||
+    !formValue.sex
   ) {
     buttonEle.setAttribute("disabled", "true");
     buttonEle.classList.add("invalid");
@@ -118,6 +124,54 @@ const checkSubmit = () => {
     buttonEle.classList.remove("invalid");
   }
 };
+
+// Lắng nghe sự kiện input change của các trường input
+emailELe.addEventListener("change", () => {
+  listError.email = validate("email", emailELe.value, listError);
+  formValue.email = emailELe.value;
+  checkSubmit();
+});
+
+nameEle.addEventListener("change", () => {
+  listError.userName = validate("username", nameEle.value, { minlength: 5 }, passwordEle.value);
+  formValue.userName = nameEle.value;
+  checkSubmit();
+});
+
+maleEle.addEventListener("change", () => {
+  listError.sex = validate("sex", null, listError);
+  checkSubmit();
+});
+
+femaleEle.addEventListener("change", () => {
+  listError.sex = validate("sex", null, listError);
+  checkSubmit();
+});
+
+passwordEle.addEventListener("change", () => {
+  listError.password = validate("password", passwordEle.value, { theFirstLetter: true }, confirmEle.value);
+  formValue.password = passwordEle.value;
+  checkSubmit();
+});
+
+confirmEle.addEventListener("change", () => {
+  listError.confirmPw = validate("confirm", confirmEle.value, { checkPw: true }, passwordEle.value);
+  formValue.confirmPw = confirmEle.value;
+  checkSubmit();
+});
+
+dobEle.addEventListener("change", () => {
+  listError.dob = validate("dob", dobEle.value, listError);
+  formValue.dob = dobEle.value;
+  checkSubmit();
+});
+
+avatarEle.addEventListener("change", () => {
+  formValue.avatar = avatarEle.value;
+});
+
+//...
+
 
 const listError = {
   userName: null,
@@ -168,8 +222,10 @@ formEle.addEventListener("submit", (e) => {
     password: formValue.password,
     confirm: formValue.confirmPw,
     gender: formValue.sex,
+    
     dob: formValue.dob,
   };
+  console.log(user.email);
 
   // reset giá trị trên form và báo thành công
   formEle.reset();
