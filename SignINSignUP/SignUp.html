@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Sign Up</title>
     <link rel="stylesheet" href="./SignUp.css">
 </head>
+
 <body>
     <div class="SignUp">
         <div class="SignUp__left">
@@ -15,27 +17,35 @@
                 <div class="content1">
                     <h1>Sign Up</h1>
                     <p>If you already have an account register</p>
-                    <p class='Sign'>You can  
-                        <b>  
+                    <p class='Sign'>You can
+                        <b>
                             <a href="./SignIn.html"> Login here !</a>
                         </b>
                     </p>
                 </div>
                 <div class="content2">
-                    <p class='intro'>Email</p>
-                    <div class="inp">
-                        <img src="./assets/email.svg" alt="">
-                        <input type="email" placeholder="Enter your email address">
-                        <p class="error_Email" style="color: red; font-size: 12px;"></p>
+
+
+                    <div class="divEmail">
+                        <p class='intro'>Email</p>
+                        <div class="inp">
+                            <img src="./assets/email.svg" alt="">
+                            <input id="email" type="email" placeholder="Enter your email address">
+                        </div>
+                        <p id="errorEmail" style="color: red;   "></p>
                     </div>
+
                     <hr>
 
-                    <p class='intro'>Username</p>
-                    <div class="inp">
-                        <img src="./assets/user.svg" alt="">
-                        <input id='username' type="text" placeholder="Enter your User name">
-                        <p class="error_username" style="color: red; font-size: 12px;"></p>
+                    <div class="divusername">
+                        <p class='intro'>Username</p>
+                        <div class="inp">
+                            <img src="./assets/email.svg" alt="">
+                            <input id="username" type="text" placeholder="Enter your account">
+                        </div>
+                        <p id="errorUsername" class="perror" style="color: red"></p>
                     </div>
+
                     <hr>
 
                     <p class='intro'>Planet</p>
@@ -49,36 +59,43 @@
                             <label for="option1">Female</label>
                         </div>
                     </div>
+                    <p id="errorPlanet" class="perror" style="color: red"></p>
                     <hr>
 
-                    <p class='intro'>Password</p>
-                    <div class="security">
-                        <div class="inp">
-                            <img src="./assets/pass.svg" alt="">
-                            <input type="password" name="password" placeholder="Enter your Password">
-                            <p class="error_password" style="color: red; font-size: 12px;"></p>
+                    <div class="divpassword">
+                        <p class='intro'>Password</p>
+                        <div class="security">
+                            <div class="inp">
+                                <img src="./assets/pass.svg" alt="">
+                                <input id="password" type="password" name="password" placeholder="Enter your Password">
+                            </div>
+                            <button type="button" onclick="togglePassword()"><img src="./assets/mk.svg" alt=""></button>
                         </div>
-                        <button type="button" onclick="togglePassword()"><img src="./assets/mk.svg" alt=""></button>
+                        <p id="errorPassword" class="perror" style="color: red"></p>
+                    </div>
+
+                    <hr>
+
+                    <div class="divConfirm">
+                        <p class='intro'>Confirm Password</p>
+                        <div class="security">
+                            <div class="inp">
+                                <img src="./assets/pass.svg" alt="">
+                                <input id="passwordConfirm" type="password" name="password" placeholder="Confirm your Password">
+                            </div>
+                            <button type="button" onclick="togglePassword1()"><img src="./assets/mk.svg" alt=""></button>    
+                        </div>
+                        <p id="errorConfirmpassword" style="color: red; font-size: 12px;"></p>
                     </div>
                     <hr>
 
-                    <p class='intro'>Confirm Password</p>
-                    <div class="security">
+                    <div class="divdOB">
+                        <p class='intro'>Date of birth</p>
                         <div class="inp">
-                            <img src="./assets/pass.svg" alt="">
-                            <input type="password" name="password" placeholder="Confirm your Password">
-                            <p class="error_confirmpassword" style="color: red; font-size: 12px;"></p>
+                            <img src="./assets/date.svg" alt="">
+                            <input id="dOB" type="date" style="color: gray">
                         </div>
-                        <button type="button" onclick="toggleCPassword()"><img src="./assets/mk.svg" alt=""></button>
-                    </div>
-                    <hr>
-
-
-                    <p class='intro'>Date of birth</p>
-                    <div class="inp">
-                        <img src="./assets/date.svg" alt="">
-                        <input type="date" max="2023-05-05" 
-                        style="color: gray" >
+                        <p id="errordOB" style="color: red; font-size: 12px;"></p>
                     </div>
                     <hr>
 
@@ -92,9 +109,10 @@
                     </form>
                 </div>
 
-                <button onclick="savedataRegister()">Register</button>
+                <button id="submit">Register</button>
+                
             </div>
-        </div>  
+        </div>
         <div class="SignUp__right">
             <div class="contact-us">
                 <p>+94 0116 789 754</p>
@@ -102,7 +120,7 @@
             </div>
             <div class='image'>
                 <div class="image-logo">
-                        <img src="./assets/Saly.svg" alt="">
+                    <img src="./assets/Saly.svg" alt="">
                 </div>
                 <div class="image-text">
                     <h1>Sign Up to name</h1>
@@ -113,5 +131,7 @@
 
     </div>
 </body>
-<script src="./SignUpIn.js"></script>
+<script src="./SignUp.js"></script>
+<!-- <script src="./SignUpIn.js"></script> -->
+
 </html>
