@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- //npx tailwindcss -i ./src/tailwind.css -o ./public/css/tailwind.css --watch -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+    <style>
+        .poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="poppins">
+    <section class="lg:w-[1440px] lg:h-[900px]">
+        <div class="grid lg:grid-cols-2 sm:grid-cols-1">
+            <div>
+                <div>
+                    <img src="./icons/logo.svg" alt="" srcset=""
+                        class="w-[76px] h-[66px] lg:mt-[21px] lg:ml-[23px] sm:mt-[34px] sm:ml-[30px]">
+                </div>
+                <div
+                    class="lg:mt-[63px] lg:ml-[122px] lg:w-[431px] lg:h-[636px] mb-[114.88px] sm:mt-[21px] sm:mx-[27px]">
+                    <h2 class="text-[30px] font-medium pb-[22px]">Sign in</h2>
+                    <span class="text-base font-regular ">
+                        If you don’t have an account register
+                    </span>
+                    <br>
+                    <span>
+                        You can <a href="http://127.0.0.1:5500/public/register.html" class="text-[#0C21C1]">Register
+                            here !</a>
+                    </span>
+                    <div class="mt-[52px]">
+                        <form action="#">
+                            <div class="border-b-2 border-[#000842]">
+                                <label for="" class="font-medium text-[13px]">Email</label>
+                                <div class="flex flex-row mb-[7px]">
+                                    <img src="./icons/message.svg" alt="">
+                                    <input type="text" placeholder="Enter your email address"
+                                        class="ml-[10px] font-regular" name="username">
+                                </div>
+                            </div>
+                            <div class="mt-[49px] border-b-2 border-[#000842]">
+                                <label for="" class="font-medium text-[13px]">Password</label>
+                                <div class="flex flex-row mb-[7px]">
+                                    <img src="./icons/pass.svg" alt="">
+                                    <input type="text" placeholder="Enter your Password" class="ml-[10px] font-regular"
+                                        name="password">
+                                </div>
+                            </div>
+                            <div class="mt-[17px] flex flex-row justify-between ">
+                                <div class="flex items-center"><input type="checkbox" name="Rememebr me" id=""
+                                        value="Rememebr me" class="mr-[10px]"><span
+                                        class="text-[12px] font-light">Rememebr me</span></div>
+                                <a href="#" class="font-light text-xs text-[#4D4D4D]">Forgot Password ?</a>
+                            </div>
+                            <button
+                                class="mt-[60px] py-[14px] lg:px-[191px] sm:px-[133px] bg-[#0C21C1] rounded-[32px] text-[17px] font-medium text-white"
+                                id="login-button">Login</button>
+                        </form>
+                    </div>
+                    <div class="text-center mt-[39px]"><span class="font-medium text-[#B5B5B5]">or continue with</span>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="mt-[31px] flex flex-row justify-between w-[165px] text-center">
+                            <div>
+                                <a href="#"><img src="./icons/Facebook.svg" alt=""></a>
+                            </div>
+                            <div>
+                                <a href="#"><img src="./icons/apple.svg" alt=""></a>
+                            </div>
+                            <div>
+                                <a href="#"><img src="./icons/google.svg" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="lg:relative lg:block sm:hidden">
+                <div class="bg-[#000842] w-[735px] h-[859px] rounded-[15px] absolute top-[20px] right-[32px]">
+                    <div class="pt-[24px] mr-[32px]">
+                        <div class="flex flex-row justify-end">
+                            <img src="./icons/phone.svg" alt="">
+                            <span class="text-white text-[15px] font-regular">+94 0116 789 754</span>
+                        </div>
+                    </div>
+                    <div class="mt-[17px] w-[546px] h-[699px] mx-[91px] mb-[96px]">
+                        <img src="./images/anhnen.png" alt="" class="w-[521px] h-[521px] ">
+                        <div class="mt-[84px]">
+                            <h2 class="text-white font-semibold text-[40px]">Sign in to name</h2>
+                            <span class="text-white font-light text-[20px]">Lorem Ipsum is simply </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+    async function postJSON(data) {
+        try {
+            const response = await fetch("http://3.95.239.60:9001/api/auth/login", {
+                method: "POST", // or 'PUT'
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            console.log("Success:", result);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
+    const loginButton = document.getElementById("login-button");
+    loginButton.addEventListener("click", function () {
+        const data = {
+            username: document.querySelector('input[name="username"]').value,
+            password: document.querySelector('input[name="password"]').value,
+        };
+        postJSON(data);
+    });
+</script>
+
+</html>
