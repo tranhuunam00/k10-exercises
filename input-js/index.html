@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form id="form" action="">
+      <div class="divUserName">
+        <h4>UserName</h4>
+        <input
+          class="input"
+          id="username"
+          type="text"
+          name="username"
+          id=""
+          placeholder="username"
+          valid="required|toUpperCase|minLength:6|dataTypeNumber|maxLength:12|"
+        />
+        <p id="errorUserName" style="color: red"></p>
+      </div>
+
+      <div class="divPassword">
+        <h4>Password</h4>
+        <input
+          class="input"
+          id="password"
+          type="text"
+          name="password"
+          id=""
+          placeholder="password"
+          valid="required|minLength:6|maxLength:12"
+        />
+        <p id="errorPassword" style="color: red"></p>
+      </div>
+
+      <div class="divSex">
+        <h4>Sex</h4>
+        <label for="">Male</label> <input id="male" name="sex" type="radio" />
+        <label for="">FE_MALE</label>
+        <input id="female" name="sex" type="radio" checked="true" />
+        <p id="errorSex" style="color: red"></p>
+      </div>
+
+      <div class="divDob">
+        <h4>Dob</h4>
+        <input
+          class="input"
+          id="dOB"
+          type="date"
+          name="dOB"
+          id=""
+          valid="required|checkDate"
+        />
+        <p id="errorDob" style="color: red"></p>
+      </div>
+
+      <div class="divEmail">
+        <h4>email</h4>
+        <input
+          class="input"
+          id="email"
+          type="text"
+          name="email"
+          id=""
+          placeholder="email"
+          valid="required|reg"
+        />
+        <p id="errorEmail" style="color: red"></p>
+      </div>
+
+      <button id="submit" disabled type="submit">nut</button>
+    </form>
+  </body>
+  <script src="/index.js"></script>
+</html>
