@@ -364,4 +364,5 @@ dobEle.addEventListener("change", (event) => {
     listError.password = error;
   }
   checkSubmit();
+  
 });
