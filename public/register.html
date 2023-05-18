@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<!-- //npx tailwindcss -i ./src/tailwind.css -o ./public/css/tailwind.css --watch -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+    <style>
+        .poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #toastContainer {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        #toast {
+            background-color: #333;
+            padding: 12px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+
+        #toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="poppins">
+    <section class="w-[1440px] h-[900px]">
+        <div class="grid grid-cols-2">
+            <div>
+                <div>
+                    <img src="./icons/logo.svg" alt="" srcset="" class="w-[76px] h-[66px] mt-[21px] ml-[23px]">
+                </div>
+                <div class="mt-[63px] ml-[122px] w-[431px] h-[636px] mb-[114.88px]">
+                    <h2 class="text-[30px] font-medium">Sign up</h2>
+                    <span class="text-base font-regular mt-[22px]">
+                        If you already have an account register
+                    </span>
+                    <br>
+                    <span>
+                        You can <a href="http://127.0.0.1:5500/public/login.html" class="text-[#0C21C1]">Login here
+                            !</a>
+                    </span>
+                    <div class="mt-[27px]">
+                        <form id="form" action="#">
+                            <div class="border-b-2 border-[#000842] divEmail ">
+                                <label for="" class="font-medium text-[13px]">Email</label>
+                                <div class="flex flex-row mb-[7px] ">
+                                    <img src="./icons/message.svg" alt="">
+                                    <input type="text" placeholder="Enter your email address"
+                                        class="ml-[10px] font-regular" name="email" id="email" required="true"
+                                        isEmail='true'>
+
+                                </div>
+                                <p id="errorEmail" class="text-[8px]" style="color: red"></p>
+                            </div>
+
+                            <div class="border-b-2 border-[#000842] mt-3 divUserName">
+                                <label for="" class="font-medium text-[13px]">Username</label>
+                                <div class="flex flex-row mb-[7px] ">
+                                    <img src="./icons/user1.svg" alt="">
+                                    <input type="text" placeholder="Enter your User name" class="ml-[10px] font-regular"
+                                        name="username" id="username" required="true" minlength="6" maxlength2="12">
+
+                                </div>
+                                <p id="errorUserName" style="color: red"></p>
+                            </div>
+
+                            <div class="border-b-2 border-[#000842] mt-3 divSex">
+                                <label for="" class="font-medium text-[13px]">Planet</label>
+                                <div class="flex flex-row ">
+                                    <div class="">
+                                        <input type="radio" id="male" name="sex" value="male" option="true" checked>
+                                        <label for="male">Male</label>
+                                    </div>
+
+                                    <div class="ml-[18px] ">
+                                        <input type="radio" id="female" name="sex" value="female" option="true">
+                                        <label for="female">Female</label>
+                                    </div>
+
+                                </div>
+                                <p id="errorSex" style="color: red"></p>
+                            </div>
+                            <div class="border-b-2 border-[#000842] mt-3 divPassword">
+                                <label for="" class="font-medium text-[13px]">Password</label>
+                                <div class="flex flex-row mb-[7px] ">
+                                    <img src="./icons/pass.svg" alt="">
+                                    <input type="password" placeholder="Enter your Password"
+                                        class="ml-[10px] font-regular" name="password" id="password" required="true"
+                                        hasOneUpperCase="1" minlength="8">
+
+                                </div>
+                                <p id="errorPassword" style="color: red"></p>
+                            </div>
+
+                            <div class="border-b-2 border-[#000842] mt-3 divRePassword">
+                                <label for="" class="font-medium text-[13px]">Confrim Password</label>
+                                <div class="flex flex-row mb-[7px] ">
+                                    <img src="./icons/pass.svg" alt="">
+                                    <input type="password" placeholder="Confrim your Password"
+                                        class="ml-[10px] font-regular" name="repassword" id="repassword" required="true"
+                                        alike="true">
+
+                                </div>
+                                <p id="errorRePassword" style="color: red"></p>
+                            </div>
+
+                            <div class="border-b-2 border-[#000842] mt-3 divDob">
+                                <label for="" class="font-medium text-[13px]">Date of birth</label>
+                                <div class="flex flex-row mb-[7px] ">
+                                    <input type="date" class="font-regular" name="dOB" id="dOB" option='true'
+                                        lessNow='true'>
+
+                                </div>
+                                <p id="errorDob" style="color: red"></p>
+                            </div>
+
+                            <div>
+                                <label for="" class="font-medium text-[13px]">Avatar</label>
+                                <div class="flex flex-row">
+                                    <img src="./icons/camera.svg" alt="">
+                                    <img src="./icons/avatar.svg" alt="" class="ml-[71px]">
+                                </div>
+                            </div>
+
+                            <button
+                                class="mt-[31px] py-[14px] px-[191px] bg-[#0C21C1] rounded-[32px] text-[17px] font-medium text-white"
+                                id="submit" disabled type="submit">Register</button>
+                        </form>
+                        <div id="toastContainer">
+                            <div id="toast">Thông báo toast</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="bg-[#000842] w-[735px] h-[859px] rounded-[15px] absolute top-[20px] right-[32px]">
+                    <div class="pt-[24px] mr-[32px]">
+                        <div class="flex flex-row justify-end">
+                            <img src="./icons/phone.svg" alt="">
+                            <span class="text-white text-[15px] font-regular">+94 0116 789 754</span>
+                        </div>
+                    </div>
+                    <div class="mt-[17px] w-[546px] h-[699px] mx-[91px] mb-[96px]">
+                        <img src="./images/anhnen.png" alt="" class="w-[521px] h-[521px] ">
+                        <div class="mt-[84px]">
+                            <h2 class="text-white font-semibold text-[40px]">Sign Up to name</h2>
+                            <span class="text-white font-light text-[20px]">Lorem Ipsum is simply </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    // username: "hau123",
+            // password: "123",
+            // sex: "male",
+            // dOB: 13214324234,
+            // email: "conghaunguyen909@gmail.com", -->
+    <script>
+        const nameEle = document.getElementById("username");
+        const passwordEle = document.getElementById("password");
+        const rePasswordEle = document.getElementById("repassword");
+        const emailEle = document.getElementById("email");
+        const dOBEle = document.getElementById("dOB");
+        const sexEle = document.getElementById("sex");
+        const buttonELe = document.getElementById("submit");
+        const formELe = document.getElementById("form");
+        const maleELe = document.getElementById("male");
+        const femaleELe = document.getElementById("female");
+
+        const validate = (type = "username", value, listError = {}) => {
+            const listErrorType = Object.keys(listError);
+            const regExEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const dOBCheck = new Date(value).getTime();
+            const maxdOB = new Date().getTime();
+            //   console.log(listErrorType);
+            let error = "";
+            switch (type) {
+                case "username":
+                    if (listErrorType.includes("required") && !value) {
+                        error = "hay nhap gia tri";
+                        break;
+                    }
+                    if (
+                        listErrorType.includes("minlength") &&
+                        value.length < listError["minlength"]
+                    ) {
+                        error = "ban  hay nhap" + listError["minlength"] + " ki tu";
+                        break;
+                    }
+                    if (
+                        listErrorType.includes("maxlength") &&
+                        value.length > listError["maxlength"]
+                    ) {
+                        console.log(listError["maxlength"]);
+                        error = "ban  hay nhap" + listError["maxlength"] + " ki tu";
+                        break;
+                    }
+                    if (
+                        listErrorType.includes("theFirstLetter") &&
+                        value[0] !== value[0].toUpperCase()
+                    ) {
+                        error = "hay viet hoa ki tu dau";
+                        break;
+                    }
+                    error = null;
+                    break;
+                case "password":
+                    if (listErrorType.includes('required') && !value) {
+                        error = 'Vui lòng nhập trường này';
+                        break;
+                    }
+                    if (listErrorType.includes('hasOneUpperCase') && !/[A-Z]/.test(value)) {
+                        error = 'Vui lòng nhập ít nhất 1 kí tự viết hoa';
+                        break;
+                    }
+                    if (
+                        listErrorType.includes("minlength") &&
+                        value.length < listError["minlength"]
+                    ) {
+                        error = "ban hay nhap toi thieu " + listError["minlength"] + " ki tu";
+                        break;
+                    }
+                    error = null;
+                    break;
+
+                case "repassword":
+                    if (listErrorType.includes('required') && !value) {
+                        error = 'Vui lòng nhập trường này';
+                        break;
+                    }
+                    if(listErrorType.includes('alike') && value !== passwordEle.value){
+                        error = 'Vui lòng nhập lai dung mat khau';
+                        break;
+                    }
+                    error = null;
+                    break;
+
+                case "email":
+                    if (listErrorType.includes('required') && !value) {
+                        error = 'Vui lòng nhập trường này';
+                        break;
+                    }
+                    if (listErrorType.includes('isEmail') && !regExEmail.test(value)) {
+                        error = 'Vui lòng nhập email dung dinh dang';
+                        break;
+                    }
+                    error = null;
+                    break;
+                case 'dOB':
+                    if (listErrorType.includes('option') && (value || "").trim() === "") {
+                        error = 'Vui long chon ngay';
+                        break;
+                    }
+                    if (listErrorType.includes('lessNow') && dOBCheck > maxdOB) {
+                        error = 'Vui long khong chon ngay lon hon ngay hom nay';
+                        break;
+                    }
+                    error = null;
+                    break;
+
+            }
+
+            return error;
+        };
+
+        const checkSubmit = () => {
+            if (
+                listError.userName ||
+                listError.password ||
+                listError.repassword ||
+                listError.dob ||
+                listError.sex ||
+                listError.email ||
+                !formValue.userName ||
+                !formValue.dob ||
+                !formValue.sex ||
+                !formValue.email ||
+                !formValue.password ||
+                !formValue.repassword
+            ) {
+                buttonELe.setAttribute("disabled", "true");
+            } else {
+                buttonELe.removeAttribute("disabled");
+            }
+        };
+
+        const listError = {
+            userName: null,
+            dob: null,
+            sex: null,
+            password: null,
+            repassword:null,
+            email: null,
+        };
+
+        const formValue = {
+            userName: null,
+            dob: null,
+            sex: null,
+            password: null,
+            repassword:null,
+            email: null,
+        };
+
+        formELe.addEventListener("submit", (e) => {
+            e.preventDefault();
+        });
+
+        const ERROR_CHECK_LIST_TYPE = {
+            required: "required",
+            minlength: "minlength",
+        };
+
+        console.log(ERROR_CHECK_LIST_TYPE);
+        // gắn 1 sự kiện vào thẻ input của username
+        nameEle.addEventListener("keyup", (event) => {
+            const { name, value, checked } = event.target;
+            formValue.userName = value;
+
+            // get element
+            const divUserName = document.querySelector(".divUserName");
+            const pErrorEle = divUserName.querySelector("#errorUserName");
+
+            console.log(nameEle.hasAttribute("required"));
+            const errorList = {
+                minlength: nameEle.getAttribute("minlength"),
+                maxlength: nameEle.getAttribute("maxlength2"),
+                required: nameEle.getAttribute("required"),
+            };
+
+            console.log(errorList);
+
+            // check dk
+
+            const error = validate("username", value, errorList);
+            console.log('error:', error);
+
+            if (error) {
+                pErrorEle.innerText = error;
+                listError.userName = error;
+            } else {
+                pErrorEle.innerText = "";
+                listError.userName = null;
+            }
+            checkSubmit();
+        });
+
+        passwordEle.addEventListener("keyup", (event) => {
+            const { name, value, checked } = event.target;
+            formValue.password = value;
+
+            // get element
+            const divUserName = document.querySelector(".divPassword");
+            const pErrorEle = divUserName.querySelector("#errorPassword");
+
+
+            const errorList = {
+                hasOneUpperCase: passwordEle.getAttribute("hasOneUpperCase"),
+                required: passwordEle.getAttribute("required"),
+                minlength: passwordEle.getAttribute("minlength"),
+            };
+            // check dk
+            const error = validate("password", value, errorList);
+            console.log('error:', error);
+
+            if (error) {
+                pErrorEle.innerText = error;
+                listError.password = error;
+            } else {
+                pErrorEle.innerText = "";
+                listError.password = null;
+            }
+            checkSubmit();
+        });
+        rePasswordEle.addEventListener("keyup", (event) => {
+            const { name, value, checked } = event.target;
+            formValue.repassword = value;
+
+            // get element
+            const divUserName = document.querySelector(".divRePassword");
+            const pErrorEle = divUserName.querySelector("#errorRePassword");
+
+
+            const errorList = {
+                
+                required: rePasswordEle.getAttribute("required"),
+                alike : rePasswordEle.getAttribute('alike')
+            };
+            // check dk
+            const error = validate("repassword", value, errorList);
+            console.log('error:', error);
+
+            if (error) {
+                pErrorEle.innerText = error;
+                listError.repassword = error;
+            } else {
+                pErrorEle.innerText = "";
+                listError.repassword = null;
+            }
+            checkSubmit();
+        });
+
+        emailEle.addEventListener("keyup", (event) => {
+            const { name, value, checked } = event.target;
+            formValue.email = value;
+
+            // get element
+            const divUserName = document.querySelector(".divEmail");
+            const pErrorEle = divUserName.querySelector("#errorEmail");
+
+            const errorList = {
+                isEmail: emailEle.getAttribute('isEmail'),
+                required: emailEle.getAttribute('required')
+            }
+            // check dk
+            const error = validate('email', value, errorList);
+            if (error) {
+                pErrorEle.innerText = error;
+                listError.email = error;
+            } else {
+                pErrorEle.innerText = "";
+                listError.email = null;
+            }
+            checkSubmit();
+        });
+
+        maleELe.addEventListener("click", (event) => {
+            const { name, value, checked } = event.target;
+            formValue.sex = checked;
+            checkSubmit();
+        });
+        femaleELe.addEventListener("click", (event) => {
+            const { name, value, checked } = event.target;
+            formValue.sex = checked;
+            checkSubmit();
+        });
+
+        dOBEle.addEventListener("change", (event) => {
+            const { name, value, checked } = event.target;
+            formValue.dob = new Date(value).getTime();
+
+            // get element
+            const divUserName = document.querySelector(".divDob");
+            const pErrorEle = divUserName.querySelector("#errorDob");
+            const errorList = {
+                option: dOBEle.getAttribute('option'),
+                lessNow: dOBEle.getAttribute('lessNow'),
+            }
+            // check dk
+            const error = validate('dOB', value, errorList);
+            if (error) {
+                pErrorEle.innerText = error;
+                listError.dob = error;
+            } else {
+                pErrorEle.innerText = "";
+                listError.dob = null;
+            }
+            checkSubmit();
+        });
+
+        function showToast() {
+            var toast = document.getElementById("toast");
+            toast.classList.add("show");
+
+            setTimeout(function () {
+                toast.classList.remove("show");
+            }, 3000);
+        };
+
+        buttonELe.addEventListener('click', () => {
+            const maleELe = document.getElementById("male");
+            const femaleELe = document.getElementById("female");
+            const username = nameEle.value;
+            const password = passwordEle.value;
+            const email = emailEle.value;
+            const dOB = new Date(dOBEle.value).getTime();
+            const male = maleELe.checked;
+            const female = femaleELe.checked;
+            const sex = !male ? 'feMale' : 'male';
+            const toast = document.getElementById('toast');
+            console.log(username, password, email, dOB, sex);
+            async function postJSON(data) {
+                buttonELe.innerText = "Loading...";
+                buttonELe.setAttribute('disabled', 'true');
+                try {
+                    const response = await fetch(
+                        "http://3.95.239.60:9001/api/auth/sign-in",
+                        {
+                            method: "POST", // or 'PUT'
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(data),
+                        }
+                    );
+                    const result = await response.json();
+                    console.log("Success:", result);
+                    if (result.success === false) {
+                        toast.classList.add('error');
+                        toast.innerText = 'false';
+                        showToast()
+                        buttonELe.innerText = "Submit";
+                        buttonELe.removeAttribute("disabled");
+                    } else {
+                        toast.classList.add('success');
+                        toast.innerText = 'success';
+                        showToast();
+                        buttonELe.innerText = "OK";
+
+                        setTimeout(() => {
+                            window.location.assign("login.html")
+                        }, 2000);
+                    }
+
+
+                } catch (error) {
+                    console.error("Error:", error);
+                }
+                finally {
+                    // buttonELe.disabled = false;
+                }
+            }
+
+
+            postJSON({ username, dOB, sex, email, password });
+        });
+
+    </script>
+</body>
+
+</html>

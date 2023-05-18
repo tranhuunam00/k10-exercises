@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <form id="form" action="">
+    <div class="divUserName">
+      <h4>UserName</h4>
+      <input id="username" type="text" name="username" id="" valid="required|minlength:6|maxlength:12" />
+      <p id="errorUserName" style="color: red"></p>
+    </div>
+
+    <div class="divPassword">
+      <h4>Password</h4>
+      <input id="password" type="text" name="password" id="" placeholder="password"
+        valid="required|minlength:8|hasOneUpperCase:1" />
+      <p id="errorPassword" style="color: red"></p>
+    </div>
+
+    <div class="divSex">
+      <h4>Sex</h4>
+      <label for="">Male</label> <input id="male" name="sex" type="radio" valid="sex" checked />
+      <label for="">FE_MALE</label>
+      <input id="female" name="sex" type="radio" valid="sex"/>
+      
+      <p id="errorSex" style="color: red"></p>
+    </div>
+
+    <div class="divDob">
+      <h4>Dob</h4>
+      <input id="dOB" type="date" name="dOB" id="" 
+      valid="option|maxDay"/>
+      <p id="errorDob" style="color: red"></p>
+    </div>
+
+    <div class="divEmail">
+      <h4>email</h4>
+      <input id="email" type="text" name="email" id="" placeholder="email" 
+      valid="required|isEmail"/>
+      <p id="errorEmail" style="color: red"></p>
+    </div>
+
+    <button id="submit" disabled type="submit">nut</button>
+  </form>
+</body>
+<script>
+  const nameEle = document.getElementById("username");
+  const passwordEle = document.getElementById("password");
+  const emailEle = document.getElementById("email");
+  const dOBEle = document.getElementById("dOB");
+  const sexEle = document.getElementById("sex");
+  const buttonELe = document.getElementById("submit");
+  const formELe = document.getElementById("form");
+  const maleELe = document.getElementById("male");
+  const femaleELe = document.getElementById("female");
+
+  const ERROR_CHECK_LIST_TYPE = {
+    required: "Bạn phải nhập trường này",
+    minlength: "yêu cầu tối thiểu cho",
+    maxlength: "yêu cầu tối đa cho",
+    dataType: "dataType",
+    min: "min",
+    max: "max",
+    format: "format",
+    hasOneUpperCase: 'Phai co it nhat',
+    isEmail: 'ban phai nhap dung dinh dang email',
+    option: 'vui long chon',
+    maxDay: 'Vui long khong chon lon hon hom nay',
+    sex: 'Vui long chon gioi tinh'
+  };
+  const parseValid = (validString) => {
+    if (!validString) {
+      return {};
+    }
+
+    const listError = validString.split('|');
+    // console.log(listError);
+    // for(let i of listError){
+    //   console.log(i);
+    //   const [key, value=true] = i.split(':');
+
+    //   objectValid[key] = value;
+    //   console.log(key, value);
+    // }
+    // console.log(objectValid);
+    // return objectValid;
+    return listError.reduce((pre, curr) => {
+      const [key, value = true] = curr.split(':');
+      console.log(key, value);
+      return { ...pre, [key]: value };
+    }, {});
+  }
+  const validate = (type = "username", value, listError = {}) => {
+    let error = null;
+    const regExEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    for (let key in listError) {
+      console.log(key);
+      switch (key) {
+        case 'required':
+          error = !value ? ERROR_CHECK_LIST_TYPE[key] : null;
+          break;
+        case 'minlength':
+          error = value.length < +listError[key] ? ERROR_CHECK_LIST_TYPE[key] + " " + listError[key] + " ky tu" : null;
+          break;
+        case 'maxlength':
+          error = value.length > +listError[key] ? ERROR_CHECK_LIST_TYPE[key] + " " + listError[key] + " ky tu" : null;
+          break;
+        case 'hasOneUpperCase':
+          error = !/[A-Z]/.test(value) ? ERROR_CHECK_LIST_TYPE[key] + " " + listError[key] + " ky tu in hoa" : null;
+          break;
+        case 'isEmail':
+          error = !regExEmail.test(value) ? ERROR_CHECK_LIST_TYPE[key] : null;
+          break;
+        case 'option':
+          error = !value ? ERROR_CHECK_LIST_TYPE[key] + " ngay thang" : null;
+          break;
+        case 'maxDay':
+          error = new Date(value).getTime() > new Date().getTime() - 2000 ? ERROR_CHECK_LIST_TYPE[key] : null;
+          break;
+        case 'sex':
+          console.log(value);
+          error = !value ? ERROR_CHECK_LIST_TYPE[key] : null;
+          break;
+      }
+      if (error) {
+        break;
+      }
+    }
+    return error;
+  };
+
+
+  const checkSubmit = () => {
+    if (
+      listError.userName ||
+      listError.password ||
+      listError.dob ||
+      listError.sex ||
+      listError.email ||
+      !formValue.userName ||
+      !formValue.dob ||
+      !formValue.sex ||
+      !formValue.email ||
+      !formValue.password
+    ) {
+      buttonELe.setAttribute("disabled", "true");
+    } else {
+      buttonELe.removeAttribute("disabled");
+    }
+  };
+
+  const listError = {
+    userName: null,
+    dob: null,
+    sex: null,
+    password: null,
+    email: null,
+  };
+
+  const formValue = {
+    userName: null,
+    dob: null,
+    sex: null,
+    password: null,
+    email: null,
+  };
+
+  formELe.addEventListener("submit", (e) => {
+    e.preventDefault();
+  });
+
+  // gắn 1 sự kiện vào thẻ input của username
+  nameEle.addEventListener("keyup", (event) => {
+    const { name, value, checked } = event.target;
+    formValue.userName = value;
+
+    // get element
+    const divUserName = document.querySelector(".divUserName");
+    const pErrorEle = divUserName.querySelector("#errorUserName");
+
+    // check dk
+    const valid = nameEle.getAttribute('valid');
+    console.log(valid);
+    const arrparse = parseValid(valid);
+    console.log(arrparse);
+    const error = validate(name, value, arrparse);
+    console.log(error);
+    if(error) {
+      pErrorEle.innerText = error;
+    }else{
+      pErrorEle.innerText = "";
+    }
+
+    // const error = validate("username", value, errorList);
+
+    // if (error) {
+    //   pErrorEle.innerText = error;
+    //   listError.userName = error;
+    // } else {
+    //   pErrorEle.innerText = "";
+    //   listError.userName = null;
+    // }
+    checkSubmit();
+  });
+
+  passwordEle.addEventListener("keyup", (event) => {
+    const { name, value, checked } = event.target;
+    formValue.password = value;
+
+    // get element
+    const divUserName = document.querySelector(".divPassword");
+    const pErrorEle = divUserName.querySelector("#errorPassword");
+
+    // check dk
+    const valid = passwordEle.getAttribute('valid');
+    const parsePassword = parseValid(valid);
+    const error = validate(name, value, parsePassword);
+
+    if(error){
+      pErrorEle.innerText = error;
+    }else{
+      pErrorEle.innerText = "";
+    }
+    
+
+    // if (!value || value.length < 6) {
+    //   pErrorEle.innerText = "ban hay nhap 6 ki tu";
+    //   listError.password = "ban hay nhap 6 ki tu";
+    // } else {
+    //   pErrorEle.innerText = "";
+    //   listError.password = null;
+    // }
+    checkSubmit();
+  });
+
+  emailEle.addEventListener("keyup", (event) => {
+    const { name, value, checked } = event.target;
+    formValue.email = value;
+
+    // get element
+    const divUserName = document.querySelector(".divEmail");
+    const pErrorEle = divUserName.querySelector("#errorEmail");
+
+    // check dk
+    const valid = emailEle.getAttribute('valid');
+    const parseEmail = parseValid(valid);
+    const error = validate(name, value, parseEmail);
+
+    if(error){
+      pErrorEle.innerText = error;
+    }else{
+      pErrorEle.innerText = "";
+    }
+    checkSubmit();
+  });
+
+  maleELe.addEventListener("click", (event) => {
+    const { name, value, checked } = event.target;
+    formValue.sex = checked;
+    // get element
+    const divUserName = document.querySelector(".divSex");
+    const pErrorEle = divUserName.querySelector("#errorSex");
+
+    const valid = maleELe.getAttribute('valid');
+    const parseMale = parseValid(valid);
+    const error = validate(name, checked, parseMale);
+    if(error) {
+      pErrorEle.innerText = error;
+    }else{
+      pErrorEle.innerText = "";
+    }
+    checkSubmit();
+  });
+
+  femaleELe.addEventListener("click", (event) => {
+    const { name, value, checked } = event.target;
+    formValue.sex = checked;
+    // get element
+    const divUserName = document.querySelector(".divSex");
+    const pErrorEle = divUserName.querySelector("#errorSex");
+    console.log(value);
+    const valid = femaleELe.getAttribute('valid');
+    const parseFeMale = parseValid(valid);
+    const error = validate(name, checked, parseFeMale);
+    if(error) {
+      pErrorEle.innerText = error;
+    }else{
+      pErrorEle.innerText = "";
+    }
+    checkSubmit();
+  });
+
+  dOBEle.addEventListener("change", (event) => {
+    const { name, value, checked } = event.target;
+    formValue.dob = new Date(value).getTime();
+
+    // get element
+    const divUserName = document.querySelector(".divDob");
+    const pErrorEle = divUserName.querySelector("#errorDob");
+    // check dk
+    const valid = dOBEle.getAttribute('valid');
+    const parseDOB = parseValid(valid);
+    const error = validate(name, value, parseDOB);
+    if(error){
+      pErrorEle.innerText = error;
+    }else{
+      pErrorEle.innerText = "";
+    }
+    checkSubmit();
+  });
+</script>
+
+</html>

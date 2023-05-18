@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .inter {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="inter">
+
+    <section class="header">
+        <div class="container box-sizing d-flex flex-column align-items-center my-[40px]">
+
+            <span class="text-[#7F56D9] lg:text-[16px] sm:text-[14px] font-semibold">Our blog</span>
+
+
+            <span class="font-semibold lg:text-[48px] sm:text-[36px] my-1 mt-4 sm:text-center">Stories and
+                interviews</span>
+            <p class="text-center text-[#667085] lg:text-[20px] sm:text-[18px] font-regular">Subscribe to learn about
+                new product
+                features, the latest
+                in
+                technology,<br> solutions, and updates.</p>
+            <div class="mt-[40px] lg:flex lg:flex-row sm:flex sm:flex-col">
+                <div class="flex flex-col">
+                    <input type="text" placeholder="Enter your email"
+                        class="border py-[2px] px-[10px] rounded-[7px] font-regular w-[330px] h-[48px]">
+                    <span class="text-[14px] font-regular text-[#667085]">We care about your data in our <a href="#"
+                            class="underline decoration-1">privacy policy</a></span>
+                </div>
+                <div class=" lg:mt-0 sm:mt-[16px]">
+                    <button
+                        class="border px-[20px] py-[12px] w-[100%] rounded-[10px] bg-[#7F56D9] text-white font-medium lg:ml-2 ">Subscribe</button>
+                </div>
+                <br>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="recent_blog">
+        <div class="container">
+            <span class="font-semibold lg:text-[24px] sm:text-[20px]">Recent blog posts</span>
+            <div class="grid lg:grid-cols-2 gap-4 mt-[32px] lg:h-[432px] sm:h-[1436px] sm:grid-cols-1">
+                <div class="">
+                    <div>
+                        <img src="./images/recent_anh1.png" alt="">
+
+                    </div>
+                    <div class="mt-[32px]">
+                        <span class="text-[#6941C6] text-[14px] font-semibold">Olivia Rhye • 20 Jan 2022</span>
+                        <div class="d-flex justify-content-between my-[12px]">
+                            <h2 class="lg:text-[24px] sm:text-[20px] font-semibold ">UX review presentations</h2>
+                            <img src="./icons/arrow-up-right.svg" alt="">
+                        </div>
+                        <p class="text-[#667085] font-regular">How do you create compelling presentations that wow your
+                            colleagues and impress your managers?</p>
+                        <div class="mt-[24px]">
+                            <span
+                                class="text-[#6941C6] text-[14px] font-medium bg-[#F9F5FF] rounded-[25px] py-[2px] px-[10px]">Design</span>
+                            <span
+                                class="text-[#3538CD] text-[14px] font-medium bg-[#EEF4FF] rounded-[25px] py-[2px] px-[10px]">Research</span>
+                            <span
+                                class="text-[#C11574] text-[14px] font-medium bg-[#FDF2FA] rounded-[25px] py-[2px] px-[10px]">Presentation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:mt-0 sm:mt-[48px]">
+                    <div class="grid lg:grid-cols-2 gap-4 sm:grid-cols-1 lg:mt-0 sm:mt-[48px]">
+                        <div style="background-color: aqua;">
+                            <img src="./images/recent_anh2.png" class="scale-x-100 h-[100%] w-[100%]" alt="">
+                        </div>
+                        <div class="w-[248px]">
+                            <span class="text-[#6941C6] text-[14px]  font-semibold">Phoenix Baker • 19 Jan 2022</span>
+                            <h2 class="lg:text-[18px] sm:text-[20px] font-semibold mt-[12px]">Migrating to Linear 101
+                            </h2>
+                            <p class="text-[#667085] font-regular mt-[8px]">Linear helps streamline software projects,
+                                sprints,
+                                tasks, and bug tracking. Here’s how to get...</p>
+                            <div class="mt-[24px] mb-[12px]">
+                                <span
+                                    class="text-[#6941C6] text-[14px] font-medium bg-[#F9F5FF] rounded-[25px] py-[2px] px-[10px]">Design</span>
+                                <span
+                                    class="text-[#C11574] text-[14px] font-medium bg-[#FDF2FA] rounded-[25px] py-[2px] px-[10px]">Research</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid lg:grid-cols-2 gap-4 lg:mt-[32px] sm:grid-cols-1 sm:mt-[48px]">
+                        <div style="background-color: aqua;">
+                            <img src="./images/recent_anh3.png" class="scale-x-100 h-[100%] w-[100%]" alt="">
+                        </div>
+                        <div>
+                            <span class="text-[#6941C6] text-[14px]  font-semibold">Lana Steiner • 18 Jan 2022</span>
+                            <h2 class="lg:text-[18px] sm:text-[20px] font-semibold mt-[12px]">Building your API Stack
+                            </h2>
+                            <p class="text-[#667085] font-regular mt-[8px]">The rise of RESTful APIs has been met by a
+                                rise in tools for creating, testing, and manag...</p>
+                            <div class="mt-[24px] mb-[12px]">
+                                <span
+                                    class="text-[#027A48] text-[14px] font-medium bg-[#ECFDF3] rounded-[25px] py-[2px] px-[10px]">Design</span>
+                                <span
+                                    class="text-[#C11574] text-[14px] font-medium bg-[#FDF2FA] rounded-[25px] py-[2px] px-[10px]">Research</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="lg:mt-[96px] all-posts sm:mt-[64px]">
+        <div class="container">
+            <h2 class="lg:text-[24px] sm:text-[20px] font-semibold sm:mt-[64px]">All blog posts</h2>
+            <div class="grid lg:grid-cols-3 gap-4 mt-[32px] sm:grid-cols-1">
+                <div>
+                    <div>
+                        <img src="./images/all_anh1.png" alt="">
+                    </div>
+                    <div class="mt-[32px]">
+                        <span class="text-[#6941C6] text-[14px] font-semibold">Alec Whitten • 17 Jan 2022</span>
+                        <div class="d-flex justify-content-between">
+                            <h2 class="lg:text-[24px] sm:text-[20px] font-semibold py-4">Bill Walsh leadership lessons
+                            </h2>
+                            <img src="./icons/arrow-up-right.svg" alt="">
+                        </div>
+                        <p class="text-[#667085] font-regular">Like to know the secrets of transforming a 2-14 team into
+                            a 3x Super Bowl winning Dynasty?</p>
+                        <div class="mt-5">
+                            <span
+                                class="text-[#6941C6] text-[14px] font-medium bg-[#F9F5FF] rounded-[25px] py-[2px] px-[10px]">Leadership</span>
+                            <span
+                                class="text-[#363F72] text-[14px] font-medium bg-[#F8F9FC] rounded-[25px] py-[2px] px-[10px]">Management</span>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sm:mt-[64px]  lg:mt-0">
+                    <div>
+                        <img src="./images/all_anh2.png" alt="">
+                    </div>
+                    <div class="mt-[32px]">
+                        <span class="text-[#6941C6] text-[14px] font-semibold">Demi WIlkinson • 16 Jan 2022</span>
+                        <div class="d-flex justify-content-between">
+                            <h2 class="lg:text-[24px] sm:text-[20px] font-semibold py-4">PM mental models</h2>
+                            <img src="./icons/arrow-up-right.svg" alt="">
+                        </div>
+                        <p class="text-[#667085] font-regular">Mental models are simple expressions of complex processes
+                            or relationships.</p>
+                        <div class="mt-5">
+                            <span
+                                class="text-[#026AA2] text-[14px] font-medium bg-[#F0F9FF] rounded-[25px] py-[2px] px-[10px]">Product</span>
+                            <span
+                                class="text-[#3538CD] text-[14px] font-medium bg-[#EEF4FF] rounded-[25px] py-[2px] px-[10px]">Research</span>
+                            <span
+                                class="text-[#C4320A] text-[14px] font-medium bg-[#FFF6ED] rounded-[25px] py-[2px] px-[10px]">Frameworks</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="sm:mt-[64px]  lg:mt-0">
+                    <div>
+                        <img src="./images/all_anh3.png" alt="">
+                    </div>
+                    <div class="mt-[32px]">
+                        <span class="text-[#6941C6] text-[14px] font-semibold">Candice Wu • 15 Jan 2022</span>
+                        <div class="d-flex justify-content-between">
+                            <h2 class="lg:text-[24px] sm:text-[20px] font-semibold py-4">What is Wireframing?</h2>
+                            <img src="./icons/arrow-up-right.svg" alt="">
+                        </div>
+                        <p class="text-[#667085] font-regular">Introduction to Wireframing and its Principles. Learn
+                            from the best in the industry.</p>
+                        <div class="mt-5">
+                            <span
+                                class="text-[#6941C6] text-[14px] font-medium bg-[#F9F5FF] rounded-[25px] py-[2px] px-[10px]">Design</span>
+                            <span
+                                class="text-[#3538CD] text-[14px] font-medium bg-[#EEF4FF] rounded-[25px] py-[2px] px-[10px]">Research</span>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="grid lg:grid-cols-3 gap-4 lg:mt-[48px] sm:grid-cols-1">
+                <div class="sm:mt-[64px]  lg:mt-0">
+                    <div>
+                        <img src="./images/all_anh4.png" alt="">
+                    </div>
+                    <div class="mt-[32px]">
+                        <span class="text-[#6941C6] text-[14px] font-semibold">Natali Craig • 14 Jan 2022</span>
+                        <div class="d-flex justify-content-between">
+                            <h2 class="lg:text-[24px] sm:text-[20px] font-semibold py-4">How collaboration makes us
+                                better designers</h2>
+                            <img src="./icons/arrow-up-right.svg" alt="">
+                        </div>
+                        <p class="text-[#667085] font-regular">Collaboration can make our teams stronger, and our
+                            individual designs better.</p>
+                        <div class="mt-5">
+                            <span
+                                class="text-[#6941C6] text-[14px] font-medium bg-[#F9F5FF] rounded-[25px] py-[2px] px-[10px]">Design</span>
+                            <span
+                                class="text-[#3538CD] text-[14px] font-medium bg-[#EEF4FF] rounded-[25px] py-[2px] px-[10px]">Research</span>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sm:mt-[64px]  lg:mt-0">
+                    <div>
+                        <img src="./images/all_anh5.png" alt="">
+                    </div>
+                    <div class="mt-[32px]">
+                        <span class="text-[#6941C6] text-[14px] font-semibold">Drew Cano • 13 Jan 2022</span>
+                        <div class="d-flex justify-content-between">
+                            <h2 class="lg:text-[24px] sm:text-[20px] font-semibold py-4">Our top 10 Javascript
+                                frameworks to use</h2>
+                            <img src="./icons/arrow-up-right.svg" alt="">
+                        </div>
+                        <p class="text-[#667085] font-regular">JavaScript frameworks make development easy with
+                            extensive features and functionalities.</p>
+                        <div class="mt-5">
+                            <span
+                                class="text-[#027A48] text-[14px] font-medium bg-[#ECFDF3] rounded-[25px] py-[2px] px-[10px]">Software
+                                Development</span>
+                            <span
+                                class="text-[#C11574] text-[14px] font-medium bg-[#FDF2FA] rounded-[25px] py-[2px] px-[10px]">Tools</span>
+                            <span
+                                class="text-[#C01048] text-[14px] font-medium bg-[#FFF1F3] rounded-[25px] py-[2px] px-[10px]">SaaS</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="sm:mt-[64px] lg:mt-0">
+                    <div>
+                        <img src="./images/all_anh6.png" alt="">
+                    </div>
+                    <div class="mt-[32px]">
+                        <span class="text-[#6941C6] text-[14px] font-semibold">Orlando Diggs • 12 Jan 2022
+                        </span>
+                        <div class="d-flex justify-content-between">
+                            <h2 class="lg:text-[24px] sm:text-[20px] font-semibold py-4">Podcast: Creating a better CX
+                                Community</h2>
+                            <img src="./icons/arrow-up-right.svg" alt="">
+                        </div>
+                        <p class="text-[#667085] font-regular">Starting a community doesn’t need to be complicated, but
+                            how do you get started?</p>
+                        <div class="mt-5">
+                            <span
+                                class="text-[#6941C6] text-[14px] font-medium bg-[#F9F5FF] rounded-[25px] py-[2px] px-[10px]">Podcasts</span>
+                            <span
+                                class="text-[#363F72] text-[14px] font-medium bg-[#F8F9FC] rounded-[25px] py-[2px] px-[10px]">Customer
+                                Success</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="mb-[96px] mt-[64px] text-center">
+        <!-- <hr class="mb-[20px] w-[100%] mt-[64px] lg:container sm:container m-0 px-[15px]"> -->
+        <div class="container mt-[20px] border-t-2 pt-[20px] ">
+
+            <nav aria-label="Page navigation example " class="lg:block sm:hidden">
+                <ul class="inline-flex items-center -space-x-px d-flex justify-content-between">
+                    <div>
+                        <li>
+                            <a href="#"
+                                class="inline-flex items-center px-4 py-2 mr-3 text-sm font-medium text-gray-500 bg-purple-50 hover:rounded-[5px] 
+                                 hover:bg-purple-300 hover:text-[#7F56D9] dark:bg-violet-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-violet-900 hover:underline dark:hover:text-white"
+                                style="text-decoration: none;">
+                                <svg aria-hidden="true" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Previous
+                            </a>
+                        </li>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <li>
+                            <a href="#"
+                                class="px-3 py-2 leading-tight text-gray-500 bg-purple-50 hover:rounded-[5px] hover:bg-purple-300 hover:text-[#7F56D9] dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 hover:underline dark:hover:text-white"
+                                style="text-decoration: none;">1</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="px-3 py-2 leading-tight text-gray-500 bg-purple-300 rounded-[5px] hover:bg-violet-400 hover:text-[#7F56D9] dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 hover:underline dark:hover:text-white"
+                                style="text-decoration: none;">2</a>
+                        </li>
+                        <li>
+                            <a href="#" aria-current="page"
+                                class="px-3 py-2 leading-tight text-gray-500 bg-purple-50 hover:rounded-[5px] hover:bg-purple-300 hover:text-[#7F56D9] dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 hover:underline dark:hover:text-white"
+                                style="text-decoration: none;">3</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="px-3 py-2 leading-tight text-gray-500 bg-purple-50 hover:rounded-[5px] hover:bg-purple-300 hover:text-[#7F56D9] dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 hover:underline dark:hover:text-white"
+                                style="text-decoration: none;">...</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="px-3 py-2 leading-tight text-gray-500 bg-purple-50 hover:rounded-[5px] hover:bg-purple-300 hover:text-[#7F56D9] dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 hover:underline dark:hover:text-white"
+                                style="text-decoration: none;">8</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="px-3 py-2 leading-tight text-gray-500 bg-purple-50 hover:rounded-[5px] hover:bg-purple-300 hover:text-[#7F56D9] dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 hover:underline dark:hover:text-white"
+                                style="text-decoration: none;">9</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="px-3 py-2 leading-tight text-gray-500 bg-purple-50 hover:rounded-[5px] hover:bg-purple-300 hover:text-[#7F56D9] dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 hover:underline dark:hover:text-white"
+                                style="text-decoration: none;">10</a>
+                        </li>
+                    </div>
+                    <div>
+                        <li>
+                            <a href="#"
+                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-purple-50 hover:bg-purple-300 hover:rounded-[5px] hover:text-[#7F56D9] dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 hover:underline dark:hover:text-white"
+                                style="text-decoration: none;">
+                                Next
+                                <svg aria-hidden="true" class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </li>
+                    </div>
+                </ul>
+            </nav>
+
+            <nav aria-label="Page navigation example " class="lg:hidden sm:block">
+                <ul class="inline-flex items-center -space-x-px d-flex justify-content-between">
+                    <div>
+                        <li>
+                            <a href="#"
+                                class="inline-flex items-center px-4 py-2 mr-3 text-sm font-medium text-gray-500 bg-purple-50 hover:rounded-[5px] 
+                                 hover:bg-purple-300 hover:text-[#7F56D9] dark:bg-violet-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-violet-900 hover:underline dark:hover:text-white"
+                                style="text-decoration: none;">
+                                <svg aria-hidden="true" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+
+                            </a>
+                        </li>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <li>
+                            <a href="#"
+                                class="px-3 py-2 leading-tight text-gray-500 bg-purple-50 hover:rounded-[5px] hover:bg-purple-300 hover:text-[#7F56D9] dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 hover:underline dark:hover:text-white"
+                                style="text-decoration: none;">Page 1 of 10</a>
+                        </li>
+
+                    </div>
+                    <div>
+                        <li>
+                            <a href="#"
+                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-purple-50 hover:bg-purple-300 hover:rounded-[5px] hover:text-[#7F56D9] dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 hover:underline dark:hover:text-white"
+                                style="text-decoration: none;">
+
+                                <svg aria-hidden="true" class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </li>
+                    </div>
+                </ul>
+            </nav>
+
+        </div>
+    </section>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
