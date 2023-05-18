@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Signup</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="container__left">
+        <img class="container__left__img" src="image/pngegg (70) 1.png" alt="fail" />
+        <div class="container__left__form">
+            <h1>Sign up</h1>
+            <p class="container__left__p1">If you already have an account register</p>
+            <p class="container__left__p2">You can <span><a href="">Login here !</a></span></p>
+            <form action="" id="form">
+                <div class="form__email">
+                    <label for="">Email: </label>
+                    <img src="image/Vector (1).png" alt="">
+                    <input type="text" name="email" id="email" placeholder="Enter your email address" valid="required" >
+                    <p class="error__email" style="color: red;"></p>
+                </div>
+                <div class="form__username">
+                    <label for="">User Name: </label>
+                    <img src="image/Vector (1).png" alt="">
+                    <input type="text" name="username" id="username" placeholder="Enter your email address" valid="required | minlength : 6 | maxlength : 15">
+                    <p class="error__username" style="color: red;"></p>
+                </div>
+                <div class="form__planet">
+                    <label for="">Planet: </label>
+                    <div class="form__planet__input">
+                        <input type="radio" name="sex" id="male">
+                        <label for="">Male</label>
+                        <input type="radio" name="sex" id="fe_male">
+                        <label for="">Female</label>
+                    </div>
+                    
+                </div>
+                <div class="form__password">
+                    <label for="">Password: </label>
+                    <img src="image/Vector (1).png" alt="">
+                    <input type="password" name="password" id="password" placeholder="Enter your Password"  valid="required | minlength : 6 | maxlength : 15">
+                    <p class="error__password" style="color: red;"></p>
+                </div>
+                <div class="form__repassword">
+                    <label for="">Confrim Password: </label>
+                    <img src="image/Vector (1).png" alt="">
+                    <input type="password" name="password" id="password" placeholder="Confrim your Password" valid="required | minlength : 6 | maxlength : 15">
+                </div>
+                <div class="form__date">
+                    <label for="">Date of birth: </label>
+                    <img src="image/Vector (1).png" alt="">
+                    <input type="date" name="date" id="date">
+                    <p class="error__date" style="color: red;"></p>
+                </div>
+                <div class="form__avatar">
+                    <label for="">Avatar: </label>
+                    <img src="image/image 3.png" alt="">     
+                    <input type="image" src="image/image 2.png" alt="Submit" width="48" height="48">
+                </div>
+            <input class="form__input__button" type="submit" id="btn" >
+            </form>
+        </div>
+
+      </div>
+      <div class="container__right">
+        <div class="container__right__icon">
+          <img src="image/Vector.png" alt="fail" />
+          <p>+84 357935220</p>
+        </div>
+        <img class="container__right__img" src="image/Saly-10.png" alt="fail" />
+        <h1>Sign Up to name</h1>
+        <p class="container__right__p">Lorem Ipsum is simply</p>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
