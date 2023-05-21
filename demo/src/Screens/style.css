@@ -1,0 +1,106 @@
+.input input{
+    width: 20%;
+    padding: 10px;
+}
+.input{
+    margin: 20px;
+}
+.input label{
+  text-align: left;
+  padding: 0 10px ;
+}
+.inputRadio{
+    margin: 20px;
+}
+.inputRadio label{
+    margin-right: 20px;
+    text-align: left;
+    
+}
+.input label{
+    width: 100px;
+    margin-right: 30px;
+}
+button {
+    width: 20%;
+    height: 50px;
+    border-radius: 20px;
+    background-color: whitesmoke;
+    margin: 0 20px;
+}
+p{
+    color: red;
+}
+.btn_active{
+    background-color: blue;
+}
+.btn_disabled{
+    background-color: red;
+    
+}
+.toastSuccess {
+    display: flex;
+    align-items: center;
+    background-color: rgb(0, 226, 30);
+    border-radius: 0.5rem;
+    border-left: 1rem solid red;
+    padding: 2rem 0;
+    min-width: 20rem;
+    max-width: 25rem;
+    position: fixed;
+    height: 2rem;
+    top: 3rem;
+    right: 3rem;
+    animation: identifier ease .5s, fadeOut linear 1s 3s forwards;
+  }
+  .toastError {
+    display: flex;
+    align-items: center;
+    background-color: rgb(248, 13, 13);
+    border-radius: 0.5rem;
+    border-left: 1rem solid rgb(239, 178, 178);
+    padding: 2rem 0;
+    min-width: 20rem;
+    max-width: 25rem;
+    height: 2rem;
+    position: fixed;
+    top: 3rem;
+    right: 3rem;
+    animation: identifier ease .5s, fadeOut linear 1s 3s forwards;
+  }
+  @keyframes identifier {
+    from {
+      opacity: 0;
+      transform: translateX(calc(100% + 3rem));
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes fadeOut {
+    to{
+      opacity: 0;
+    }
+  }
+  
+  .toast_icon,
+  .toast_clone {
+    padding: 0 1.6rem;
+  }
+  .toast_icon {
+    font-size: 2.4rem;
+  }
+  .toast_clone {
+    font-size: 2rem;
+  }
+  .toast_body {
+    flex: 1;
+  }
+  .toast_title {
+    font-size: 2.5rem;
+    color: rgb(43, 81, 43);
+  }
+  .toast_msg {
+    font-size: 1.6rem;
+  }
