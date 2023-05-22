@@ -2,6 +2,23 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./register.css";
 
+const InputCustom = ({ label, name, value, error, onChange }) => (
+  <div className="mb-2">
+    <label htmlFor={name} className="form-label">
+      {label}
+    </label>
+    <input
+      type="text"
+      id={name}
+      className="form-control"
+      name={name}
+      value={value}
+      onChange={onChange}
+    />
+    {error && <div className="error-feedback">{error}</div>}
+  </div>
+);
+
 const initFormValue = {
   firstName: "",
   lastName: "",
@@ -26,7 +43,6 @@ const Toast = ({ message, type, isLoading }) => (
     {isLoading && <div className="toast-loading"></div>}
   </div>
 );
-
 export default function RegisterPage() {
   const [formValue, setFormValue] = useState(initFormValue);
   const [formError, setFormError] = useState({});
@@ -34,10 +50,10 @@ export default function RegisterPage() {
   const [toastType, setToastType] = useState("");
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [registeredUsers, setRegisteredUsers] = useState([]);
   useEffect(() => {
     axios
-      .get("https://jsonplaceholder.typicode.com/users")
+      .get("http://3.95.239.60:9001/api")
       .then((response) => {
         setUsers(response.data);
       })
@@ -62,9 +78,10 @@ export default function RegisterPage() {
 
   const fetchUsers = () => {
     axios
-      .get("https://jsonplaceholder.typicode.com/users")
+      .get("http://3.95.239.60:9001/api")
       .then((response) => {
         setUsers(response.data);
+        setRegisteredUsers(response.data.filter(user => user.registered));
       })
       .catch((error) => {
         console.error("API error:", error);
@@ -84,9 +101,7 @@ export default function RegisterPage() {
     }
     if (isEmptyValue(formValue.gender)) {
       error["gender"] = "Gender is required";
-    } else if (
-      !["male", "female", "other"].includes(formValue.gender.toLowerCase())
-    ) {
+    } else if (!["male", "female", "other"].includes(formValue.gender.toLowerCase())) {
       error["gender"] = "Invalid Gender";
     }
 
@@ -119,15 +134,21 @@ export default function RegisterPage() {
     event.preventDefault();
 
     if (validateForm()) {
+      setIsLoading(true); // Set loading state
+
       axios
-        .post("https://jsonplaceholder.typicode.com/users", formValue)
+        .post("http://3.95.239.60:9001/api", formValue)
         .then((response) => {
           showToast("Registration successful", "success");
-          fetchUsers(); // Fetch updated user list
+          setRegisteredUsers([...registeredUsers, formValue]); // Add registered user to the list
+          setFormValue(initFormValue); // Reset form values
         })
         .catch((error) => {
           console.error("API error:", error);
           showToast("Registration failed", "error");
+        })
+        .finally(() => {
+          setIsLoading(false); // Reset loading state
         });
     } else {
       showToast("Please fill in all required fields correctly", "error");
@@ -140,71 +161,34 @@ export default function RegisterPage() {
         <h1 className="title">Register account</h1>
         {toastMessage && <Toast message={toastMessage} type={toastType} />}
         <form onSubmit={handleSubmit}>
-          <div className="mb-2">
-            <label htmlFor="first-name" className="form-label">
-              First Name
-            </label>
-            <input
-              type="text"
-              id="first-name"
-              className="form-control"
-              name="firstName"
-              value={formValue.firstName}
-              onChange={handleChange}
-            />
-            {formError.firstName && (
-              <div className="error-feedback">{formError.firstName}</div>
-            )}
-          </div>
-          <div className="mb-2">
-            <label htmlFor="last-name" className="form-label">
-              Last Name
-            </label>
-            <input
-              type="text"
-              id="last-name"
-              className="form-control"
-              name="lastName"
-              value={formValue.lastName}
-              onChange={handleChange}
-            />
-            {formError.lastName && (
-              <div className="error-feedback">{formError.lastName}</div>
-            )}
-          </div>
-          <div className="mb-2">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <input
-              type="text"
-              id="email"
-              className="form-control"
-              name="email"
-              value={formValue.email}
-              onChange={handleChange}
-            />
-            {formError.email && (
-              <div className="error-feedback">{formError.email}</div>
-            )}
-          </div>
-          <div className="mb-2">
-            <label htmlFor="birthdate" className="form-label">
-              Birthdate
-            </label>
-            <input
-              type="date"
-              id="birthdate"
-              className="form-control"
-              name="birthdate"
-              value={formValue.birthdate}
-              onChange={handleChange}
-            />
-            {formError.birthdate && (
-              <div className="error-feedback">{formError.birthdate}</div>
-            )}
-          </div>
-
+          <InputCustom
+            label="First Name"
+            name="firstName"
+            value={formValue.firstName}
+            error={formError.firstName}
+            onChange={handleChange}
+          />
+          <InputCustom
+            label="Last Name"
+            name="lastName"
+            value={formValue.lastName}
+            error={formError.lastName}
+            onChange={handleChange}
+          />
+          <InputCustom
+            label="Email"
+            name="email"
+            value={formValue.email}
+            error={formError.email}
+            onChange={handleChange}
+          />
+          <InputCustom
+            label="Birthdate"
+            name="birthdate"
+            value={formValue.birthdate}
+            error={formError.birthdate}
+            onChange={handleChange}
+          />
           <div className="mb-2">
             <label htmlFor="gender" className="form-label">
               Gender
@@ -226,42 +210,34 @@ export default function RegisterPage() {
             )}
           </div>
 
-          <div className="mb-2">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="form-control"
-              name="password"
-              value={formValue.password}
-              onChange={handleChange}
-            />
-            {formError.password && (
-              <div className="error-feedback">{formError.password}</div>
-            )}
-          </div>
-          <div className="mb-2">
-            <label htmlFor="confirm-password" className="form-label">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              id="confirm-password"
-              className="form-control"
-              name="confirmPassword"
-              value={formValue.confirmPassword}
-              onChange={handleChange}
-            />
-            {formError.confirmPassword && (
-              <div className="error-feedback">{formError.confirmPassword}</div>
-            )}
-          </div>
+          <InputCustom
+            label="Password"
+            name="password"
+            value={formValue.password}
+            error={formError.password}
+            onChange={handleChange}
+          />
+          <InputCustom
+            label="Confirm Password"
+            name="confirmPassword"
+            value={formValue.confirmPassword}
+            error={formError.confirmPassword}
+            onChange={handleChange}
+          />
+
           <button type="submit" className="submit-btn">
             Register
           </button>
         </form>
+      </div>
+      <div>
+        <h2>Registered Users:</h2>
+        {registeredUsers.map((user, index) => (
+          <div key={index}>
+            <p>{user.firstName} {user.lastName}</p>
+            <p>{user.email}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
