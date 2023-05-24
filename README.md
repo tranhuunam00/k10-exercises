@@ -1,1 +1,1 @@
-+ Em có dùng 2 kiểu logic. Mọi người chạy thử có thể comment 1 dòng js thì có thể test đoạn còn lại
+
