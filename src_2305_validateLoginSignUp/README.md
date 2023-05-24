@@ -1,1 +1,1 @@
-Em chưa làm xong cái validate nữa ~
+Em đang mắc ở chỗ validate
