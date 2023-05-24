@@ -4,6 +4,7 @@ import IMAGE_APP from '../assets/image'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import styles from './style.module.scss'
+import useViewport from '../Mobile/viewWidth'
 
 const LoginPage = () => {
     const [data, setData] = useState({
@@ -11,7 +12,7 @@ const LoginPage = () => {
         username: '',
         password: '',
         dOB: '',
-        sex:'',
+        sex: '',
     })
 
     const [errorShow, setErrorShow] = useState({
@@ -92,14 +93,13 @@ const LoginPage = () => {
                 erro_list.errorPassword
             )
         } else if (name === 'dOB' && value) {
-            console.log("Ngày: ", value);
+            console.log('Ngày: ', value)
             setData({ ...data, [name]: new Date(value).getTime() })
         } else if (name === 'sex' && value) {
-            console.log("Giới tính nè: ", value);
-            setData({ ...data, [name]: value})
+            console.log('Giới tính nè: ', value)
+            setData({ ...data, [name]: value })
         }
     }
-
 
     const [datenow, setDatenow] = useState('')
     const today_7h = new Date()
@@ -115,7 +115,7 @@ const LoginPage = () => {
             toast.error('Vui lòng nhập thông tin', { autoClose: 1000 })
             console.log(data, typeof data)
         } else {
-            // POST_DATA_LOGIN(api_login, data)
+            POST_DATA_LOGIN(api_login, data)
             console.log(data, typeof data)
         }
     }
@@ -141,9 +141,11 @@ const LoginPage = () => {
         }
     }
 
-    return (
-        <div className={styles.SignINUP}>
-            <div className={styles.SignINUP_left}>
+    const viewPort = useViewport()
+    const isMobile = viewPort.width <= 1324
+    if (isMobile) {
+        return (
+            <div className={styles.SignINUP_Mobile}>
                 <div className={styles.form__row}>
                     <h1 className={styles.h1}>Sign Up</h1>
                     <img src={IMAGE_APP.iconMain} alt="" />
@@ -232,11 +234,116 @@ const LoginPage = () => {
                     </div>
                 </div>
             </div>
-            <div className={styles.SignINUP_right}>
-                <img src={IMAGE_APP.loginImage} />
+        )
+    } else {
+        return (
+            <div className={styles.SignINUP}>
+                <div className={styles.SignINUP_left}>
+                    <div className={styles.form__row}>
+                        <h1 className={styles.h1}>Sign Up</h1>
+                        <img src={IMAGE_APP.iconMain} alt="" />
+                    </div>
+
+                    <div className={styles.form__center}>
+                        <p>If you don’t have an account register</p>
+                        <p class="Sign">You can Login</p>
+                    </div>
+
+                    <InputCustom
+                        ICON={IMAGE_APP.email}
+                        name={'email'}
+                        label={'Email'}
+                        type={'text'}
+                        error={errorShow.errorText_Email}
+                        onChange={handleChangeInput}
+                    />
+                    <InputCustom
+                        ICON={IMAGE_APP.user}
+                        onChange={handleChangeInput}
+                        label={'Username'}
+                        type={'text'}
+                        error={errorShow.errorText_Username}
+                        name={'username'}
+                    />
+                    <InputCustom
+                        onChange={handleChangeInput}
+                        label={'Planet'}
+                        type={'radio'}
+                        id={'male'}
+                        value_input="male"
+                        Planet={
+                            <>
+                                <label for="male">Male</label>
+                                <input
+                                    type="radio"
+                                    id="female"
+                                    name="sex"
+                                    value="female"
+                                    onChange={(e) =>
+                                        handleChangeInput(e.target)
+                                    }
+                                />
+                                <label for="female">Female</label>
+                            </>
+                        }
+                        name={'sex'}
+                    />
+                    <InputCustom
+                        ICON={IMAGE_APP.pass}
+                        name={'password'}
+                        label={'Password'}
+                        type={'password'}
+                        error={errorShow.errorText_Password}
+                        onChange={handleChangeInput}
+                        Show_pass={IMAGE_APP.showPass}
+                    />
+                    <InputCustom
+                        ICON={IMAGE_APP.pass}
+                        name={'passwordComfirm'}
+                        error={errorShow.errorText_ComfirmPassword}
+                        label={'Comfirm Password'}
+                        type={'password'}
+                        onChange={handleChangeInput}
+                        Show_pass={IMAGE_APP.showPass}
+                    />
+                    <InputCustom
+                        ICON={IMAGE_APP.dOB}
+                        name={'dOB'}
+                        label={'Date of birth'}
+                        type={'date'}
+                        DateNow={datenow}
+                        onChange={handleChangeInput}
+                    />
+
+                    <button onClick={handleSubmit} className={styles.button}>
+                        Submit
+                    </button>
+                    <ToastContainer />
+
+                    <div className={styles.form__center}>
+                        <p>or continue with</p>
+                        <div class="other_acc">
+                            <img src={IMAGE_APP.gApple} alt="" />
+                            <img src={IMAGE_APP.google} alt="" />
+                            <img src={IMAGE_APP.gFace} alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.SignINUP_right}>
+                    <div className={styles.phone}>
+                        <p>+94 0116 789 754</p>
+                        <img src={IMAGE_APP.phone} alt="" />
+                    </div>
+
+                    <img className={styles.ads} src={IMAGE_APP.loginImage} />
+                    <div className={styles.text_left}>
+                        <p>Lorem Ipsum is simply </p>
+                        <h1>Sign Up to name</h1>
+                    </div>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default LoginPage

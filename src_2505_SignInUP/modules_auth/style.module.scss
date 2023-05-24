@@ -20,6 +20,22 @@
     justify-content: space-around;
 }
 
+.SignINUP_Mobile {
+    position: absolute;
+    width: 94%;
+    height: 96%;
+    left: 3%;
+    top: 2%;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    background-color: white;
+    border-radius: 10px;
+}
+
 .SignINUP_right {
     position: absolute;
     width: 73.5rem;
@@ -29,8 +45,37 @@
     background: #000842;
     border-radius: 15px;
 
-    justify-content: center;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    padding-left: 7rem;
+    padding-right: 7rem;
+    padding-top: 5rem;
+}
+
+.ads {
+    padding-left: 12.3rem;
+    width: 521px;
+    height: 521px;
+}
+
+.phone,
+.text_left {
+    font-size: 3rem;
+    color: white;
+}
+.text_left {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+}
+.text_left h1 {
+    font-size: 3.5rem;
+}
+
+.phone {
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 .h1 {
@@ -64,21 +109,4 @@
 
 h1 {
     font-size: 1.8rem;
-}
-
-@media screen and (max-width: 768px) {
-    html {
-        font-size: 10px;
-    }
-
-    .SignINUP_left {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 10%;
-        top: 10%;
-    }
-    .SignINUP_right {
-        display: none;
-    }
 }

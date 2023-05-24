@@ -4,7 +4,7 @@ import IMAGE_APP from '../assets/image'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import styles from './style.module.scss'
-
+import useViewport from '../Mobile/viewWidth'
 const LoginPage = () => {
     const [data, setData] = useState({
         username: '',
@@ -90,11 +90,71 @@ const LoginPage = () => {
         }
     }
 
-    return (
-        <div className={styles.SignINUP}>
+    const viewPort = useViewport()
+    const isMobile = viewPort.width <= 1324
+    if (isMobile) {
+        return (
+            <div className={styles.SignINUP_Mobile}>
+                <div className={styles.form__row}>
+                    <h1 className={styles.h1}>Sign In</h1>
+                    <img src={IMAGE_APP.iconMain} alt="" />
+                </div>
+
+                <div className={styles.form__center}>
+                    <p>If you don’t have an account register</p>
+                    <p class="Sign">You can Register</p>
+                </div>
+
+                <InputCustom
+                    ICON={IMAGE_APP.user}
+                    onChange={handleChangeInput}
+                    label={'Username'}
+                    type={'text'}
+                    error={errorShow.errorText_Username}
+                    name={'username'}
+                />
+                <InputCustom
+                    ICON={IMAGE_APP.pass}
+                    name={'password'}
+                    label={'Password'}
+                    type={'password'}
+                    error={errorShow.errorText_Password}
+                    onChange={handleChangeInput}
+                    Show_pass={IMAGE_APP.showPass}
+                />
+                <div class={styles.remember_forgot}>
+                    <div>
+                        <input
+                            type="checkbox"
+                            id="Remember me"
+                            name="Remember me"
+                            value="1"
+                        />
+                        <label for="Remember me">Remember me</label>
+                    </div>
+                    <a>Forgot Password ?</a>
+                </div>
+
+                <button onClick={handleSubmit} className={styles.button}>
+                    Submit
+                </button>
+                <ToastContainer />
+
+                <div className={styles.form__center}>
+                    <p>or continue with</p>
+                    <div class="other_acc">
+                        <img src={IMAGE_APP.gApple} alt="" />
+                        <img src={IMAGE_APP.google} alt="" />
+                        <img src={IMAGE_APP.gFace} alt="" />
+                    </div>
+                </div>
+            </div>
+        )
+    } else {
+        ;<div className={styles.SignINUP}>
             <div className={styles.SignINUP_left}>
                 <div className={styles.form__row}>
-                <h1 className={styles.h1}>Sign In</h1>
+                    <h1 className={styles.h1}>Sign In</h1>
                     <img src={IMAGE_APP.iconMain} alt="" />
                 </div>
 
@@ -148,10 +208,19 @@ const LoginPage = () => {
                 </div>
             </div>
             <div className={styles.SignINUP_right}>
-                <img src={IMAGE_APP.loginImage} />
+                <div className={styles.phone}>
+                    <p>+94 0116 789 754</p>
+                    <img src={IMAGE_APP.phone} alt="" />
+                </div>
+
+                <img className={styles.ads} src={IMAGE_APP.loginImage} />
+                <div className={styles.text_left}>
+                    <p>Lorem Ipsum is simply </p>
+                    <h1>Sign In to name</h1>
+                </div>
             </div>
         </div>
-    )
+    }
 }
 
 export default LoginPage
