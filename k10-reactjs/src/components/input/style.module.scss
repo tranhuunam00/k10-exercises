@@ -1,0 +1,23 @@
+.inputCom {
+    width: 430px;
+    height: 64px;
+    margin: 27px 0 30px 0;
+}
+.inputCom input {
+    width: 80%;
+    border: 0;
+    border-bottom: 2px solid #f3f3f3;
+    outline: 0;
+    font-size: 13px;
+    padding: 7px 0;
+    margin-top: 10px;
+}
+.inputCom label{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+}
+.pEle{
+    color: red;
+    position: relative;
+}
