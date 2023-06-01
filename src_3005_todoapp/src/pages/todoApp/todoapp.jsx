@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styles from './style.module.scss'
 import Table_card from '../../components/card/cardTable'
 import ButtonCustom from '../../components/button/button'
 import IMAGE_APP from '../../assets/image'
 import InputCustom from '../../components/input/inputText'
 import { ToastContainer, toast } from 'react-toastify'
+import UserProvider from '../../context/user.provider'
+import UserContext from '../../context/user.context'
 
-const Todoapp = () => {
-    const header = ['id', 'name', 'money']
+
+const Todoapp = ({value, index}) => {
+    // const [{ listUser, isOpenModal }, dispatch] = useContext(UserContext);
+
+    const header = ['ID', 'Name', 'Money', 'Edit', 'Delete']
     const [content, setContent] = useState([
         { id: '1', username: 'Vi', money: '14 000' },
         { id: '2', username: 'Coro', money: '98 000' },
@@ -18,6 +23,7 @@ const Todoapp = () => {
         username: null,
         money: null,
     })
+
     const [new_add_money, setAddMoney] = useState({
         money: null,
     })
@@ -29,7 +35,7 @@ const Todoapp = () => {
     })
 
     const validate = (input, value, set_errorText, int) => {
-        if (input != 'username' && !int.test(value)) {
+        if (input !== 'username' && !int.test(value)) {
             setErrorShow({ ...errorShow, [set_errorText]: 'Vui lòng nhập số' })
             console.log('int', value)
         } else if (input === 'add_money') {
@@ -41,6 +47,7 @@ const Todoapp = () => {
         }
     }
     const handleInput = (e) => {
+
         const { name, value } = e
         if (name === 'id') {
             validate(name, value, 'errorText_id', /^[0-9]*\d$/)
@@ -59,18 +66,22 @@ const Todoapp = () => {
         } else if (content.some((user) => new_user.id === user.id)) {
             toast.error('ID đã tồn tại', { autoClose: 1000 })
         } else {
+            // LƯU VÀO LOCALSTORAGE
+
             toast.success('Thêm người dùng thành công', { autoClose: 1000 })
             setContent([...content, new_user])
         }
     }
 
     const handleDEL = () => {
-        console.log(content.some((user) => new_user.id != user.id))
+        console.log(content.some((user) => new_user.id !== user.id))
         if (!new_user.id) {
             toast.error('Vui lòng nhập thông tin ID', { autoClose: 1000 })
         } else if (content.some((user) => new_user.id === user.id)) {
             toast.success('Xoá người dùng thành công', { autoClose: 1000 })
-            const update_list = content.filter((user) => user.id != new_user.id)
+            const update_list = content.filter(
+                (user) => user.id !== new_user.id
+            )
             setContent(update_list)
         } else {
             toast.error('ID chưa tồn tại', { autoClose: 1000 })
@@ -90,20 +101,30 @@ const Todoapp = () => {
             )
             const update_list = content.map((user) => {
                 if (user.id === new_user.id) {
-                    return { ...user, money: parseInt(user.money) + parseInt(new_add_money.money) }
-                }return user;
-            });
-            setContent(update_list);
+                    return {
+                        ...user,
+                        money:
+                            parseInt(user.money) +
+                            parseInt(new_add_money.money),
+                    }
+                }
+                return user
+            })
+            setContent(update_list)
         } else {
             toast.error('ID chưa tồn tại', { autoClose: 1000 })
         }
     }
 
     return (
-        <div className={styles.todo}>
+        <form className={styles.todo}>
             <div className={styles.show}>
                 <h1 className={styles.h1}>Danh sách người dùng</h1>
-                <Table_card arr_header={header} arr_value={content} />
+                <Table_card
+                    arr_header={header}
+                    arr_value={content}
+                    handleDelete={handleDEL}
+                />
             </div>
 
             <div className={styles.add}>
@@ -126,12 +147,6 @@ const Todoapp = () => {
                         error={errorShow.errorText_money}
                         onChange={handleInput}
                     />
-                    <InputCustom
-                        label={' + Money'}
-                        name={'add_money'}
-                        error={errorShow.errorText_addmoney}
-                        onChange={handleInput}
-                    />
                 </div>
             </div>
 
@@ -139,19 +154,22 @@ const Todoapp = () => {
                 <img src={IMAGE_APP.iconMain} />
                 <h1 className={styles.h1}>Xin chào! </h1>
                 <h2> Chào mừng đến với app của chúng tôi</h2>
-                <ButtonCustom text="Thêm người dùng" handleButton={handleADD} />
-                <ToastContainer />
-                <ButtonCustom text="Xoá người dùng" handleButton={handleDEL} />
-                <p>Xoá người dùng bạn chỉ cần nhập ID</p>
-                <ButtonCustom text="+ Tiền" handleButton={handle_Add_money} />
-                <p>Có thể thêm tiền cho người dùng bằng ID</p>
-                <p> hoặc tất cả người dùng khi nhập MONEY</p>
-                <ButtonCustom text="Thay đổi số DƯ" />
+                <ButtonCustom
+                    type={'reset'}
+                    text="Thêm người dùng"
+                    handleButton={() => {
+                        // dispatch({ type: 'SHOW_MODAL', payload: value })
+                    }}
+                />
                 <ButtonCustom text="Sắp xếp" />
             </div>
-        </div>
+        </form>
     )
 }
 
-export default Todoapp
+export default () => (
+    <UserProvider>
+        <Todoapp />
+    </UserProvider>
+)
 // rfc

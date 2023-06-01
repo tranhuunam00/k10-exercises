@@ -26,9 +26,9 @@ const InputCustom = ({
                         name={name}
                         onChange={(e) => onChange(e.target)}
                         type={type}
-                        placeholder=""
                         max={DateNow}
                         value={value_input}
+                        placeholder={name}
                     />
                 </div>
                 {Planet}
