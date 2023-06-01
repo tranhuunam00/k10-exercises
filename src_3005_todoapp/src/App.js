@@ -10,17 +10,12 @@ import UserProvider from './context/user.provider'
 import UserContext from './context/user.context'
 
 function App() {
-
     return (
         <div>
-            {/* <Todoapp /> */}
-            <LearnuseReducer />
+            <Todoapp />
+            {/* <LearnuseReducer /> */}
         </div>
     )
 }
 
-export default () => (
-    <UserProvider>
-        <App />
-    </UserProvider>
-)
+export default App

@@ -1,29 +1,22 @@
-import React, { useContext, useReducer } from 'react'
+import React from 'react'
 import { ToastContainer, toast } from 'react-toastify'
-import UserProvider from '../../context/user.provider'
-import UserContext from '../../context/user.context'
+import { useStore } from '../../context'
+import ButtonCustom from '../../components/button/button'
+import InputCustom from '../../components/input/inputText'
 
-const LearnuseReducer = ({ value, index, onDeletee }) => {
+const LearnuseReducer = () => {
+    const [{ listUser, isOpenModel, dataModel }, dispatch] = useStore()
 
-    console.log(UserContext)
-    // const [{ listUser, isOpenModal }, dispatch] = useContext(UserContext)
-
-    console.log(useContext)
     return (
-        <div>
-            {/* <h1>{value}</h1> */}
-            <button
-                // onClick={() => {
-                //     console.log(value)
-                //     dispatch({ type: 'SHOW_MODAL', payload: value })
-                // }}
-            >
-                ADD
-            </button>
-            <ToastContainer />
-            {/* <button onClick={() => dispatch()}>DELETE</button> */}
-            <ToastContainer />
-        </div>
+        <form>
+            <div>
+                {listUser.map((value, index) => {
+                    return <h1 key={index}>{value.name}</h1>
+                })}
+            </div>
+            <InputCustom name={'username'} />
+            <ButtonCustom type={'reset'} text={'Click đi nào!'} />
+        </form>
     )
 }
 

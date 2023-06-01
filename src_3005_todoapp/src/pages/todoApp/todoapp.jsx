@@ -7,10 +7,11 @@ import InputCustom from '../../components/input/inputText'
 import { ToastContainer, toast } from 'react-toastify'
 import UserProvider from '../../context/user.provider'
 import UserContext from '../../context/user.context'
+import { useStore } from '../../context'
 
 
 const Todoapp = ({value, index}) => {
-    // const [{ listUser, isOpenModal }, dispatch] = useContext(UserContext);
+    const [{ listUser, isOpenModal, dataModel }, dispatch] = useStore();
 
     const header = ['ID', 'Name', 'Money', 'Edit', 'Delete']
     const [content, setContent] = useState([
@@ -88,34 +89,6 @@ const Todoapp = ({value, index}) => {
         }
     }
 
-    const handle_Add_money = () => {
-        console.log(new_user.id, new_add_money.money)
-        if (!new_user.id && !new_add_money.money) {
-            toast.error('Vui lòng nhập thông tin ID', { autoClose: 1000 })
-        } else if (content.some((user) => new_user.id === user.id)) {
-            toast.success(
-                'Tăng tiền cho người dùng',
-                new_user.id,
-                'thành công',
-                { autoClose: 1000 }
-            )
-            const update_list = content.map((user) => {
-                if (user.id === new_user.id) {
-                    return {
-                        ...user,
-                        money:
-                            parseInt(user.money) +
-                            parseInt(new_add_money.money),
-                    }
-                }
-                return user
-            })
-            setContent(update_list)
-        } else {
-            toast.error('ID chưa tồn tại', { autoClose: 1000 })
-        }
-    }
-
     return (
         <form className={styles.todo}>
             <div className={styles.show}>
@@ -123,7 +96,6 @@ const Todoapp = ({value, index}) => {
                 <Table_card
                     arr_header={header}
                     arr_value={content}
-                    handleDelete={handleDEL}
                 />
             </div>
 
@@ -157,9 +129,7 @@ const Todoapp = ({value, index}) => {
                 <ButtonCustom
                     type={'reset'}
                     text="Thêm người dùng"
-                    handleButton={() => {
-                        // dispatch({ type: 'SHOW_MODAL', payload: value })
-                    }}
+                    handleButton={handleADD}
                 />
                 <ButtonCustom text="Sắp xếp" />
             </div>

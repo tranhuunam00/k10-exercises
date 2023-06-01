@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './style.module.scss'
 
-const Table_card = ({ arr_header, arr_value, handleEdit, handleDelete }) => {
+const Table_card = ({ arr_header, arr_value, handle_Edit, handle_Delete }) => {
 
     return (
         <table border="1" className={styles.table}>
@@ -25,12 +25,12 @@ const Table_card = ({ arr_header, arr_value, handleEdit, handleDelete }) => {
                             )
                         })}
                         <th>
-                            <button key={index} className={styles.button} onClick={handleEdit}> 
+                            <button key={index} className={styles.button} onClick={handle_Edit}> 
                                 <img src="https://img.icons8.com/?size=1x&id=oR5tfd18Ei7C&format=gif" />
                             </button>
                         </th>
                         <th>
-                            <button key={index} className={styles.button} onClick={handleDelete}>
+                            <button key={index} className={styles.button} onClick={handle_Delete}>
                                 <img src="https://img.icons8.com/?size=1x&id=4B0kCMNiLlmW&format=gif" />
                             </button>
                         </th>
