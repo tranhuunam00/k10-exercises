@@ -5,6 +5,7 @@ import App from './App'
 import { User_Provider } from './context'
 import LearnuseReducer from './pages/todoApp/learnuseReducer'
 import Todoapp from './pages/todoApp/todoapp'
+import Table_card from './components/card/cardTable_todo'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

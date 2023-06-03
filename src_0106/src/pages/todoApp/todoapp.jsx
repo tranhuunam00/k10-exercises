@@ -14,7 +14,6 @@ const Todoapp = () => {
     const { listUser, isOpenModel, dataMoel } = state
 
     useEffect(() => {
-
         const GET_DATA_USER = async () => {
             try {
                 const reponse = await fetch(
@@ -36,7 +35,6 @@ const Todoapp = () => {
         username: null,
         email: null,
     })
-
     const [errorShow, setErrorShow] = useState({
         errorText_email: '',
     })
@@ -69,7 +67,6 @@ const Todoapp = () => {
         if (Object.values(new_user).some((value) => !value)) {
             toast.error('Bạn cần nhập đủ thông tin', { autoClose: 500 })
         } else {
-            console.log(listUser)
             setArr_value([
                 ...arr_value,
                 {
@@ -78,6 +75,7 @@ const Todoapp = () => {
                     email: new_user.email,
                 },
             ])
+            setNew((new_user.username = ''), (new_user.email = ''))
         }
     }
 
@@ -133,8 +131,13 @@ const Todoapp = () => {
                 <Table_card
                     arr_header={arr_header}
                     arr_value={arr_value}
-                    handle_Edit={(e) => {
-                        handleEdit(e)
+                    handle_Edit={() => {
+                        console.log('ShowModel', isOpenModel)
+                        dispatch({
+                            type: 'SHOW_MODEL',
+                            payload: new_user,
+                        })
+                        console.log('ShowModel', isOpenModel)
                     }}
                     handle_Delete={(e) => handelDelete(e)}
                 />

@@ -58,12 +58,7 @@ const Table_card = ({
                                 key={index}
                                 className={styles.button}
                                 onClick={() => {
-                                    console.log('ShowModel', isOpenModel)
-                                    dispatch({
-                                        type: 'SHOW_MODEL',
-                                        payload: isOpenModel,
-                                    })
-                                    console.log('ShowModel', isOpenModel)
+                                    handle_Edit()
                                 }}
                             >
                                 <img src="https://img.icons8.com/?size=1x&id=oR5tfd18Ei7C&format=gif" />

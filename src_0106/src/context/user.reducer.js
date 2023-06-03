@@ -1,5 +1,5 @@
 const initState = {
-    listUser: [],
+    listUser: [{name:'Chochu', email:'a'},{name:'Quang', email:'a'}],
     isOpenModel: false,
     dataModel: null,
 }
@@ -20,7 +20,8 @@ function reducer(state, action) {
         case 'CHANGE_USER_MONEY':
 
         case 'SHOW_MODEL':
-            return { ...state, isOpenModal: true}
+            console.log("SHOW_MODEL")
+            return { ...state, isOpenModal: true , dataModal: action.payload }
 
         case 'HIDE_MODEL':
             return { ...state, isOpenModal: false, dataModal: action.payload }
@@ -28,5 +29,6 @@ function reducer(state, action) {
             return state
     }
 }
+
 export { initState }
 export default reducer
