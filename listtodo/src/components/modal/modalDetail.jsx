@@ -3,7 +3,7 @@ import IMAGE_APP from "../../assets/image";
 import { useContext, useState } from 'react';
 import { DataContext } from '../../App';
 const ModalDetail = ({ cloneModal }) => {
-  const listTodo = useContext(DataContext)
+  const {listTodo} = useContext(DataContext)
 
   const handleClickRemoveModal = () => {
     cloneModal(false)

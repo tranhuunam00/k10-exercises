@@ -1,14 +1,18 @@
 import { useContext, useState } from "react";
 import styles from './style.module.scss'
 import IMAGE_APP from "../../assets/image";
-const ModalDelete = ({ cloneModal }) => {
+import { DataContext } from "../../App";
+const ModalDelete = ({ listTodo , cloneModal}) => {
 
+  const { handleCLickImgDelete } = useContext(DataContext)
 
+console.log(listTodo)
   const handleClickRemoveModal = () => {
     cloneModal(false)
   }
   const handleClickSave = () => {
-
+    // const removeList = listTodo.filter((value) => value.id !== id);
+    // setListTodo(removeList);
   }
   return (
     <div className={styles.modal}>
@@ -21,7 +25,7 @@ const ModalDelete = ({ cloneModal }) => {
       </div>
 
       <div className={styles.btn}>
-        <button className={styles.btn_item} onClick={() => { handleClickSave() }}  >Delete</button>
+        <button className={styles.btn_item} onClick={() => { handleClickSave() }}>Delete</button>
         <button className={styles.btn_item} onClick={() => { handleClickRemoveModal() }}>Cancel</button>
       </div>
     </div>

@@ -11,7 +11,6 @@ export const DataContext = createContext();
 
 function App() {
   const LIST_USER_API = "https://jsonplaceholder.typicode.com/users";
-  
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -34,14 +33,14 @@ function App() {
     setUsername("");
     setEmail("");
   };
-  console.log(listTodo);
   const handleCLickImgEdit = () => {
     setShowModalEdit(true);
   };
 
   const handleCLickImgDelete = (data) => {
-    // const removeList = listTodo.filter((value) => value.id !== data.id);
-    // setListTodo(removeList);
+    const removeList = listTodo.filter((value) => value.id !== data.id);
+    setListTodo(removeList);
+
     setShowModalDelete(true);
   };
   const handleClickValueDetail = () => {
@@ -89,67 +88,73 @@ function App() {
   };
 
   return (
-    <DataContext.Provider value={listTodo}>
-    <>
-      <h1>HeHe</h1>
-      <InputCustom
-        label={"Username"}
-        name={"username"}
-        onChange={(e) => {
-          const { value } = e;
-          setUsername(value);
-        }}
-        placeholder={"Username"}
-        value={username}
-      />
-      <InputCustom
-        label={"Email"}
-        name={"email"}
-        onChange={(e) => {
-          const { value } = e;
-          setEmail(value);
-        }}
-        placeholder={"Email"}
-        value={email}
-      />
+    <DataContext.Provider
+      value={{ listTodo }}
+    >
+      <>
+        <h1>HeHe</h1>
+        <InputCustom
+          label={"Username"}
+          name={"username"}
+          onChange={(e) => {
+            const { value } = e;
+            setUsername(value);
+          }}
+          placeholder={"Username"}
+          value={username}
+        />
+        <InputCustom
+          label={"Email"}
+          name={"email"}
+          onChange={(e) => {
+            const { value } = e;
+            setEmail(value);
+          }}
+          placeholder={"Email"}
+          value={email}
+        />
 
-      <ButtonCustom
-        text={"Thêm"}
-        disabled={!username || !email}
-        onClick={() => {
-          handleClickButton();
-        }}
-      />
-      <h2>List to do</h2>
-      <table>
-        <tr>
-          <th>stt</th>
-          <th>id</th>
-          <th>username</th>
-          <th>email</th>
-          <th>edit</th>
-          <th>delete</th>
-        </tr>
+        <ButtonCustom
+          text={"Thêm"}
+          disabled={!username || !email}
+          onClick={() => {
+            handleClickButton();
+          }}
+        />
+        <h2>List to do</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>stt</th>
+              <th>id</th>
+              <th>username</th>
+              <th>email</th>
+              <th>edit</th>
+              <th>delete</th>
+            </tr>
+          </thead>
 
-        {listTodo.map((value, index) => {
-          return (
-            <Todo
-              key={value.id}
-              value={value}
-              index={index}
-              onDelete={handleCLickImgDelete}
-              onUpdate={handleCLickImgEdit}
-              onDetail={handleClickValueDetail}
-            />
-          );
-        })}
-      </table>
-      {showModalEdit && <ModalEdit cloneModal={setShowModalEdit} />}
-      {showModalDelete && <ModalDelete cloneModal={setShowModalDelete} />}
-      {showModalDetail && <ModalDetail cloneModal={setShowModalDetail} />}
-    </>
+          <tbody>
+            {listTodo.map((value, index) => {
+              return (
+                <Todo
+                  key={value.id}
+                  value={value}
+                  index={index}
+                  onDelete={handleCLickImgDelete}
+                  onUpdate={handleCLickImgEdit}
+                  onDetail={handleClickValueDetail}
+                />
+              );
+            })}
+          </tbody>
+        </table>
+        {showModalEdit && <ModalEdit cloneModal={setShowModalEdit} />}
+        {showModalDelete && <ModalDelete cloneModal={setShowModalDelete} listTodo={listTodo}/>}
+        {showModalDetail && <ModalDetail cloneModal={setShowModalDetail} />}
+      </>
     </DataContext.Provider>
   );
 }
 
-export default App
+export default App;
