@@ -1,5 +1,5 @@
 const initState = {
-    listUser: [{name:'Chochu', email:'a'},{name:'Quang', email:'a'}],
+    listUser: [],
     isOpenModel: false,
     dataModel: null,
 }

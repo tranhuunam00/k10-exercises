@@ -7,14 +7,15 @@ import LearnuseReducer from './pages/todoApp/learnuseReducer'
 import Todoapp from './pages/todoApp/todoapp'
 import { useStore } from './context'
 import Model_Edit from './pages/todoApp/model_todoUser/model_edit'
+import Modal from './pages/todoApp/learnuseReducer'
 
 function App() {
     const [{ isOpenModal }, dispatch] = useStore()
     return (
         <div>
-            {/* <Model_Edit/> */}
-            <Todoapp />
-            {isOpenModal && <Model_Edit/>}
+            {/* <Modal/> */}
+            {(!isOpenModal && <Todoapp/>) || (isOpenModal && <Model_Edit/>)}
+            
         </div>
     )
 }

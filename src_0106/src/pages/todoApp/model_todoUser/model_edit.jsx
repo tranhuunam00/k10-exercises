@@ -12,7 +12,6 @@ const Model_Edit = () => {
     const { listUser, isOpenModel, dataMoel } = state
 
     useEffect(() => {
-
         const GET_DATA_USER = async () => {
             try {
                 const reponse = await fetch(
@@ -79,13 +78,14 @@ const Model_Edit = () => {
         }
     }
 
-    const handleEdit = (data) => {}
-
-    const handelDelete = (data) => {
-        const delete_user = arr_value.filter((user) => user.id !== data.id)
-        setArr_value(delete_user)
+    const handleOverlayClick = (e) => {
+        if (e.target.classList.contains('modal-overlay')) {
+            dispatch({
+                type: 'HIDE_MODEL',
+                payload: new_user,
+            })
+        }
     }
-
     return (
         <form
             className={styles.todoapp}
@@ -93,38 +93,53 @@ const Model_Edit = () => {
                 e.preventDefault()
             }}
         >
-            <div>
-                <h1>Xin chào!</h1>
-                <h4>Chào mừng đến với !</h4>
-            </div>
+            <div onClick={handleOverlayClick}>
+                <div className={styles.closeIN}>
+                    <div>
+                        <h1>Xin chào!</h1>
+                        <h4>Bạn có thể CHỈNH SỬA thông tin tại đây!</h4>
+                    </div>
 
-            <div className={styles.add}>
-                <h3>Add User</h3>
-                <div className={styles.input}>
-                    <InputCustom
-                        label={'Name'}
-                        name={'username'}
-                        ICON={IMAGE_APP.user}
-                        text={'Enter your username'}
-                        onChange={handleInput}
-                    />
-                    <InputCustom
-                        label={'Email'}
-                        name={'email'}
-                        ICON={IMAGE_APP.email}
-                        text={'Enter your email'}
-                        onChange={handleInput}
-                        error={errorShow.errorText_email}
+                    <img
+                        onClick={() => {
+                            dispatch({
+                                type: 'HIDE_MODEL',
+                                payload: new_user,
+                            })
+                        }}
+                        src="https://img.icons8.com/?size=1x&id=4MBC7gtaoPlW&format=png"
+                        alt=""
                     />
                 </div>
-                <button
-                    type="reset"
-                    className={styles.buttonADD}
-                    onClick={handleADD}
-                >
-                    Lưu
-                </button>
-                <ToastContainer />
+
+                <div className={styles.add}>
+                    <h3>Add User</h3>
+                    <div className={styles.input}>
+                        <InputCustom
+                            label={'Name'}
+                            name={'username'}
+                            ICON={IMAGE_APP.user}
+                            text={'Enter your username'}
+                            onChange={handleInput}
+                        />
+                        <InputCustom
+                            label={'Email'}
+                            name={'email'}
+                            ICON={IMAGE_APP.email}
+                            text={'Enter your email'}
+                            onChange={handleInput}
+                            error={errorShow.errorText_email}
+                        />
+                    </div>
+                    <button
+                        type="reset"
+                        className={styles.buttonADD}
+                        onClick={handleADD}
+                    >
+                        Lưu
+                    </button>
+                    <ToastContainer />
+                </div>
             </div>
         </form>
     )

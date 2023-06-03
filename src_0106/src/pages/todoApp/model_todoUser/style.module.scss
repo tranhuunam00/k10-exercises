@@ -1,7 +1,6 @@
 .todoapp {
-    position: relative;
-    width: 100%;
-    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.5); /* Màu đen với độ mờ 50% */
 
     margin: 1rem;
     padding: 1rem;
@@ -19,6 +18,13 @@
     height: 5rem;
     border-radius: 50%;
 }
-.list, .add {
+.list,
+.add {
     padding-top: 5rem;
+}
+
+.closeIN {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

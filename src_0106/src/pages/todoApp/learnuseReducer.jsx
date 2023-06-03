@@ -1,31 +1,65 @@
-import React from 'react'
-import { ToastContainer, toast } from 'react-toastify'
-import { useStore } from '../../context'
+import React, { useState } from 'react'
+import Todoapp from './todoapp'
 import ButtonCustom from '../../components/button/button'
-import InputCustom from '../../components/input/inputText'
 
-const LearnuseReducer = () => {
-    const [{ listUser, isOpenModel, dataModel }, dispatch] = useStore()
+function Modal() {
+    const [isOpen, setIsOpen] = useState(false)
+
+    const openModal = () => {
+        console.log('Click đê!', isOpen)
+        setIsOpen(true)
+    }
+    console.log('Click đê!', isOpen)
+    const closeModal = () => setIsOpen(false)
+
+    const handleOverlayClick = (e) => {
+        if (e.target.classList.contains('modal-overlay')) {
+            closeModal()
+        }
+    }
 
     return (
-        <form>
-            <div>
-                {listUser.map((value, index) => {
-                    return (
-                        <tr>
-                            {value.map((value, index) => {
-                                return value.map((val) => {
-                                    return <tb>{val}</tb>
-                                })
-                            })}
-                        </tr>
-                    )
-                })}
-            </div>
-            <InputCustom name={'username'} />
-            <ButtonCustom type={'reset'} text={'Click đi nào!'} />
-        </form>
+        <div>
+            <button
+                style={{ width: '100px', height: '100px' }}
+                onClick={openModal}
+            >
+                Open Modal
+            </button>
+            {isOpen && (
+                <div
+                    className="modal-overlay"
+                    style={{
+                        position: 'fixed',
+                        top: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor:
+                            'rgba(0, 0, 0, 0.5)' /* Màu đen với độ mờ 50% */,
+                        // display: 'flex',
+                        // justifycontent: 'center',
+                        // alignitems: 'center',
+                    }}
+                    onClick={handleOverlayClick}
+                >
+                    <div className="modal" style={{
+                      position: 'relative',
+                      zIndex: '1',
+                      backgroundColor: 'white',
+                      width:'100px',
+                      padding: '20px'
+                    }}>
+                        <span className="close" onClick={closeModal}>
+                            &times;
+                        </span>
+                        <h2>Modal Header</h2>
+                        <p>Modal Content</p>
+                    </div>
+                </div>
+            )}
+        </div>
     )
 }
 
-export default LearnuseReducer
+export default Modal
