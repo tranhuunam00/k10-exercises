@@ -1,25 +1,29 @@
-import { useContext, useState, useEffect, useRef } from "react";
-import { v4 } from "uuid";
+import { createContext, useState, useEffect, useContext } from "react";
 
 import ButtonCustom from "./components/ButtonCustom/ButtonCustom";
 import InputCustom from "./components/InputCustom/InputCustom";
-import UserProvider from "./context/user.provider";
-import UserContext from "./context/user.context";
 import IMAGE_APP from "./assets/image";
+import ModalEdit from "./components/modal/modalEdit";
+import ModalDelete from "./components/modal/modalDelete";
+import ModalDetail from "./components/modal/modalDetail";
+
+export const DataContext = createContext();
 
 function App() {
   const LIST_USER_API = "https://jsonplaceholder.typicode.com/users";
+  
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [listTodo, setListTodo] = useState([]);
-  const saveEffect = useRef(true);
+  const [showModalEdit, setShowModalEdit] = useState(false);
+  const [showModalDelete, setShowModalDelete] = useState(false);
+  const [showModalDetail, setShowModalDetail] = useState(false);
 
   useEffect(() => {
-    saveEffect.current = false;
     fetch(LIST_USER_API)
       .then((response) => response.json())
       .then((data) => setListTodo(data));
-    return () => saveEffect.current;
   }, []);
 
   const handleClickButton = () => {
@@ -30,22 +34,38 @@ function App() {
     setUsername("");
     setEmail("");
   };
+  console.log(listTodo);
   const handleCLickImgEdit = () => {
-    console.log("Aaaaaaaaaaaaaaaaaaaaa")
+    setShowModalEdit(true);
   };
 
   const handleCLickImgDelete = (data) => {
-    const removeList = listTodo.filter((value) => value.id !== data.id);
-    setListTodo(removeList);
-
+    // const removeList = listTodo.filter((value) => value.id !== data.id);
+    // setListTodo(removeList);
+    setShowModalDelete(true);
   };
-  const Todo = ({ value, index, onDelete,onUpdate }) => {
+  const handleClickValueDetail = () => {
+    setShowModalDetail(true);
+  };
+  const Todo = ({ value, index, onDelete, onUpdate, onDetail }) => {
     return (
       <tr key={value.id}>
         <td>{index + 1}</td>
         <td>{value.id}</td>
-        <td>{value.name}</td>
-        <td>{value.email}</td>
+        <td
+          onClick={() => {
+            onDetail();
+          }}
+        >
+          {value.name}
+        </td>
+        <td
+          onClick={() => {
+            onDetail();
+          }}
+        >
+          {value.email}
+        </td>
         <td>
           <img
             src={IMAGE_APP.iconEdit}
@@ -67,7 +87,9 @@ function App() {
       </tr>
     );
   };
+
   return (
+    <DataContext.Provider value={listTodo}>
     <>
       <h1>HeHe</h1>
       <InputCustom
@@ -103,7 +125,7 @@ function App() {
         <tr>
           <th>stt</th>
           <th>id</th>
-          <th>name</th>
+          <th>username</th>
           <th>email</th>
           <th>edit</th>
           <th>delete</th>
@@ -117,17 +139,17 @@ function App() {
               index={index}
               onDelete={handleCLickImgDelete}
               onUpdate={handleCLickImgEdit}
+              onDetail={handleClickValueDetail}
             />
           );
         })}
       </table>
+      {showModalEdit && <ModalEdit cloneModal={setShowModalEdit} />}
+      {showModalDelete && <ModalDelete cloneModal={setShowModalDelete} />}
+      {showModalDetail && <ModalDetail cloneModal={setShowModalDetail} />}
     </>
+    </DataContext.Provider>
   );
 }
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default () => (
-  <UserProvider>
-    <App />
-  </UserProvider>
-);
+export default App

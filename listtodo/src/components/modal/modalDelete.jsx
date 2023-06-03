@@ -1,42 +1,30 @@
 import { useContext, useState } from "react";
-import UserContext from "../../context/user.context";
+import styles from './style.module.scss'
+import IMAGE_APP from "../../assets/image";
+const ModalDelete = ({ cloneModal }) => {
 
-const Modal = () => {
-  const [{ isOpenModal, dataModal: user }, dispatch] = useContext(UserContext);
+
+  const handleClickRemoveModal = () => {
+    cloneModal(false)
+  }
+  const handleClickSave = () => {
+
+  }
   return (
-    <div
-      style={{
-        width: "200px",
-        height: "200px",
-        backgroundColor: "red",
-        position: "fixed",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: 'center'
-      }}
-    >
-      <div>
-        <button
-          onClick={() => {
-            dispatch({
-              type: "CHANGE_USER",
-              payload: {
-                id: user.id,
-              },
-            });
-          }}
-        >
-          luu
-        </button>
-        <button
-          onClick={() => {
-            dispatch({ type: "HIDE_MODAL" });
-          }}
-        >
-          tat modal
-        </button>
+    <div className={styles.modal}>
+      <div className={styles.imgRemoveModal}>
+        <img src={IMAGE_APP.iconRemoveModal} alt="" onClick={() => { handleClickRemoveModal() }}></img>
+      </div>
+      <div className={styles.title}>
+        <h1>Modal Delete</h1>
+        <h2>Bạn có chắc chắn muốn xóa </h2>
+      </div>
+
+      <div className={styles.btn}>
+        <button className={styles.btn_item} onClick={() => { handleClickSave() }}  >Delete</button>
+        <button className={styles.btn_item} onClick={() => { handleClickRemoveModal() }}>Cancel</button>
       </div>
     </div>
   );
 };
-export default Modal;
+export default ModalDelete;

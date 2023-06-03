@@ -1,0 +1,30 @@
+.modal {
+  width: 50rem;
+  height: 20rem;
+  align-items: center;
+  position: absolute;
+  top: calc(50% - 10rem);
+  right: calc(50% - 25rem);
+  border: 0.1rem solid black;
+}
+.btn_item {
+  width: 10rem;
+  background-color: rgb(185, 167, 167);
+}
+.btn {
+  display: flex;
+  justify-content: space-around;
+}
+.imgRemoveModal {
+  display: flex;
+  justify-content: end;
+  margin: 1rem 2rem;
+}
+.title{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.content{
+  display: flex;
+  margin: 1rem;
+}
