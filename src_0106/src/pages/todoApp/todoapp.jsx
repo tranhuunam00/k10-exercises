@@ -6,12 +6,13 @@ import ButtonCustom from '../../components/button/button'
 import Table_card from '../../components/card/cardTable_todo'
 import { useStore } from '../../context/hooks'
 import { ToastContainer, toast } from 'react-toastify'
+import Model_Edit from './model_todoUser/model_edit'
 
 const Todoapp = () => {
     const arr_header = ['STT', 'ID', 'Name', 'Email', 'Edit', 'Delete']
     const [arr_value, setArr_value] = useState([])
     const [state, dispatch] = useStore()
-    const { listUser, isOpenModel, dataMoel } = state
+    const { listUser, isOpenModel_Edit, dataMoel } = state
 
     useEffect(() => {
         const GET_DATA_USER = async () => {
@@ -32,7 +33,7 @@ const Todoapp = () => {
 
     // Input and Validate
     const [new_user, setNew] = useState({
-        username: null,
+        name: null,
         email: null,
     })
     const [errorShow, setErrorShow] = useState({
@@ -56,7 +57,7 @@ const Todoapp = () => {
 
     const handleInput = (e) => {
         const { name, value } = e
-        if (name === 'username') {
+        if (name === 'name') {
             validate(name, value)
         } else {
             validate(name, value, 'errorText_email')
@@ -64,6 +65,7 @@ const Todoapp = () => {
     }
 
     const handleADD = () => {
+        console.log('handleADD', new_user)
         if (Object.values(new_user).some((value) => !value)) {
             toast.error('Bạn cần nhập đủ thông tin', { autoClose: 500 })
         } else {
@@ -71,11 +73,11 @@ const Todoapp = () => {
                 ...arr_value,
                 {
                     id: Math.floor(Math.random() * 100000),
-                    name: new_user.username,
+                    name: new_user.name,
                     email: new_user.email,
                 },
             ])
-            setNew((new_user.username = ''), (new_user.email = ''))
+            setNew({ name: null, email: null })
         }
     }
 
@@ -87,62 +89,68 @@ const Todoapp = () => {
     }
 
     return (
-        <form
-            className={styles.todoapp}
-            onSubmit={(e) => {
-                e.preventDefault()
-            }}
-        >
-            <div>
-                <h1>Xin chào!</h1>
-                <h4>Chào mừng đến với !</h4>
-            </div>
+        <div>
+            <form
+                className={styles.todoapp}
+                onSubmit={(e) => {
+                    e.preventDefault()
+                }}
+            >
+                <div>
+                    <h1>Xin chào!</h1>
+                    <h4>Chào mừng đến với !</h4>
+                </div>
 
-            <div className={styles.add}>
-                <h3>Add User</h3>
-                <div className={styles.input}>
-                    <InputCustom
-                        label={'Name'}
-                        name={'username'}
-                        ICON={IMAGE_APP.user}
-                        text={'Enter your username'}
-                        onChange={handleInput}
-                    />
-                    <InputCustom
-                        label={'Email'}
-                        name={'email'}
-                        ICON={IMAGE_APP.email}
-                        text={'Enter your email'}
-                        onChange={handleInput}
-                        error={errorShow.errorText_email}
+                <div className={styles.add}>
+                    <h3>Add User</h3>
+                    <div className={styles.input}>
+                        <InputCustom
+                            label={'Name'}
+                            name={'name'}
+                            ICON={IMAGE_APP.user}
+                            text={'Enter your username'}
+                            onChange={handleInput}
+                        />
+                        <InputCustom
+                            label={'Email'}
+                            name={'email'}
+                            ICON={IMAGE_APP.email}
+                            text={'Enter your email'}
+                            onChange={handleInput}
+                            error={errorShow.errorText_email}
+                        />
+                    </div>
+                    <button
+                        type="reset"
+                        className={styles.buttonADD}
+                        onClick={handleADD}
+                    >
+                        Thêm
+                    </button>
+                    <ToastContainer />
+                </div>
+
+                <div className={styles.list}>
+                    <Table_card
+                        arr_header={arr_header}
+                        arr_value={arr_value}
+                        handle_Edit={() => {
+                            dispatch({
+                                type: 'SET_USER',
+                                payload: arr_value,
+                            })
+                            dispatch({
+                                type: 'SHOW_MODEL',
+                                payload: arr_value,
+                            })
+                            console.log('listUser', listUser)
+                        }}
+                        handle_Delete={(e) => handelDelete(e)}
                     />
                 </div>
-                <button
-                    type="reset"
-                    className={styles.buttonADD}
-                    onClick={handleADD}
-                >
-                    Thêm
-                </button>
-                <ToastContainer />
-            </div>
-
-            <div className={styles.list}>
-                <Table_card
-                    arr_header={arr_header}
-                    arr_value={arr_value}
-                    handle_Edit={() => {
-                        console.log('ShowModel', isOpenModel)
-                        dispatch({
-                            type: 'SHOW_MODEL',
-                            payload: new_user,
-                        })
-                        console.log('ShowModel', isOpenModel)
-                    }}
-                    handle_Delete={(e) => handelDelete(e)}
-                />
-            </div>
-        </form>
+            </form>
+            {isOpenModel_Edit && <Model_Edit />}
+        </div>
     )
 }
 

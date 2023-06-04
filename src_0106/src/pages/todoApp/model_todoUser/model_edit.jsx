@@ -6,27 +6,9 @@ import { useStore } from '../../../context/hooks'
 import { ToastContainer, toast } from 'react-toastify'
 
 const Model_Edit = () => {
-    const arr_header = ['STT', 'ID', 'Name', 'Email', 'Edit', 'Delete']
     const [arr_value, setArr_value] = useState([])
     const [state, dispatch] = useStore()
     const { listUser, isOpenModel, dataMoel } = state
-
-    useEffect(() => {
-        const GET_DATA_USER = async () => {
-            try {
-                const reponse = await fetch(
-                    'https://jsonplaceholder.typicode.com/users'
-                )
-                const resuft = await reponse.json()
-                setArr_value(resuft)
-                console.log('Thành công', arr_value)
-            } catch (error) {
-                console.log('Error: ', error)
-            }
-        }
-        GET_DATA_USER()
-        console.log('Vi')
-    }, [])
 
     // Input and Validate
     const [new_user, setNew] = useState({
@@ -78,70 +60,77 @@ const Model_Edit = () => {
         }
     }
 
+    const handleHide_modal = () => {
+        dispatch({
+            type: 'HIDE_MODEL',
+            payload: new_user,
+        })
+    }
     const handleOverlayClick = (e) => {
         if (e.target.classList.contains('modal-overlay')) {
-            dispatch({
-                type: 'HIDE_MODEL',
-                payload: new_user,
-            })
+            handleHide_modal()
         }
     }
+
     return (
-        <form
-            className={styles.todoapp}
-            onSubmit={(e) => {
-                e.preventDefault()
-            }}
+        <div
+            className="modal-overlay"
+            id={styles.modal}
+            onClick={handleOverlayClick}
         >
-            <div onClick={handleOverlayClick}>
-                <div className={styles.closeIN}>
-                    <div>
-                        <h1>Xin chào!</h1>
-                        <h4>Bạn có thể CHỈNH SỬA thông tin tại đây!</h4>
-                    </div>
+            <form
+                className={styles.todoapp}
+                onSubmit={(e) => {
+                    e.preventDefault()
+                }}
+            >
+                <div>
+                    <div className={styles.closeIN}>
+                        <div>
+                            <h1>Xin chào!</h1>
+                            <h4>Bạn có thể CHỈNH SỬA thông tin tại đây!</h4>
+                        </div>
 
-                    <img
-                        onClick={() => {
-                            dispatch({
-                                type: 'HIDE_MODEL',
-                                payload: new_user,
-                            })
-                        }}
-                        src="https://img.icons8.com/?size=1x&id=4MBC7gtaoPlW&format=png"
-                        alt=""
-                    />
-                </div>
-
-                <div className={styles.add}>
-                    <h3>Add User</h3>
-                    <div className={styles.input}>
-                        <InputCustom
-                            label={'Name'}
-                            name={'username'}
-                            ICON={IMAGE_APP.user}
-                            text={'Enter your username'}
-                            onChange={handleInput}
-                        />
-                        <InputCustom
-                            label={'Email'}
-                            name={'email'}
-                            ICON={IMAGE_APP.email}
-                            text={'Enter your email'}
-                            onChange={handleInput}
-                            error={errorShow.errorText_email}
+                        <img
+                            onClick={() => {
+                                handleHide_modal()
+                            }}
+                            src="https://img.icons8.com/?size=1x&id=4MBC7gtaoPlW&format=png"
+                            alt=""
                         />
                     </div>
-                    <button
-                        type="reset"
-                        className={styles.buttonADD}
-                        onClick={handleADD}
-                    >
-                        Lưu
-                    </button>
-                    <ToastContainer />
+
+                    <div className={styles.add}>
+                        <h3>Add User</h3>
+                        <div className={styles.input}>
+                            <InputCustom
+                                label={'Name'}
+                                name={'username'}
+                                ICON={IMAGE_APP.user}
+                                text={'Enter your username'}
+                                onChange={handleInput}
+                            />
+                            <InputCustom
+                                label={'Email'}
+                                name={'email'}
+                                ICON={IMAGE_APP.email}
+                                text={'Enter your email'}
+                                onChange={handleInput}
+                                error={errorShow.errorText_email}
+                            />
+                        </div>
+                        <button
+                            type="reset"
+                            className={styles.buttonADD}
+                            onClick={handleADD}
+                        >
+                            Lưu
+                        </button>
+                        <ToastContainer />
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     )
 }
 

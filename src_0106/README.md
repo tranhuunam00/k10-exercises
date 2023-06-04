@@ -9,6 +9,7 @@
 
 # render lại 2 lần vì check xem có biến nào dùng mà chưa khai báo không thì chạy lại 1 vòng để nhận phần khai báo. => index.js: phần bao bọc App
 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -14,7 +14,7 @@ function App() {
     return (
         <div>
             {/* <Modal/> */}
-            {(!isOpenModal && <Todoapp/>) || (isOpenModal && <Model_Edit/>)}
+            <Todoapp/>
             
         </div>
     )

@@ -6,13 +6,12 @@ function Modal() {
     const [isOpen, setIsOpen] = useState(false)
 
     const openModal = () => {
-        console.log('Click đê!', isOpen)
         setIsOpen(true)
     }
-    console.log('Click đê!', isOpen)
     const closeModal = () => setIsOpen(false)
 
     const handleOverlayClick = (e) => {
+        console.log('Click đê!', isOpen)
         if (e.target.classList.contains('modal-overlay')) {
             closeModal()
         }
@@ -37,19 +36,19 @@ function Modal() {
                         height: '100%',
                         backgroundColor:
                             'rgba(0, 0, 0, 0.5)' /* Màu đen với độ mờ 50% */,
-                        // display: 'flex',
-                        // justifycontent: 'center',
-                        // alignitems: 'center',
                     }}
                     onClick={handleOverlayClick}
                 >
-                    <div className="modal" style={{
-                      position: 'relative',
-                      zIndex: '1',
-                      backgroundColor: 'white',
-                      width:'100px',
-                      padding: '20px'
-                    }}>
+                    <div
+                        className="modal"
+                        style={{
+                            position: 'relative',
+                            zIndex: '1',
+                            backgroundColor: 'white',
+                            width: '100px',
+                            padding: '20px',
+                        }}
+                    >
                         <span className="close" onClick={closeModal}>
                             &times;
                         </span>
