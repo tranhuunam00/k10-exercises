@@ -74,7 +74,7 @@ const Model_Delete = (id, name, email, handleDelete = () => {}) => {
                         <button
                             type="reset"
                             className={styles.buttonADD}
-                            onClick={() => handleDelete()}
+                            onClick={(e) => handleDelete(e.target.value)}
                         >
                             Xoá
                         </button>

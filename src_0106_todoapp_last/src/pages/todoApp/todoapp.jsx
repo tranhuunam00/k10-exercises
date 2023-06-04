@@ -89,9 +89,10 @@ const Todoapp = () => {
         }
     }
 
-    const handleDelete = (data) => {
+    const handleDelete_inModel = (data) => {
         const delete_user = arr_value.filter((user) => user.id !== data.id)
         setArr_value(delete_user)
+        console.log('Delete ĐI')
     }
 
     return (
@@ -140,15 +141,25 @@ const Todoapp = () => {
                     <Table_card
                         arr_header={arr_header}
                         arr_value={arr_value}
-                        handle_Edit={() => {
-                        }}
-                        handle_Delete={(e) => {
+                        handle_Edit={() => {}}
+                        handle_Delete={() => {
+                            dispatch({
+                                type: 'ADD_USER',
+                                payload: arr_value,
+                            })
+                            console.log('List:', listUser, arr_value)
                         }}
                     />
                 </div>
             </form>
             {isOpenModel_Edit && <Model_Edit />}
-            {isOpenModel_Delete && <Model_Delete />}
+            {isOpenModel_Delete && (
+                <Model_Delete
+                    handleDelete={(e) => {
+                        handleDelete_inModel(e)
+                    }}
+                />
+            )}
             {isOpenModel_Detail && <Model_Detail />}
         </div>
     )

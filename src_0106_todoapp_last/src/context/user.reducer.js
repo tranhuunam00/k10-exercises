@@ -11,7 +11,7 @@ function reducer(state, action) {
         case 'ADD_USER':
             return {
                 ...state,
-                listUser: [...state.listUser, action.payload],
+                listUser: action.payload,
             }
 
         case 'DELETE_USER':
