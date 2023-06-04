@@ -18,13 +18,14 @@ function App() {
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalDetail, setShowModalDetail] = useState(false);
-
+  const [locationDataDelete, setLocationDataDelete] = useState([]);
+  const [locationDataDetail, setLocationDataDetail] = useState([]);
+  const [locationDataEdit, setLocationDataEdit] = useState([]);
   useEffect(() => {
     fetch(LIST_USER_API)
       .then((response) => response.json())
       .then((data) => setListTodo(data));
   }, []);
-
   const handleClickButton = () => {
     setListTodo([
       ...listTodo,
@@ -33,19 +34,34 @@ function App() {
     setUsername("");
     setEmail("");
   };
-  const handleCLickImgEdit = () => {
+  const handleCLickImgShowModalEdit = (data) => {
     setShowModalEdit(true);
+    setLocationDataEdit(data);
   };
 
-  const handleCLickImgDelete = (data) => {
-    const removeList = listTodo.filter((value) => value.id !== data.id);
-    setListTodo(removeList);
-
+  const handleCLickImgShowModalDelete = (data) => {
     setShowModalDelete(true);
+    setLocationDataDelete(data);
   };
-  const handleClickValueDetail = () => {
+
+  const handleCLickImgShowModalDetail = (data) => {
     setShowModalDetail(true);
+    setLocationDataDetail(data);
   };
+
+  const handleCLickDeleteItem = () => {
+    const removeList = listTodo.filter(
+      (value) => value.id !== locationDataDelete.id
+    );
+    setListTodo(removeList);
+  };
+  
+  const handleCLickEditItem = (dataUser) => {
+    setListTodo(listTodo.map((value)=> value.id === dataUser.id ? dataUser : value))
+    // listTodo : mảng ban đầu
+    // dataUser : mảng mới
+  };
+
   const Todo = ({ value, index, onDelete, onUpdate, onDetail }) => {
     return (
       <tr key={value.id}>
@@ -60,7 +76,7 @@ function App() {
         </td>
         <td
           onClick={() => {
-            onDetail();
+            onDetail(value, index);
           }}
         >
           {value.email}
@@ -70,7 +86,7 @@ function App() {
             src={IMAGE_APP.iconEdit}
             alt=""
             onClick={(e) => {
-              onUpdate();
+              onUpdate(value, index);
             }}
           />
         </td>
@@ -86,10 +102,16 @@ function App() {
       </tr>
     );
   };
-
   return (
     <DataContext.Provider
-      value={{ listTodo }}
+      value={{
+        listTodo,
+        handleCLickEditItem,
+        handleCLickDeleteItem,
+        locationDataDelete,
+        locationDataDetail,
+        locationDataEdit,
+      }}
     >
       <>
         <h1>HeHe</h1>
@@ -115,7 +137,7 @@ function App() {
         />
 
         <ButtonCustom
-          text={"Thêm"}
+          text={"Add"}
           disabled={!username || !email}
           onClick={() => {
             handleClickButton();
@@ -141,16 +163,16 @@ function App() {
                   key={value.id}
                   value={value}
                   index={index}
-                  onDelete={handleCLickImgDelete}
-                  onUpdate={handleCLickImgEdit}
-                  onDetail={handleClickValueDetail}
+                  onDelete={handleCLickImgShowModalDelete}
+                  onUpdate={handleCLickImgShowModalEdit}
+                  onDetail={handleCLickImgShowModalDetail}
                 />
               );
             })}
           </tbody>
         </table>
         {showModalEdit && <ModalEdit cloneModal={setShowModalEdit} />}
-        {showModalDelete && <ModalDelete cloneModal={setShowModalDelete} listTodo={listTodo}/>}
+        {showModalDelete && <ModalDelete cloneModal={setShowModalDelete} />}
         {showModalDetail && <ModalDetail cloneModal={setShowModalDetail} />}
       </>
     </DataContext.Provider>

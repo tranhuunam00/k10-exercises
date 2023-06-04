@@ -1,24 +1,23 @@
-import {useState } from "react";
+import { useState, useContext } from "react";
 import InputCustom from "../InputCustom/InputCustom";
 import IMAGE_APP from "../../assets/image";
 import styles from './style.module.scss'
+import { DataContext } from "../../App";
 
 const ModalEdit = ({ cloneModal }) => {
-
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-
-    const handleClickSave = () => {
-
+    const { locationDataEdit, handleCLickEditItem } = useContext(DataContext)
+    const id = locationDataEdit.id
+    const [username, setUsername] = useState(locationDataEdit.name);
+    const [email, setEmail] = useState(locationDataEdit.email);
+    const dataUser = {
+        id : id,
+        name : username,
+        email : email
     }
-    const handleClickRemoveModal = () => {
-        cloneModal(false)
-    }
-
     return (
         <div className={styles.modal}>
             <div className={styles.imgRemoveModal}>
-                <img src={IMAGE_APP.iconRemoveModal} alt="" onClick={() => { handleClickRemoveModal() }} />
+                <img src={IMAGE_APP.iconRemoveModal} alt="" onClick={() => { cloneModal(false) }} />
             </div>
             <InputCustom value={username} label={"Username"} onChange={(e) => {
                 const { value } = e;
@@ -29,8 +28,8 @@ const ModalEdit = ({ cloneModal }) => {
                 setEmail(value)
             }} />
             <div className={styles.btn}>
-                <button className={styles.btn_item} disabled={!username || !email} onClick={() => { handleClickSave() }}  >Save</button>
-                <button className={styles.btn_item} onClick={() => { handleClickRemoveModal() }}  >Cancel</button>
+                <button className={styles.btn_item} disabled={!username || !email} onClick={() => { handleCLickEditItem({dataUser}, cloneModal(false)) }}>Save</button>
+                <button className={styles.btn_item} onClick={() => { cloneModal(false) }}  >Cancel</button>
             </div>
         </div>
     )
