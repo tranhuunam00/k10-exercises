@@ -7,9 +7,15 @@ const Table_card = ({
     arr_value,
     handle_Edit,
     handle_Delete,
-    user_detail = () => {},
 }) => {
-    const [{listUser, isOpenModel}, dispatch] = useStore()
+    const [state, dispatch] = useStore()
+    const {
+        listUser,
+        isOpenModel_Edit,
+        isOpenModel_Delete,
+        isOpenModel_Detail,
+        dataModal,
+    } = state
     let counter = 0
 
     return (
@@ -31,7 +37,17 @@ const Table_card = ({
                         <th>
                             <button
                                 className={styles.button}
-                                onClick={user_detail}
+                                onClick={() => {
+                                    const new_obj = {
+                                        id: value.id,
+                                        name: value.name,
+                                        email: value.email,
+                                    }
+                                    dispatch({
+                                        type: 'USER_DETAIL',
+                                        payload: new_obj,
+                                    })
+                                }}
                             >
                                 {value.id}
                             </button>
@@ -40,7 +56,19 @@ const Table_card = ({
                             <button
                                 style={{ width: '13rem' }}
                                 className={styles.button}
-                                onClick={user_detail}
+                                onClick={() => {
+                                    handle_Delete(value, index)
+                                    const new_obj = {
+                                        id: value.id,
+                                        name: value.name,
+                                        email: value.email,
+                                    }
+                                    dispatch({
+                                        type: 'USER_DETAIL',
+                                        payload: new_obj,
+                                    })
+                                    console.log(dataModal)
+                                }}
                             >
                                 {value.name}
                             </button>
@@ -48,7 +76,19 @@ const Table_card = ({
                         <th>
                             <button
                                 className={styles.button}
-                                onClick={user_detail}
+                                onClick={() => {
+                                    handle_Delete(value, index)
+                                    const new_obj = {
+                                        id: value.id,
+                                        name: value.name,
+                                        email: value.email,
+                                    }
+                                    dispatch({
+                                        type: 'USER_DETAIL',
+                                        payload: new_obj,
+                                    })
+                                    console.log(dataModal)
+                                }}
                             >
                                 {value.email}
                             </button>
@@ -70,6 +110,16 @@ const Table_card = ({
                                 className={styles.button}
                                 onClick={() => {
                                     handle_Delete(value, index)
+                                    const new_obj = {
+                                        id: value.id,
+                                        name: value.name,
+                                        email: value.email,
+                                    }
+                                    dispatch({
+                                        type: 'DELETE_USER',
+                                        payload: new_obj,
+                                    })
+                                    console.log(dataModal)
                                 }}
                             >
                                 <img src="https://img.icons8.com/?size=1x&id=4B0kCMNiLlmW&format=gif" />

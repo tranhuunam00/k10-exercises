@@ -7,12 +7,20 @@ import Table_card from '../../components/card/cardTable_todo'
 import { useStore } from '../../context/hooks'
 import { ToastContainer, toast } from 'react-toastify'
 import Model_Edit from './model_todoUser/model_edit'
+import Model_Delete from './model_todoUser/model_delete'
+import Model_Detail from './model_todoUser/model_detail'
 
 const Todoapp = () => {
     const arr_header = ['STT', 'ID', 'Name', 'Email', 'Edit', 'Delete']
     const [arr_value, setArr_value] = useState([])
     const [state, dispatch] = useStore()
-    const { listUser, isOpenModel_Edit, dataMoel } = state
+    const {
+        listUser,
+        isOpenModel_Edit,
+        isOpenModel_Delete,
+        isOpenModel_Detail,
+        dataMoel,
+    } = state
 
     useEffect(() => {
         const GET_DATA_USER = async () => {
@@ -81,9 +89,7 @@ const Todoapp = () => {
         }
     }
 
-    const handleEdit = (data) => {}
-
-    const handelDelete = (data) => {
+    const handleDelete = (data) => {
         const delete_user = arr_value.filter((user) => user.id !== data.id)
         setArr_value(delete_user)
     }
@@ -136,7 +142,7 @@ const Todoapp = () => {
                         arr_value={arr_value}
                         handle_Edit={() => {
                             dispatch({
-                                type: 'SET_USER',
+                                type: 'ADD_USER',
                                 payload: arr_value,
                             })
                             dispatch({
@@ -145,11 +151,14 @@ const Todoapp = () => {
                             })
                             console.log('listUser', listUser)
                         }}
-                        handle_Delete={(e) => handelDelete(e)}
+                        handle_Delete={(e) => {
+                        }}
                     />
                 </div>
             </form>
             {isOpenModel_Edit && <Model_Edit />}
+            {isOpenModel_Delete && <Model_Delete />}
+            {isOpenModel_Detail && <Model_Detail />}
         </div>
     )
 }
