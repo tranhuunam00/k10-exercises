@@ -27,14 +27,13 @@ const LoginPage = () => {
     const validate = (input, value, set_errorText, Length, Pass) => {
         if (eval(Length)) {
             setErrorShow({ ...data, [set_errorText]: 'Tối thiểu 6 ký tự' })
-            console.log('Length', value)
+            
         } else if (input === 'password' && !Pass.test(value)) {
             setErrorShow({
                 ...data,
                 [set_errorText]:
                     'Tối thiểu 1 ký tự IN hoa, 1 ký tự in thường, 1 chữ số!',
             })
-            console.log('Pass1', value)
         } else {
             setData({ ...data, [input]: value })
             setErrorShow({ ...data, [set_errorText]: '' })
@@ -44,7 +43,7 @@ const LoginPage = () => {
     const handleChangeInput = (e) => {
         const { name, value } = e
         if (name === 'username') {
-            console.log(name)
+            // console.log(name)
             validate(
                 name,
                 value,
@@ -69,7 +68,7 @@ const LoginPage = () => {
             toast.error('Vui lòng nhập thông tin', { autoClose: 1000 })
         } else {
             POST_DATA_LOGIN(api_login, data)
-            console.log(data, typeof data)
+            // console.log(data, typeof data)
         }
     }
 

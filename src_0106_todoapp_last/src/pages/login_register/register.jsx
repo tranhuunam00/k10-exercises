@@ -32,26 +32,26 @@ const RegisterPage = () => {
     const validate = (input, value, set_errorText, Length, Pass, Email) => {
         if ((input === 'username' || input === 'password') && eval(Length)) {
             setErrorShow({ ...data, [set_errorText]: 'Tối thiểu 6 ký tự' })
-            console.log('Length', value)
+            // console.log('Length', value)
         } else if (input === 'password' && !Pass.test(value)) {
             setErrorShow({
                 ...data,
                 [set_errorText]:
                     'Tối thiểu 1 ký tự IN hoa, 1 ký tự in thường, 1 chữ số!',
             })
-            console.log('Pass', value)
+            // console.log('Pass', value)
         } else if (input === 'email' && !Email.test(value)) {
             setErrorShow({
                 ...data,
                 [set_errorText]: 'Không thể xác định email của bạn!',
             })
-            console.log('Email', value)
+            // console.log('Email', value)
         } else if (input === 'passwordComfirm' && data.password !== value) {
             setErrorShow({
                 ...data,
                 [set_errorText]: 'Mật khẩu nhập lại chưa khớp',
             })
-            console.log('ComfirmPass', value)
+            // console.log('ComfirmPass', value)
         } else {
             setData({ ...data, [input]: value })
             setErrorShow({ ...data, [set_errorText]: '' })
@@ -61,7 +61,7 @@ const RegisterPage = () => {
     const handleChangeInput = (e) => {
         const { name, value } = e
         if (name === 'username') {
-            console.log(name)
+            // console.log(name)
             validate(
                 name,
                 value,
@@ -95,10 +95,10 @@ const RegisterPage = () => {
                 erro_list.errorPassword
             )
         } else if (name === 'dOB' && value) {
-            console.log('Ngày: ', value)
+            // console.log('Ngày: ', value)
             setData({ ...data, [name]: new Date(value).getTime() })
         } else if (name === 'sex' && value) {
-            console.log('Giới tính nè: ', value)
+            // console.log('Giới tính nè: ', value)
             setData({ ...data, [name]: value })
         }
     }
@@ -115,10 +115,10 @@ const RegisterPage = () => {
     const handleSubmit = () => {
         if (Object.values(data).some((value) => !value)) {
             toast.error('Vui lòng nhập thông tin', { autoClose: 1000 })
-            console.log(data, typeof data)
+            // console.log(data, typeof data)
         } else {
             POST_DATA_LOGIN(api_login, data)
-            console.log(data, typeof data)
+            // console.log(data, typeof data)
         }
     }
 

@@ -36,7 +36,7 @@ const Todoapp = () => {
             }
         }
         GET_DATA_USER()
-        console.log('Vi')
+        // console.log('Vi')
     }, [])
 
     // Input and Validate
@@ -73,7 +73,7 @@ const Todoapp = () => {
     }
 
     const handleADD = () => {
-        console.log('handleADD', new_user)
+        // console.log('handleADD', new_user)
         if (Object.values(new_user).some((value) => !value)) {
             toast.error('Bạn cần nhập đủ thông tin', { autoClose: 500 })
         } else {
@@ -141,15 +141,6 @@ const Todoapp = () => {
                         arr_header={arr_header}
                         arr_value={arr_value}
                         handle_Edit={() => {
-                            dispatch({
-                                type: 'ADD_USER',
-                                payload: arr_value,
-                            })
-                            dispatch({
-                                type: 'SHOW_MODEL',
-                                payload: arr_value,
-                            })
-                            console.log('listUser', listUser)
                         }}
                         handle_Delete={(e) => {
                         }}

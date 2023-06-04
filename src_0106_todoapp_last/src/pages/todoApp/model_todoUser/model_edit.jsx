@@ -6,9 +6,10 @@ import { useStore } from '../../../context/hooks'
 import { ToastContainer, toast } from 'react-toastify'
 
 const Model_Edit = () => {
+    const arr_header = ['STT', 'ID', 'Name', 'Email', 'Edit', 'Delete']
     const [arr_value, setArr_value] = useState([])
     const [state, dispatch] = useStore()
-    const { listUser, isOpenModel, dataMoel } = state
+    const { listUser, isOpenModel, dataModal } = state
 
     // Input and Validate
     const [new_user, setNew] = useState({
@@ -101,22 +102,22 @@ const Model_Edit = () => {
                     </div>
 
                     <div className={styles.add}>
-                        <h3>Add User</h3>
                         <div className={styles.input}>
+                            <h3 className={styles.header}>Thay đổi</h3>
                             <InputCustom
                                 label={'Name'}
                                 name={'username'}
                                 ICON={IMAGE_APP.user}
-                                text={'Enter your username'}
                                 onChange={handleInput}
+                                value_input={dataModal.name}
                             />
                             <InputCustom
                                 label={'Email'}
                                 name={'email'}
                                 ICON={IMAGE_APP.email}
-                                text={'Enter your email'}
                                 onChange={handleInput}
                                 error={errorShow.errorText_email}
+                                value_input={dataModal.email}
                             />
                         </div>
                         <button

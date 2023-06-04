@@ -2,12 +2,7 @@ import React from 'react'
 import styles from './style.module.scss'
 import { useStore } from '../../context/hooks'
 
-const Table_card = ({
-    arr_header,
-    arr_value,
-    handle_Edit,
-    handle_Delete,
-}) => {
+const Table_card = ({ arr_header, arr_value, handle_Edit, handle_Delete }) => {
     const [state, dispatch] = useStore()
     const {
         listUser,
@@ -67,7 +62,6 @@ const Table_card = ({
                                         type: 'USER_DETAIL',
                                         payload: new_obj,
                                     })
-                                    console.log(dataModal)
                                 }}
                             >
                                 {value.name}
@@ -87,7 +81,6 @@ const Table_card = ({
                                         type: 'USER_DETAIL',
                                         payload: new_obj,
                                     })
-                                    console.log(dataModal)
                                 }}
                             >
                                 {value.email}
@@ -99,6 +92,15 @@ const Table_card = ({
                                 className={styles.button}
                                 onClick={() => {
                                     handle_Edit()
+                                    const new_obj = {
+                                        id: value.id,
+                                        name: value.name,
+                                        email: value.email,
+                                    }
+                                    dispatch({
+                                        type: 'SHOW_MODEL',
+                                        payload: new_obj,
+                                    })
                                 }}
                             >
                                 <img src="https://img.icons8.com/?size=1x&id=oR5tfd18Ei7C&format=gif" />
@@ -119,7 +121,6 @@ const Table_card = ({
                                         type: 'DELETE_USER',
                                         payload: new_obj,
                                     })
-                                    console.log(dataModal)
                                 }}
                             >
                                 <img src="https://img.icons8.com/?size=1x&id=4B0kCMNiLlmW&format=gif" />

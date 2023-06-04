@@ -42,7 +42,7 @@ const Model_Detail = (id, name, email, handleDelete = () => {}) => {
                 <div>
                     <div className={styles.closeIN}>
                         <div>
-                            <h1>Xin chào! Đây là: </h1>
+                            <h1>Xin chào! Đây là </h1>
                             <h4>Thông tin chi tiết!</h4>
                         </div>
 
@@ -56,13 +56,21 @@ const Model_Detail = (id, name, email, handleDelete = () => {}) => {
                     </div>
 
                     <div className={styles.add}>
-                        <h3>Xoá User</h3>
                         <div className={styles.input}>
-                            <InputCustom label={'ID'} value_input={dataModal.id} />
-                            <InputCustom label={'Name'} value_input={dataModal.name} />
-                            <InputCustom label={'Email'} value_input={dataModal.email} />
+                            <h3 className={styles.header}>User</h3>
+                            <InputCustom
+                                label={'ID'}
+                                value_input={dataModal.id}
+                            />
+                            <InputCustom
+                                label={'Name'}
+                                value_input={dataModal.name}
+                            />
+                            <InputCustom
+                                label={'Email'}
+                                value_input={dataModal.email}
+                            />
                         </div>
-                        
                     </div>
                 </div>
             </form>

@@ -11,7 +11,7 @@ function Modal() {
     const closeModal = () => setIsOpen(false)
 
     const handleOverlayClick = (e) => {
-        console.log('Click đê!', isOpen)
+        // console.log('Click đê!', isOpen)
         if (e.target.classList.contains('modal-overlay')) {
             closeModal()
         }

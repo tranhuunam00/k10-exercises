@@ -6,7 +6,6 @@ import { useStore } from '../../../context/hooks'
 import { ToastContainer, toast } from 'react-toastify'
 
 const Model_Delete = (id, name, email, handleDelete = () => {}) => {
-    const [arr_value, setArr_value] = useState([])
     const [state, dispatch] = useStore()
     const { listUser, isOpenModel, dataModal } = state
 
@@ -15,50 +14,6 @@ const Model_Delete = (id, name, email, handleDelete = () => {}) => {
         username: null,
         email: null,
     })
-
-    const [errorShow, setErrorShow] = useState({
-        errorText_email: '',
-    })
-
-    const validate = (input, value, set_errorText) => {
-        if (
-            input === 'email' &&
-            !/^[a-zA-Z0-9._]+@+[a-zA-Z0-9-]+\.[a-zA-Z.-]{2,}$/.test(value)
-        ) {
-            setErrorShow({
-                ...errorShow,
-                [set_errorText]: 'Không thể xác định email',
-            })
-        } else {
-            setNew({ ...new_user, [input]: value })
-            setErrorShow({ ...errorShow, [set_errorText]: '' })
-        }
-    }
-
-    const handleInput = (e) => {
-        const { name, value } = e
-        if (name === 'username') {
-            validate(name, value)
-        } else {
-            validate(name, value, 'errorText_email')
-        }
-    }
-
-    const handleADD = () => {
-        if (Object.values(new_user).some((value) => !value)) {
-            toast.error('Bạn cần nhập đủ thông tin', { autoClose: 500 })
-        } else {
-            console.log(listUser)
-            setArr_value([
-                ...arr_value,
-                {
-                    id: Math.floor(Math.random() * 100000),
-                    name: new_user.username,
-                    email: new_user.email,
-                },
-            ])
-        }
-    }
 
     const handleHide_modal = () => {
         dispatch({
@@ -101,11 +56,20 @@ const Model_Delete = (id, name, email, handleDelete = () => {}) => {
                     </div>
 
                     <div className={styles.add}>
-                        <h3>Xoá User</h3>
                         <div className={styles.input}>
-                            <InputCustom label={'ID'} value_input={dataModal.id} />
-                            <InputCustom label={'Name'} value_input={dataModal.name} />
-                            <InputCustom label={'Email'} value_input={dataModal.email} />
+                            <h3 className={styles.header}>Xoá User</h3>
+                            <InputCustom
+                                label={'ID'}
+                                value_input={dataModal.id}
+                            />
+                            <InputCustom
+                                label={'Name'}
+                                value_input={dataModal.name}
+                            />
+                            <InputCustom
+                                label={'Email'}
+                                value_input={dataModal.email}
+                            />
                         </div>
                         <button
                             type="reset"
