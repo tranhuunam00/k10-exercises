@@ -1,0 +1,21 @@
+.message{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20rem;
+}
+.title{
+    font-size: 3rem;
+    margin: 2rem 0 5rem 0;
+}
+.detail{
+    font-weight: 300;
+    font-size: 2.6rem;
+}
+.error_code{
+    margin-top: 20rem;
+    font-size: 20rem;
+    color: rgb(233, 128, 140);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
