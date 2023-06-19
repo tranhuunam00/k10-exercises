@@ -3,7 +3,9 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
-import LoginPage  from "./modules/auth/login/LoginPage";
+import LoginPage, {
+  action as LogInPageAction,
+} from "./modules/auth/login/LoginPage";
 import ErrorPage from "./modules/errorPage/ErrorPage";
 import SignUpPage, {
   action as SignUpPageAction,
@@ -21,6 +23,7 @@ const router = createBrowserRouter([
     path: `/auth/LoginPage`,
     element: <LoginPage />,
     // loader: LoginLoader,
+    action: LogInPageAction,
   },
 ]);
 

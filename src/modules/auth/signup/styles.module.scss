@@ -1,11 +1,10 @@
 .body {
     margin: 21px 21px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .form {
     margin-top: 3rem;
-    margin-left: 9rem;
 }
 .titleSignUp{
     margin-bottom: 3rem;
@@ -17,8 +16,13 @@
     font-size: 1.6rem;    
     width: 28rem;
 }
-.FORM_Login{
-    color: #0C21C1;
+.login{
+    background-color: white;
+    border: 0;
+    color: blue;
+    font-size: 1.6rem;
+    // padding: 0;
+    // margin-bottom: 1rem;
 }
 .radio {
     display: flex;
@@ -47,12 +51,16 @@
 }
 .contact img{
     margin-right: 1rem;
+    width: 2rem;
 }
 .loginImage{
-    margin: 6.5rem 9rem 8.5rem 12rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .title{
-   margin: 0 30rem 13rem 10rem;
+
+   margin: 10rem 30rem 13rem 10rem;
 }
 .title h2{
     font-size: 4rem;

@@ -6,21 +6,21 @@ const InputTextCustom = ({ label, name, placeholder, value, type, error, icon, o
             <label>{label}</label>
             <div className={styles.inputCom}>
                 <img src={icon} alt='' />
-                <input name={name} placeholder={placeholder} onChange={(e) => onChange(e.target)} value={value} type={type} valid={validate}/>
+                <input className={styles.input} name={name} placeholder={placeholder} onChange={(e) => onChange(e.target)} value={value} type={type} valid={validate}/>
                 <p className={styles.error}>{error}</p>
             </div>
         </div>
     )
 }
 
-export const InputRadioCustom = ({ label, name, value, id, onChange = () => { }, checked }) => {
+export const InputRadioCustom = ({ label, name, value, id, onChange = () => { }, checked ,type}) => {
     return (
         <div>
-            <input type='radio' name={name} id={id} value={value} onChange={onChange} checked={checked} /> <label>{label}</label>
+            <input type={type} name={name} id={id} value={value} onChange={onChange} checked={checked} /> <label>{label}</label>
         </div>
     )
 }
 export const CheckBoxCustom = ({ type, text, onChange = () => { } }) => {
-    return <div className={styles.input}><input onChange={onChange} type={type} />{text}</div>;
+    return <div><input onChange={onChange} type={type} />{text}</div>;
 };
 export default InputTextCustom

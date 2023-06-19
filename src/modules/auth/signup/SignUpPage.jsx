@@ -11,7 +11,7 @@ export async function loader() {
 
 
 export async function action() {
-    console.log("run")
+    
     return redirect(`/auth/LoginPage`);
   }
 
@@ -179,11 +179,12 @@ const SignUpPage = () => {
         <div className={styles.body}>
             <div>
                 <img src={IMAGE_APP.logo} alt="" />
-                <form className={styles.form} action="" onChange={(e) => { e.preventDefault() }}>
+                
                     <div className={styles.titleSignUp}>
                         <h1>Sign Up</h1>
-                        <p>If you already have an account register You Can <Form  className={styles.FORM_Login}><button>Login here!</button></Form></p>
+                        <p>If you already have an account register<Form method="post"><button className={styles.login}>Login here!</button></Form></p>
                     </div>
+                    <form className={styles.form} action="" onChange={(e) => { e.preventDefault() }}>
                     <InputTextCustom onChange={handleChangeInput} label={"Email"} type={"text"} name={"email"} error={listError.email} placeholder={"Enter your email address"} validate={"required|reg"} />
                     <InputTextCustom onChange={handleChangeInput} label={"Username"} type={"text"} name={"username"} error={listError.username} placeholder={"Enter your User name"} validate={"required|minLength:6|maxLength:12"} />
                     <label>Planet</label>

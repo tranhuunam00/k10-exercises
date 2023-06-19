@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import IMAGE_APP from "../../../assets/images.assets";
 import styles from "./styles.module.scss"
-import CheckBoxCustom from "../../../components/input/input";
+import CheckBoxCustom, { InputRadioCustom } from "../../../components/input/input";
 import ButtonCustom from "../../../components/button/ButtonCustom";
 import InputTextCustom from "../../../components/input/input";
+import { Form, redirect } from "react-router-dom";
 
 
 export async function loader() {
 
+}
+export async function action() {
+
+    return redirect(`/auth/SignUpPage`);
 }
 
 const LoginPage = () => {
@@ -107,17 +112,19 @@ const LoginPage = () => {
         <div className={styles.body}>
             <div>
                 <img src={IMAGE_APP.logo} alt="" />
+
+                <h1>Sign in</h1>
+                <p>If you don’t have an account register</p>
+                <Form method="post"><button className={styles.login}>Register here !</button></Form>
                 <form action="" onSubmit={(e) => { e.preventDefault() }}>
-                    <h1>Sign in</h1>
-                    <p>If you don’t have an account register</p>
-                    <p>You can   <a className={styles.register} href="/src/modules/auth/register.jsx">Register here !</a></p>
                     <InputTextCustom error={listError.username} validate={"required"} onChange={handleChangeInput} label={"Username"} type={"text"} name={"username"} placeholder={"Enter your username"} />
                     <InputTextCustom validate={"required"} onChange={handleChangeInput} name={"password"} label={"Password"} type={"text"} error={listError.password} placeholder={"Enter your password"} />
                     <div className={styles.forgot}>
-                        <CheckBoxCustom text={"Remember me"} type={"checkbox"} />
+                        {/* <CheckBoxCustom text={"Remember me"} type={"checkbox"} /> */}
+                        <InputRadioCustom type={"checkbox"} label={"Remember me"}/>
                         <a>Forgot Password ?</a>
                     </div>
-                    <ButtonCustom id={"button"} text={"Login"} onClick={btnLogin} />
+                    <ButtonCustom  id={"button"} text={"Login"} onClick={btnLogin} />
                 </form>
                 <h4 className={styles.continue}>or continue with</h4>
                 <div className={styles.icon}>
