@@ -248,6 +248,7 @@ i {
   opacity: 0.25;
   transition: opacity 200ms;
   transition-delay: 200ms;
+  background-color: red;
 }
 
 #contact {
@@ -379,3 +380,4 @@ i {
   justify-content: center;
   width: 100%;
 }
+

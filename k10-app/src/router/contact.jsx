@@ -3,6 +3,11 @@ import { getContact } from "../contact";
 
 export async function loader({ params }) {
   const contact = await getContact(params.contactsId);
+  // await new Promise((res, rej) => {
+  //   setTimeout(() => {
+  //     res
+  //   }, 5000)
+  // })
   return { contact }
 }
 
