@@ -10,20 +10,26 @@ import ErrorPage from "./modules/errorPage/ErrorPage";
 import SignUpPage, {
   action as SignUpPageAction,
 } from "./modules/auth/signup/SignUpPage";
+import ForgotPassword, {
+  action as ForgotPasswordAction,
+} from "./modules/auth/forgotPassword/ForgotPassword";
 
 const router = createBrowserRouter([
   {
     path: "auth/SignUpPage",
     element: <SignUpPage />,
     errorElement: <ErrorPage />,
-    // loader : SignUpPageLoader,
     action: SignUpPageAction,
   },
   {
     path: `/auth/LoginPage`,
     element: <LoginPage />,
-    // loader: LoginLoader,
     action: LogInPageAction,
+  },
+  {
+    path: `/auth/ForgotPassword`,
+    element: <ForgotPassword />,
+    action: ForgotPasswordAction,
   },
 ]);
 

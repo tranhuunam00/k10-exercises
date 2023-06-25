@@ -16,7 +16,7 @@ const InputTextCustom = ({ label, name, placeholder, value, type, error, icon, o
 export const InputRadioCustom = ({ label, name, value, id, onChange = () => { }, checked ,type}) => {
     return (
         <div>
-            <input type={type} name={name} id={id} value={value} onChange={onChange} checked={checked} /> <label>{label}</label>
+            <input className={styles.radioCustom} type={type} name={name} id={id} value={value} onChange={onChange} checked={checked} /> <label>{label}</label>
         </div>
     )
 }

@@ -11,11 +11,14 @@ export async function loader() {
 
 }
 export async function action() {
-
     return redirect(`/auth/SignUpPage`);
 }
 
 const LoginPage = () => {
+
+    // const  SignUpPage = () => {
+    //     return redirect(`/auth/SignUpPage`);
+    // }
 
     const parseValid = (validString) => {
         if (!validString) return {};
@@ -109,23 +112,22 @@ const LoginPage = () => {
         } postJSON({ username, password });
     }
     return (
-        <div className={styles.body}>
+        <div className={styles.FormLogin}>
             <div>
-                <img src={IMAGE_APP.logo} alt="" />
-
                 <h1>Sign in</h1>
-                <p>If you don’t have an account register</p>
-                <Form method="post"><button className={styles.login}>Register here !</button></Form>
-                <form action="" onSubmit={(e) => { e.preventDefault() }}>
+                <div className={styles.flex}>
+                    <p>If you don’t have an account register. You can </p>
+                    <Form method="post"><button  className={styles.register}>Register here !</button></Form>
+                </div>
+                <Form method="post" onSubmit={(e) => { e.preventDefault() }}>
                     <InputTextCustom error={listError.username} validate={"required"} onChange={handleChangeInput} label={"Username"} type={"text"} name={"username"} placeholder={"Enter your username"} />
                     <InputTextCustom validate={"required"} onChange={handleChangeInput} name={"password"} label={"Password"} type={"text"} error={listError.password} placeholder={"Enter your password"} />
-                    <div className={styles.forgot}>
-                        {/* <CheckBoxCustom text={"Remember me"} type={"checkbox"} /> */}
-                        <InputRadioCustom type={"checkbox"} label={"Remember me"}/>
-                        <a>Forgot Password ?</a>
+                    <div className={styles.forgotPassword}>
+                        <InputRadioCustom type={"checkbox"} label={"Remember me"} />
+                        <button>Forgot Password ?</button>
                     </div>
-                    <ButtonCustom  id={"button"} text={"Login"} onClick={btnLogin} />
-                </form>
+                    <ButtonCustom id={"button"} text={"Login"} onClick={btnLogin} />
+                </Form>
                 <h4 className={styles.continue}>or continue with</h4>
                 <div className={styles.icon}>
                     <img src={IMAGE_APP.iconFacebook} alt="" />
@@ -133,7 +135,7 @@ const LoginPage = () => {
                     <img src={IMAGE_APP.iconGoogle} alt="" />
                 </div>
             </div>
-            <div className={styles.bgr}>
+            <div className={styles.background}>
                 <div className={styles.contact}>
                     <img src={IMAGE_APP.iconPhone} alt="" />
                     <h3>+94 0116 789 754</h3>

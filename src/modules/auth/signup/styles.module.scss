@@ -1,92 +1,61 @@
-.body {
-    margin: 21px 21px;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.FormSignUp{
     display: flex;
     justify-content: space-around;
-}
-.form {
-    margin-top: 3rem;
+    
 }
 .titleSignUp{
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
-.titleSignUp h1{
-    font-size: 3rem;
+.titleSignUp h1 {
+    font-size: 2rem;
 }
-.titleSignUp p{
-    font-size: 1.6rem;    
-    width: 28rem;
+.titleSignUp p {
+    font-size: 1.3rem;
+}
+.flex{
+    display: flex;
+    align-items: center;
 }
 .login{
     background-color: white;
     border: 0;
-    color: blue;
-    font-size: 1.6rem;
-    // padding: 0;
-    // margin-bottom: 1rem;
+    color: #0C21C1;
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
+    margin-top: 0.2rem;
 }
-.radio {
+.radio{
     display: flex;
-    margin: 10px;
-    width: 15rem;
-    justify-content: space-between;
+    padding: 1rem;
 }
-.bgr {
-    width: 73.5rem;
-    height: 86rem;
-    background-color: #000842;
+.background{
+    width: 45rem;
+    background-color: #000842 ;
     border-radius: 2rem;
-}
-.bgr h3,h2 {
-    color: white;
-}
-.p{
-    color: white;
 }
 .contact{
     display: flex;
     justify-content: end;
-    align-items: center;
-    margin: 2rem;
-    font-size: 1.5rem;
+    margin: 1rem;
 }
-.contact img{
-    margin-right: 1rem;
-    width: 2rem;
+.contact h3 {
+    color: white;
+    margin-left: 0.5rem;
 }
 .loginImage{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.title{
-
-   margin: 10rem 30rem 13rem 10rem;
-}
-.title h2{
-    font-size: 4rem;
+.title {
+    margin: 2rem;
 }
 .title p {
-    font-size: 2rem;
     color: white;
-}
-.forgot{
-    display: flex;
-    justify-content: space-between;
-}
-a{
-    text-decoration: none;
-    color: #4D4D4D;
-}
-.register{
-    color: #0C21C1;
-}
-.continue{
-    text-align: center;
-    margin-top: 5rem;
-    color: #B5B5B5;
-}
-.icon{
-    display: flex;
-    justify-content: center;
-    margin: 2rem;
+    font-size: 1.3rem;
 }

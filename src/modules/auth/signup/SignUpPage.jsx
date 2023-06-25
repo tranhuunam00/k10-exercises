@@ -6,14 +6,14 @@ import IMAGE_APP from "../../../assets/images.assets";
 import { Form, redirect } from "react-router-dom";
 
 export async function loader() {
-    
+
 }
 
 
 export async function action() {
-    
+
     return redirect(`/auth/LoginPage`);
-  }
+}
 
 
 const SignUpPage = () => {
@@ -23,6 +23,8 @@ const SignUpPage = () => {
     const [dobState, setDob] = useState("");
     const [confirmPWState, setConfirmPW] = useState("");
     const [planetState, setPlanet] = useState("");
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const ERROR_CHECK_LIST_TYPE = {
         required: "Bạn không được để chống ",
@@ -49,7 +51,7 @@ const SignUpPage = () => {
         }, {});
     };
 
-    const validate = (type = "username", inputValue, listError = {}, password = inputValue.password) => {
+    const validate = (type = "username", inputValue, listError = {}, password = passwordState) => {
         let error = null;
         const reg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
         const checkNumber = inputValue.substr(inputValue.length - 1);
@@ -135,12 +137,17 @@ const SignUpPage = () => {
     const handleChangeInputRadio = (e) => {
         setPlanet(e.target.value)
     }
+    
     const btnRegister = () => {
+
+        // setIsLoading(true)
+
         const username = usernameState
         const password = passwordState
         const email = emailState
         const dOB = new Date(dobState).getTime()
         const sex = planetState
+        console.log(sex)
         async function postJSON(data) {
             const buttonELe = document.getElementById("button")
             buttonELe.innerText = "loading";
@@ -173,18 +180,20 @@ const SignUpPage = () => {
             }
 
         } postJSON({ email, username, password, sex, dOB });
+
     }
 
     return (
-        <div className={styles.body}>
+        <div className={styles.FormSignUp}>
             <div>
-                <img src={IMAGE_APP.logo} alt="" />
-                
-                    <div className={styles.titleSignUp}>
-                        <h1>Sign Up</h1>
-                        <p>If you already have an account register<Form method="post"><button className={styles.login}>Login here!</button></Form></p>
+                <div className={styles.titleSignUp}>
+                    <h1>Sign Up</h1>
+                    <div className={styles.flex}>
+                        <p>If you already have an account Login. You can </p>
+                        <Form method="post"><button className={styles.login}>Login here!</button></Form>
                     </div>
-                    <form className={styles.form} action="" onChange={(e) => { e.preventDefault() }}>
+                </div>
+                <Form method="post" className={styles.form} action="" onChange={(e) => { e.preventDefault() }}>
                     <InputTextCustom onChange={handleChangeInput} label={"Email"} type={"text"} name={"email"} error={listError.email} placeholder={"Enter your email address"} validate={"required|reg"} />
                     <InputTextCustom onChange={handleChangeInput} label={"Username"} type={"text"} name={"username"} error={listError.username} placeholder={"Enter your User name"} validate={"required|minLength:6|maxLength:12"} />
                     <label>Planet</label>
@@ -196,9 +205,9 @@ const SignUpPage = () => {
                     <InputTextCustom onChange={handleChangeInput} name={"confirmPassword"} label={"Confirm Password"} type={"password"} error={listError.confirmPassword} placeholder={"Confirm your Password"} validate={"required|checkPw"} />
                     <InputTextCustom onChange={handleChangeInput} name={"dateOfBirth"} label={" Date of birth"} type={"date"} error={listError.dateOfBirth} placeholder={"dd/mm/yyyy"} validate={"required|checkDate"} />
                     <ButtonCustom id={"button"} text={"Register"} onClick={btnRegister} />
-                </form>
+                </Form>
             </div>
-            <div className={styles.bgr}>
+            <div className={styles.background}>
                 <div className={styles.contact}>
                     <img src={IMAGE_APP.iconPhone} alt="" />
                     <h3>+94 0116 789 754</h3>
