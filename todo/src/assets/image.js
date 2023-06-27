@@ -1,9 +1,9 @@
-import iconDelete from './icons/iconDelete.svg'
-import iconEdit from './icons/iconEdit.svg'
+// import iconDelete from './icons/iconDelete.svg'
+// import iconEdit from './icons/iconEdit.svg'
 
-const IMAGE_APP =  {
-    iconDelete,
-    iconEdit
-}
+// const IMAGE_APP =  {
+//     iconDelete,
+//     iconEdit
+// }
 
-export default IMAGE_APP
+// export default IMAGE_APP
