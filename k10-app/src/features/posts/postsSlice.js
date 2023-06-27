@@ -8,8 +8,8 @@ const initialState = [
   },
   {
     id: "2",
-    title: "First Post!",
-    content: "Hello",
+    title: "Hello Khuong",
+    content: "Khuong ne'",
   },
 ];
 
@@ -18,10 +18,18 @@ const postSlice = createSlice({
   initialState,
   reducers: {
     incrementByPost: (state, action) => {
-        state.push(action.payload)
-      },
+      console.log("qqq",action);
+      state.push(action.payload);
+    },
+    postUpdate(state, action) {
+      const { id, title, content } = action.payload;
+      const abcd = state.find((post) => post.id === id);
+      if (abcd) {
+        abcd.title = title;
+        abcd.content = content;
+      }
+    },
   },
-  
 });
-export const { incrementByPost } = postSlice.actions;
+export const { incrementByPost, postUpdate } = postSlice.actions;
 export default postSlice.reducer;

@@ -16,6 +16,8 @@ import store from "./app/store";
 import Counter from "./features/counter/counter";
 import { PostList } from "./features/posts/PostList";
 import { AddPostForm } from "./features/posts/AddPostFrom";
+import SinglePostPage from "./features/posts/SinglePostPage";
+import EditPostForm from "./features/posts/EditPostForm";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +48,15 @@ const router = createBrowserRouter([
       {
         path: "post/edit",
         element: <AddPostForm />,
+      }
+      ,
+      {
+        path: "post/:postId",
+        element: <SinglePostPage />,
+      },
+      {
+        path: "post/edit/:postId",
+        element: <EditPostForm />,
       }
     ],
   },

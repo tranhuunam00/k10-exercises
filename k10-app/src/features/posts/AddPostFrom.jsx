@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { incrementByPost } from "./postsSlice";
 import { Form, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const AddPostForm = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+    const [a, setA] = useState("")
     const navigate = useNavigate()
     const onTitleChanged = (e) => setTitle(e.target.value);
     const onContentChanged = (e) => setContent(e.target.value);
 
+    const user = useSelector((state) => state.users);
+    console.log(user)
     const dispatch = useDispatch();
 
-    const onClick=()=>{
-        dispatch(incrementByPost({ title, content }))
+    const onClick = () => {
+        dispatch(incrementByPost({ title, content, a }))
         return navigate('/post')
     }
     return (
@@ -35,6 +38,15 @@ export const AddPostForm = () => {
                     value={content}
                     onChange={onContentChanged}
                 />
+                <select onChange={(e) => setA(e.target.value)}>
+
+                    {user.map((u) => (
+                        <>
+                            <option key={u.id} value={u.name} >{u.name}</option>
+                        </>
+                    ))}
+                </select>
+                
                 <button type="button" onClick={onClick}>Save Post</button>
             </Form>
         </section>
