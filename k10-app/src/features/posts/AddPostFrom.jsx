@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 export const AddPostForm = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [a, setA] = useState("")
+    const [users, setA] = useState("")
     const navigate = useNavigate()
     const onTitleChanged = (e) => setTitle(e.target.value);
     const onContentChanged = (e) => setContent(e.target.value);
@@ -15,8 +15,9 @@ export const AddPostForm = () => {
     console.log(user)
     const dispatch = useDispatch();
 
+    // const canSave = Boolean(title) && Boolean(content) && Boolean(users)
     const onClick = () => {
-        dispatch(incrementByPost({ title, content, a }))
+        dispatch(incrementByPost({ title, content, users }))
         return navigate('/post')
     }
     return (
@@ -42,12 +43,12 @@ export const AddPostForm = () => {
 
                     {user.map((u) => (
                         <>
-                            <option key={u.id} value={u.name} >{u.name}</option>
+                            <option key={u.id} value={u.id} >{u.name}</option>
                         </>
                     ))}
                 </select>
-                
-                <button type="button" onClick={onClick}>Save Post</button>
+
+                <button type="button" onClick={onClick} >Save Post</button>
             </Form>
         </section>
     );

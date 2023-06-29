@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-import Root, { loader as rootLoader, action as actionRoot, action } from "./router/Root";
+import Root, { loader as rootLoader, action as actionRoot } from "./router/Root";
 import ErrorPage from "./error-page";
 import Contact, { loader as contactsLoader } from "./router/contact";
 import EditContact, { action as edtAction } from "./router/edit";
