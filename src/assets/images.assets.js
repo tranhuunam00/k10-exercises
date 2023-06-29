@@ -4,6 +4,10 @@ import iconPhone from "./icons/iconPhone.svg"
 import iconFacebook from "./icons/iconFacebook.svg"
 import iconGoogle from "./icons/iconGoogle.svg"
 import iconApple from "./icons/iconApple.svg"
+import iconTwitter from "./icons/iconTwitter.svg"
+import iconInstagram from "./icons/iconInstagram.svg"
+import iconFB from "./icons/iconFB.svg"
+import iconTikTok from "./icons/iconTikTok.svg"
 const IMAGE_APP = {
     logo,
     iconPhone,
@@ -11,6 +15,10 @@ const IMAGE_APP = {
     iconFacebook,
     iconApple,
     iconGoogle,
+    iconTwitter,
+    iconInstagram,
+    iconFB,
+    iconTikTok
 }
 
 export default IMAGE_APP

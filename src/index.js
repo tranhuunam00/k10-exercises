@@ -13,6 +13,7 @@ import SignUpPage, {
 import ForgotPassword, {
   action as ForgotPasswordAction,
 } from "./modules/auth/forgotPassword/ForgotPassword";
+import CheckCardUser from "./modules/users/checkCard/CardUser";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,12 @@ const router = createBrowserRouter([
     path: `/auth/ForgotPassword`,
     element: <ForgotPassword />,
     action: ForgotPasswordAction,
+  }
+  ,
+  {
+    path: `/user/Card`,
+    element: <CheckCardUser />,
+
   },
 ]);
 
