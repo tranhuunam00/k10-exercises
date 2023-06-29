@@ -5,8 +5,7 @@ import CheckCardUser from './modules/users/checkCard/CardUser';
 function App() {
   return (
     <div className="App">
-      {/* <SignUpPage/> */}
-      <CheckCardUser/>
+      
     </div>
   );
 }
