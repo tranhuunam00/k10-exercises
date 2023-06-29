@@ -1,0 +1,118 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+html {
+  font-size: 10px;
+}
+@-webkit-keyframes my {
+  0% {
+    color: #222222;
+  }
+  50% {
+    color: #fff;
+  }
+  100% {
+    color: #222222;
+  }
+}
+@-moz-keyframes my {
+  0% {
+    color: #222222;
+  }
+  50% {
+    color: #fff;
+  }
+  100% {
+    color: #222222;
+  }
+}
+@-o-keyframes my {
+  0% {
+    color: #222222;
+  }
+  50% {
+    color: #fff;
+  }
+  100% {
+    color: #222222;
+  }
+}
+@keyframes my {
+  0% {
+    color: #222222;
+  }
+  50% {
+    color: #fff;
+  }
+  100% {
+    color: #222222;
+  }
+}
+.modal {
+  box-shadow: 1px 2px 9px #b7a4a4;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  margin-top: 30%;
+  display: flex;
+}
+.modal_Image {
+  width: 25rem;
+  height: 25rem;
+  border-radius: 1rem;
+  margin-top: 1.5rem;
+}
+.modalBackground {
+  width: 60rem;
+  height: 25rem;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  animation: fadeIn 2s;
+}
+.modalContainer{
+  margin-left: 2rem;
+}
+.title {
+  font-size: 1.6rem;
+  text-align: center;
+  margin-right: 4rem;
+  -webkit-animation: my 700ms infinite;
+  -moz-animation: my 700ms infinite;
+  -o-animation: my 700ms infinite;
+  animation: my 700ms infinite;
+}
+.body {
+  font-size: 1.6rem;
+}
+.footer {
+  margin-top: 6rem;
+  text-align: center;
+}
+.btnNo {
+  width: 12rem;
+  height: 4rem;
+  background-color: red;
+  border-radius: 4rem;
+  border-color: red;
+  color: white;
+  margin-right: 3rem;
+  font-weight: bold;
+}
+.btnYes {
+  width: 12rem;
+  height: 4rem;
+  background-color: rgb(83, 83, 244);
+  border-radius: 4rem;
+  margin-right: 2rem;
+  border-color: rgb(83, 83, 244);
+  color: white;
+  font-weight: bold;
+}
+.modal_Image {
+}
