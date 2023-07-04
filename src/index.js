@@ -14,6 +14,8 @@ import ForgotPassword, {
   action as ForgotPasswordAction,
 } from "./modules/auth/forgotPassword/ForgotPassword";
 import CheckCardUser from "./modules/users/checkCard/CardUser";
+import UserLanguage from "./modules/users/checkLanguage/userLanguage";
+import "../src/components/multiLanguage/i18next/i18next"
 
 const router = createBrowserRouter([
   {
@@ -36,7 +38,10 @@ const router = createBrowserRouter([
   {
     path: `/user/Card`,
     element: <CheckCardUser />,
-
+  },
+  {
+    path: `/user/Language`,
+    element : <UserLanguage/>
   },
 ]);
 

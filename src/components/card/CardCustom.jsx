@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss"
 import IMAGE_APP from "../../assets/images.assets"
 
-const CardCustom = ({ imgUser, nameUser, detailUser }) => {
+const CardCustom = ({ imgUser, nameUser, detailUser, onChangeFB = () => { }, onChangeTW = () => { }, onChangeINS = () => { } }) => {
     return (
         <div className={styles.picture}>
             <div className={styles.IMG_user}>
@@ -11,20 +11,21 @@ const CardCustom = ({ imgUser, nameUser, detailUser }) => {
                 {nameUser}
                 <span>{detailUser}</span>
             </p>
+            <hr/>
             <div className={styles.social}>
-                <a href="#">
-                    <img src={IMAGE_APP.iconFB} alt="" />
+                <div className={styles.imgIcon}>
+                    <img src={IMAGE_APP.iconFB} alt="" onChange={onChangeFB} />
                     <span className={styles.tooltip_social}>Facebook</span>
-                </a>
-                <a href="#">
-                    <img src={IMAGE_APP.iconTwitter} alt="" />
-                    <span className={styles.tooltip_social}>Twitter</span>
-                </a>
-                <a href="#">
-                    <img src={IMAGE_APP.iconInstagram} alt="" />
+                </div>
+                <div className={styles.imgIcon}>
+                    <img src={IMAGE_APP.iconTwitter} alt="" onChange={onChangeTW} />
+                    <span className={styles.tooltip_social} >Twitter</span>
+                </div>
+                <div className={styles.imgIcon}>
+                    <img src={IMAGE_APP.iconInstagram} alt="" onChange={onChangeINS} />
                     <span className={styles.tooltip_social}>Instagram</span>
-                </a>
-                
+                </div>
+
             </div>
         </div>
     )

@@ -4,7 +4,8 @@ import styles from "./styles.module.scss"
 import CheckBoxCustom, { InputRadioCustom } from "../../../components/input/input";
 import ButtonCustom from "../../../components/button/ButtonCustom";
 import InputTextCustom from "../../../components/input/input";
-import { Form, redirect } from "react-router-dom";
+import { Form, redirect, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 
 export async function loader() {
@@ -15,10 +16,8 @@ export async function action() {
 }
 
 const LoginPage = () => {
-
-    // const  SignUpPage = () => {
-    //     return redirect(`/auth/SignUpPage`);
-    // }
+    const { t } = useTranslation("translation");
+    const navigate = useNavigate()
 
     const parseValid = (validString) => {
         if (!validString) return {};
@@ -74,47 +73,50 @@ const LoginPage = () => {
         setListError({ ...listError, [name]: error })
         setFormValue({ ...formValue, [name]: inputValue })
     }
+    // const btnLogin = () => {
+    //     const username = userName
+    //     const password = passWord
+
+    //     async function postJSON(data) {
+    //         const buttonELe = document.getElementById("button")
+    //         buttonELe.innerText = "loading";
+    //         buttonELe.setAttribute("disabled", "true");
+    //         try {
+    //             const response = await fetch("http://3.85.3.86:9001/api/auth/login", {
+    //                 method: "POST",
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                 },
+    //                 body: JSON.stringify(data),
+    //             });
+    //             console.log(response)
+    //             if (response.ok === true) {
+    //                 window.alert("Thành công")
+    //             } else {
+    //                 window.alert("Thất bại")
+    //             }
+    //             const result = await response.json();
+    //             await new Promise((rev) => {
+    //                 setTimeout(() => {
+    //                     rev();
+    //                     buttonELe.removeAttribute("disabled");
+    //                     buttonELe.innerText = "Login";
+    //                 }, 2000);
+    //             });
+    //             console.log("Success:", result);
+    //         } catch (error) {
+    //             console.error("Error:", error);
+    //         }
+
+    //     } postJSON({ username, password });
+    // }
     const btnLogin = () => {
-        const username = userName
-        const password = passWord
-
-        async function postJSON(data) {
-            const buttonELe = document.getElementById("button")
-            buttonELe.innerText = "loading";
-            buttonELe.setAttribute("disabled", "true");
-            try {
-                const response = await fetch("http://3.85.3.86:9001/api/auth/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data),
-                });
-                console.log(response)
-                if (response.ok === true) {
-                    window.alert("Thành công")
-                } else {
-                    window.alert("Thất bại")
-                }
-                const result = await response.json();
-                await new Promise((rev) => {
-                    setTimeout(() => {
-                        rev();
-                        buttonELe.removeAttribute("disabled");
-                        buttonELe.innerText = "Login";
-                    }, 2000);
-                });
-                console.log("Success:", result);
-            } catch (error) {
-                console.error("Error:", error);
-            }
-
-        } postJSON({ username, password });
+        return navigate(`/user/Language`)
     }
     return (
         <div className={styles.FormLogin}>
             <div>
-                <h1>Sign in</h1>
+                <h1>{t("login")}</h1>
                 <div className={styles.flex}>
                     <p>If you don’t have an account register. You can </p>
                     <Form method="post"><button  className={styles.register}>Register here !</button></Form>
