@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
+import Provider from "./store/Provider";
 import "./index.css";
 import LoginPage, {
   action as LogInPageAction,
@@ -15,7 +15,7 @@ import ForgotPassword, {
 } from "./modules/auth/forgotPassword/ForgotPassword";
 import CheckCardUser from "./modules/users/checkCard/CardUser";
 import UserLanguage from "./modules/users/checkLanguage/userLanguage";
-import "../src/components/multiLanguage/i18next/i18next"
+import "../src/components/multiLanguage/i18next/i18next";
 
 const router = createBrowserRouter([
   {
@@ -33,21 +33,22 @@ const router = createBrowserRouter([
     path: `/auth/ForgotPassword`,
     element: <ForgotPassword />,
     action: ForgotPasswordAction,
-  }
-  ,
+  },
   {
     path: `/user/Card`,
     element: <CheckCardUser />,
   },
   {
     path: `/user/Language`,
-    element : <UserLanguage/>
+    element: <UserLanguage />,
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
