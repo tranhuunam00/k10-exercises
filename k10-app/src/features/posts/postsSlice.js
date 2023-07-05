@@ -70,6 +70,21 @@ const postSlice = createSlice({
       }
     },
   },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchPosts.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        // Add any fetched posts to the array
+        state.posts = state.posts.concat(action.payload);
+      })
+      .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+  },
 });
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   console.log("vao");
@@ -83,5 +98,6 @@ export const selectAllPosts = (state) => state.posts.posts;
 export const selectPostById = (state, postId) =>
   state.posts.posts.find((post) => post.id === postId);
 
-export const { incrementByPost, postUpdate, reactionAdded } = postSlice.actions;
+export const { incrementByPost, postUpdate, reactionAdded,  } =
+  postSlice.actions;
 export default postSlice.reducer;
