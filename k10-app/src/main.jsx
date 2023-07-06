@@ -19,6 +19,7 @@ import SinglePostPage from "./features/posts/SinglePostPage";
 import EditPostForm from "./features/posts/EditPostForm";
 import { worker } from "./api/server";
 import { PostsList } from "./features/posts/PostList";
+import { fetchUsers } from "./features/users/usersSlice";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,7 @@ const router = createBrowserRouter([
 
 async function render() {
   await worker.start()
+  store.dispatch(fetchUsers());
   ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <React.StrictMode>

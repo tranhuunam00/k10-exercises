@@ -1,28 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { client } from "../../api/client";
+
+export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
+  const response = await client.get("/fakeApi/users");
+  return response.data;
+});
 
 const initialState = [
-  {
-    id: "1",
-    name: "Khuong",
-  },
-  {
-    id: "2",
-    name: "Bao",
-  },
-  {
-    id: "3",
-    name: "Thanh",
-  },
+  { id: "0", name: "Tianna Jenkins" },
+  { id: "1", name: "Kevin Grant" },
+  { id: "2", name: "Madison Price" },
 ];
 
-const postSlice = createSlice({
+const userSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    // incrementByPost: (state, action) => {
-    //     state.push(action.payload)
-    //   },
+    extraReducers(builder) {
+      builder.addCase(fetchUsers.fulfilled, (state, action) => {
+        return action.payload;
+      });
+    },
   },
 });
-export const { incrementByPost } = postSlice.actions;
-export default postSlice.reducer;
+export default userSlice.reducer;

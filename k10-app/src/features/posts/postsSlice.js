@@ -83,16 +83,27 @@ const postSlice = createSlice({
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(addNewPost.fulfilled, (state, action) => {
+        console.log("khuong",action)
+        state.posts.push(action.payload);
       });
   },
 });
+
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   console.log("vao");
   const response = await client.get("/fakeApi/posts");
   console.log("response", response);
-
   return response.data;
 });
+
+export const addNewPost = createAsyncThunk("posts/addNewPost", async (initialPost) => {
+  const response = await client.post("/fakeApi/posts", initialPost);
+  console.log("response",response)
+  return response.data
+})
+
 export const selectAllPosts = (state) => state.posts.posts;
 
 export const selectPostById = (state, postId) =>
