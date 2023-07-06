@@ -1,6 +1,5 @@
-import logo from './logo.svg'
 import './App.css'
-import DropdownCustom from './components/dropdown/Dropdown'
+
 import MultiSelectDropdown from './components/dropdown/testDropdownCustom'
 
 const options = [
@@ -14,7 +13,8 @@ const options = [
 function App() {
     return (
         <div className="App">
-            <MultiSelectDropdown listFilter={options} />
+            <MultiSelectDropdown listFilter={options} label={'Dropdown View'} />
+            
         </div>
     )
 }
