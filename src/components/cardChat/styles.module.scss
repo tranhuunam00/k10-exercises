@@ -1,0 +1,11 @@
+.card {
+  margin-top: 2rem;
+  position: relative;
+  border-radius: 1rem;
+  width: 100%;
+  &_area {
+    border-radius: 1rem;
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+}

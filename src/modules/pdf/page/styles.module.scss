@@ -1,0 +1,42 @@
+.page {
+  display: flex;
+  height: 100vh;
+  &_sidebar {
+    flex: 1;
+    background-color: rgba(144, 198, 241, 0.2);
+    height: 100%;
+    button {
+      border: 1px solid #000;
+      margin: 2rem;
+      padding: 5px;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+  &_content {
+    overflow-y: scroll;
+    background-color: rgba(195, 240, 158, 0.25);
+    flex: 5;
+    position: relative;
+    &_chat {
+      overflow-y: scroll;
+      height: calc(100% - 5rem);
+    }
+    &_input {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+      height: 5rem;
+      display: flex;
+      input {
+        width: calc(100% - 10rem);
+      }
+      button {
+        width: 10rem;
+        background-color: rgba(26, 80, 124, 0.7);
+      }
+    }
+  }
+}
