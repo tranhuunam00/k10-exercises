@@ -5,6 +5,7 @@ const apiClient = axios.create({
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
   },
+  rejectUnauthorized: false,
 });
 
 export default apiClient;
