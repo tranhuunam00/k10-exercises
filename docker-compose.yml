@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  nestjs-api-casino:
+    image: nam2302/k10-fe
+    ports:
+      - "9003:3000"
+networks:
+  app_net:
+    driver: bridge
