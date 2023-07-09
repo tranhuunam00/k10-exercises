@@ -8,31 +8,62 @@ export default function PagePdf() {
   const [messageList, setMessageList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState("");
+  const [page, setPage] = useState({ start: 1, end: 2 });
 
   const handleUpload = async () => {
     if (selectedFile) {
       setIsLoading(true);
+      if (page.end < page.start) {
+        alert("Vui lòng nhập lại page");
+      }
+      const pages = [];
+      for (let i = page.start; i <= page.end; i++) {
+        pages.push(i);
+      }
 
       const formData = new FormData();
       formData.append("paper", selectedFile);
+      formData.append("pages", JSON.stringify(pages));
+
       try {
         const response = await apiClient.post("/upload-paper", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log("response.data", response.data);
-        setPaperInit(response.data);
-        setMessageList([
+        setPaperInit(response.data.data);
+        const chatPromt =
+          "Hãy phân tích như 1 chuyên gia với đoạn báo sau : " +
+          response.data.data +
+          " Và chuẩn bị trả lời những câu hỏi sắp tới đây của tôi như chuyên gia";
+        const newMessageList = [
           ...messageList,
-          { text: response.data.data, isMe: false },
-        ]);
+          { content: chatPromt, role: "user" },
+        ];
+        const resChat = await handleChat(JSON.stringify(newMessageList));
+        newMessageList.push({
+          content: resChat.data.data,
+          role: "assistant",
+        });
+        setMessageList(newMessageList);
       } catch (error) {
         console.error(error);
       } finally {
         setIsLoading(false);
       }
     }
+  };
+
+  const handleChat = async (messages) => {
+    return await apiClient.post("/chat", {
+      messages: messages,
+    });
+  };
+
+  const changePage = (e) => {
+    const { name, value } = e.target;
+    const newPage = { ...page, [name]: +value };
+    setPage(newPage);
   };
 
   return (
@@ -44,8 +75,18 @@ export default function PagePdf() {
             setSelectedFile(event.target.files[0]);
           }}
         ></input>
-        <input type="number" placeholder="Start" />
-        <input type="number" placeholder="End" />
+        <input
+          type="number"
+          placeholder="Start"
+          name="start"
+          onChange={changePage}
+        />
+        <input
+          type="number"
+          placeholder="End"
+          name="end"
+          onChange={changePage}
+        />
         <button onClick={handleUpload} disabled={isLoading}>
           {isLoading ? "Loading" : "Upload"}
         </button>
@@ -53,19 +94,29 @@ export default function PagePdf() {
       <div className={styles.page_content}>
         <div className={styles.page_content_chat}>
           {messageList.map((mes, index) => (
-            <CardChat key={index} text={mes.text} isMe={mes.isMe} />
+            <CardChat key={index} text={mes.content} isMe={mes.isMe} />
           ))}
         </div>
         <div className={styles.page_content_input}>
           <input
             placeholder="Nhập câu hỏi"
+            value={text}
             onChange={(e) => {
               setText(e.target.value);
             }}
           ></input>
           <button
-            onClick={() => {
-              setMessageList([...messageList, { text: text, isMe: true }]);
+            onClick={async () => {
+              const newMessageList = [
+                ...messageList,
+                { content: text, role: "user" },
+              ];
+              const resChat = await handleChat(JSON.stringify(newMessageList));
+              newMessageList.push({
+                content: resChat.data.data,
+                role: "assistant",
+              });
+              setMessageList(newMessageList);
               setText("");
             }}
           >
