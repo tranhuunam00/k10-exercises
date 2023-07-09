@@ -106,7 +106,9 @@ export default function PagePdf() {
             }}
           ></input>
           <button
+            disabled={isLoading}
             onClick={async () => {
+              setIsLoading(true);
               const newMessageList = [
                 ...messageList,
                 { content: text, role: "user" },
@@ -118,9 +120,10 @@ export default function PagePdf() {
               });
               setMessageList(newMessageList);
               setText("");
+              setIsLoading(false);
             }}
           >
-            Send
+            {isLoading ? "Send" : "Loading"}
           </button>
         </div>
       </div>
