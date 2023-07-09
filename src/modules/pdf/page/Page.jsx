@@ -123,7 +123,7 @@ export default function PagePdf() {
               setIsLoading(false);
             }}
           >
-            {isLoading ? "Send" : "Loading"}
+            {!isLoading ? "Send" : "Loading"}
           </button>
         </div>
       </div>
