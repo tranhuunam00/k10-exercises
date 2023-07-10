@@ -16,6 +16,7 @@ import ForgotPassword, {
 import CheckCardUser from "./modules/users/checkCard/CardUser";
 import UserLanguage from "./modules/users/checkLanguage/userLanguage";
 import "../src/components/multiLanguage/i18next/i18next";
+import Uploader from "./modules/users/uploader/Uploader";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: `/user/Language`,
     element: <UserLanguage />,
+  },
+  {
+    path: `/`,
+    element: <Uploader />,
   },
 ]);
 

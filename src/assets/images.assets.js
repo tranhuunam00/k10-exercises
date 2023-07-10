@@ -8,6 +8,7 @@ import iconTwitter from "./icons/iconTwitter.svg"
 import iconInstagram from "./icons/iconInstagram.svg"
 import iconFB from "./icons/iconFB.svg"
 import iconTikTok from "./icons/iconTikTok.svg"
+import iconUploader from "./icons/iconUploader.svg"
 const IMAGE_APP = {
     logo,
     iconPhone,
@@ -18,7 +19,8 @@ const IMAGE_APP = {
     iconTwitter,
     iconInstagram,
     iconFB,
-    iconTikTok
+    iconTikTok,
+    iconUploader
 }
 
 export default IMAGE_APP
