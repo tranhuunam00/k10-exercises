@@ -50,12 +50,14 @@ export default function LandingPage() {
                     </div>
                 </div>
                 <div id="landingBody">
+                    <h2>Learntion</h2>
                     <h1>Learntion</h1>
                     <img
                         className="imgContent"
                         src="src/landingPage/assets/landing_content.gif"
                         alt=""
                     />
+                    <h2>Learntion</h2>
                 </div>
                 <div className="addToCart">
                     <ButtonCustom
