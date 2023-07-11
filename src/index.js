@@ -17,6 +17,7 @@ import CheckCardUser from "./modules/users/checkCard/CardUser";
 import UserLanguage from "./modules/users/checkLanguage/userLanguage";
 import "../src/components/multiLanguage/i18next/i18next";
 import Uploader from "./modules/users/uploader/Uploader";
+import AvatarUser from "./modules/users/avatar/AvatarUser";
 
 const router = createBrowserRouter([
   {
@@ -44,8 +45,12 @@ const router = createBrowserRouter([
     element: <UserLanguage />,
   },
   {
-    path: `/`,
+    path: `/user/Upload`,
     element: <Uploader />,
+  },
+  {
+    path: `/`,
+    element: <AvatarUser />,
   },
 ]);
 

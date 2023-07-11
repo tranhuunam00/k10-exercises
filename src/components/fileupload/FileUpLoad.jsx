@@ -2,32 +2,34 @@ import { useState } from "react";
 import IMAGE_APP from "../../assets/images.assets"
 import styles from "./styles.module.scss"
 
-const FileUpLoad = props => {
-    console.log("props", props)
+const FileUpLoad = () => {
 
     const [fileList, setFileList] = useState([]);
-    console.log("fileList", fileList)
-    const onFileDrop = (e) => {
-        const newFile = e.target.files[0];
-        console.log("newFile", newFile)
-        if (newFile) {
-            const updatedList = [...fileList, newFile];
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+
+        if (file.type === "image/jpeg" || file.type === "image/png") {
+            const updatedList = [...fileList, file];
             setFileList(updatedList);
-            props.onFileChange(updatedList);
+
+        } else {
+            alert("Vui lòng chọn tệp hình ảnh JPEG hoặc PNG.");
+            e.target.value = null;
         }
+
     }
     const fileRemove = (file) => {
         const updatedList = [...fileList];
         updatedList.splice(fileList.indexOf(file), 1);
         setFileList(updatedList);
-        props.onFileChange(updatedList);
     }
     return (
         <>
             <div className={styles.file_card}>
 
-                <div className={styles.file_inputs} onChange={onFileDrop}>
-                    <input type="file" />
+                <div className={styles.file_inputs} onChange={handleFileChange}>
+                    <input accept="image/png , image/jpeg" type="file" />
                     <button>
                         <img src={IMAGE_APP.iconUploader} alt="" />
                         Upload
@@ -35,7 +37,7 @@ const FileUpLoad = props => {
                 </div>
 
                 <p className={styles.main}>Supported files</p>
-                <p className={styles.info}>PDF, JPG, PNG</p>
+                <p className={styles.info}>JPG, PNG</p>
 
             </div>
             {
@@ -50,10 +52,7 @@ const FileUpLoad = props => {
                                         <p>Data: {value.size}</p>
                                         <span onClick={() => fileRemove(value)}>x</span>
                                     </div>
-
                                 </div>
-
-
                             ))
                         }
                     </div>
