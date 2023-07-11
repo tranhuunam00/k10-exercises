@@ -15,9 +15,11 @@ import useDebounce from './customHook/useDebounce'
 const MultiSelectDropdown = ({ listFilter = [], label }) => {
     const dropdownRef = useRef()
     const [selectedOptions, setSelectedOptions] = useState([])
+    console.log(selectedOptions)
     const [dropdownOptions, setDropdownOptions] = useState(listFilter)
+    console.log(dropdownOptions)
     const [fillter, setFillter] = useState('')
-    const debouncedValue = useDebounce(fillter, 500)
+    const debouncedValue = useDebounce(fillter, 2000)
 
     useEffect(() => {
         // Thực hiện hành động khi giá trị đã được trì hoãn thay đổi (debouncedValue).
@@ -28,11 +30,13 @@ const MultiSelectDropdown = ({ listFilter = [], label }) => {
     console.log(dropdownOptions.filter(() => fillter))
     const handleRemoveOption = (option) => {
         setSelectedOptions(
-            selectedOptions.filter(
-                (selectedOption) => selectedOption !== option
-            )
+            selectedOptions
+                .filter((selectedOption) => selectedOption !== option)
+                .sort((a, b) => (a < b ? -1 : 1))
         )
+
         setDropdownOptions([...dropdownOptions, option])
+        // dropdownOptions.sort((a, b) => (a < b ? -1 : 1))
     }
     const handleAddOption = (option) => {
         setSelectedOptions([...selectedOptions, option])
@@ -42,14 +46,17 @@ const MultiSelectDropdown = ({ listFilter = [], label }) => {
             )
         )
     }
-
+    const clearAllOption = () => {
+        setSelectedOptions([])
+        setDropdownOptions(listFilter)
+    }
     const myFunction = () => {
         dropdownRef.current.classList.toggle(styles.show)
     }
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            console.log(dropdownRef.current)
+            console.log(dropdownRef.current.contains(event.target))
             if (
                 dropdownRef.current &&
                 !dropdownRef.current.contains(event.target)
@@ -64,14 +71,6 @@ const MultiSelectDropdown = ({ listFilter = [], label }) => {
             document.removeEventListener('mousedown', handleClickOutside)
         }
     }, [])
-
-    // const useFilterFunction = () => {
-    //     let input, filter
-    //     input = document.getElementById('myInput')
-    //     filter = input.value.toUpperCase()
-    //     // setFillter(filter)
-    //     // useDebounce(filter, 500)
-    // }
 
     const filteredOptions = dropdownOptions.filter((option) =>
         option.includes(debouncedValue)
@@ -88,45 +87,62 @@ const MultiSelectDropdown = ({ listFilter = [], label }) => {
                 <div className={styles.divContainer}>
                     <label className={styles.labelText}>{label}</label>
                     <div className={styles.dropdown}>
-                        <div className={styles.showDropdown}>
-                            <div
-                                style={{ display: 'flex' }}
-                                className={styles.scrollMenu}
-                            >
-                                {selectedOptions.map((option) => (
-                                    <div className={styles.buttonOption}>
-                                        <span
-                                            className={styles.dropbtn}
-                                            key={option}
-                                        >
-                                            {option}
-                                        </span>
-                                        <img
-                                            key={option + Math.random(1)}
-                                            onClick={() =>
-                                                handleRemoveOption(option)
+                        <div
+                            className={styles.borderDropdown}
+                            onClick={myFunction}
+                        >
+                            <div className={styles.showDropdown}>
+                                <div
+                                    style={{ display: 'flex' }}
+                                    className={styles.scrollMenu}
+                                >
+                                    {selectedOptions.map((option) => (
+                                        <div className={styles.buttonOption}>
+                                            <div className={styles.nameOption}>
+                                                <span
+                                                    className={styles.dropbtn}
+                                                    key={option}
+                                                >
+                                                    {option}
+                                                </span>
+                                            </div>
+                                            <div className={styles.clearOption}>
+                                                <img
+                                                    key={
+                                                        option + Math.random(1)
+                                                    }
+                                                    onClick={() =>
+                                                        handleRemoveOption(
+                                                            option
+                                                        )
+                                                    }
+                                                    width="10"
+                                                    height="10"
+                                                    src={IMAGE_DROPDOWN.close}
+                                                    alt="xbox-x"
+                                                    className={
+                                                        styles.clearOption
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+                                    ))}
+
+                                    <div className={styles.searchBox}>
+                                        <input
+                                            className={styles.searchInput}
+                                            type="text"
+                                            placeholder="Search.."
+                                            id="myInput"
+                                            // onKeyUp={useFilterFunction}
+                                            onChange={(e) =>
+                                                setFillter(e.target.value)
                                             }
-                                            width="10"
-                                            height="10"
-                                            src={IMAGE_DROPDOWN.close}
-                                            alt="xbox-x"
-                                            className={styles.clearOption}
                                         />
                                     </div>
-                                ))}
+                                </div>
                             </div>
-                            <div
-                                className={styles.searchBox}
-                                onClick={myFunction}
-                            >
-                                <input
-                                    className={styles.searchInput}
-                                    type="text"
-                                    placeholder="Search.."
-                                    id="myInput"
-                                    // onKeyUp={useFilterFunction}
-                                    onChange={(e) => setFillter(e.target.value)}
-                                />
+                            <div>
                                 <img
                                     src={IMAGE_DROPDOWN.downAllow2}
                                     alt=""
@@ -134,6 +150,15 @@ const MultiSelectDropdown = ({ listFilter = [], label }) => {
                                     height="20"
                                 />
                             </div>
+                            {selectedOptions.length != 0 && (
+                                <img
+                                    onClick={clearAllOption}
+                                    src={IMAGE_DROPDOWN.cancel}
+                                    alt=""
+                                    width="20px"
+                                    height="20px"
+                                />
+                            )}
                         </div>
 
                         <div
@@ -141,14 +166,16 @@ const MultiSelectDropdown = ({ listFilter = [], label }) => {
                             className={styles.dropdownContent}
                             ref={dropdownRef}
                         >
-                            {filteredOptions.map((option) => (
-                                <a
-                                    key={option}
-                                    onClick={() => handleAddOption(option)}
-                                >
-                                    {option}
-                                </a>
-                            ))}
+                            {filteredOptions
+                                .sort((a, b) => (a < b ? -1 : 1))
+                                .map((option) => (
+                                    <a
+                                        key={option}
+                                        onClick={() => handleAddOption(option)}
+                                    >
+                                        {option}
+                                    </a>
+                                ))}
                         </div>
                     </div>
                 </div>
