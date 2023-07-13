@@ -19,7 +19,7 @@ import { worker } from './api/sever'
 import { fetchUsers } from './features/users/usersSlice'
 import UsersList from './features/users/UsersList'
 import UserPage from './features/users/UserPage'
-import LandingPage, { loader as landingLoad } from './landingPage/LandingPage'
+import LandingPage from './landingPage/LandingPage'
 
 const router = createBrowserRouter([
     {
@@ -84,7 +84,6 @@ const router = createBrowserRouter([
         path: '/landing',
         element: <LandingPage />,
         errorElement: <ErrorPage />,
-        loader: landingLoad,
     },
 ])
 
