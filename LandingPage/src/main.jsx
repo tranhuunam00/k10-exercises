@@ -21,7 +21,7 @@ import UsersList from './features/users/UsersList'
 import UserPage from './features/users/UserPage'
 import LandingPage from './landingPage/LandingPage'
 import Pagination from './routes/Pagination'
-import PageTable from './features/pageTable/PageTable'
+import { fetchPosts } from './features/posts/postsSlice'
 
 const router = createBrowserRouter([
     {
@@ -91,19 +91,13 @@ const router = createBrowserRouter([
         path: '/table',
         element: <Pagination />,
         errorElement: <ErrorPage />,
-        children: [
-            {
-                path: '/table/page1',
-                element: <PageTable />,
-                errorElement: <ErrorPage />,
-            },
-        ],
     },
 ])
 
 async function render() {
     await worker.start()
     store.dispatch(fetchUsers())
+    store.dispatch(fetchPosts())
     ReactDOM.createRoot(document.getElementById('root')).render(
         <Provider store={store}>
             <React.StrictMode>
