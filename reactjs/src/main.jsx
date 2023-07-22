@@ -19,15 +19,9 @@ import { worker } from './api/sever'
 import { fetchUsers } from './features/users/usersSlice'
 import UsersList from './features/users/UsersList'
 import UserPage from './features/users/UserPage'
-import LandingPage from './landingPage/LandingPage'
-import Pagination from './routes/Pagination'
 import { fetchPosts } from './features/posts/postsSlice'
-
-
-const listItemInput = [
-    { name: 'id', label: 'ID' },
-    { name: 'title', label: 'Title' },
-]
+import PaginationAndTable from './present/TableAndPagination/PaginationAndTable'
+import LandingPage from './present/landingPage/LandingPage'
 
 const router = createBrowserRouter([
     {
@@ -95,13 +89,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/table',
-        element: (
-            <Pagination
-                paseShow={11}
-                api={'https://jsonplaceholder.typicode.com/albums'}
-                listItem={listItemInput}
-            />
-        ),
+        element: <PaginationAndTable />,
         errorElement: <ErrorPage />,
     },
 ])
