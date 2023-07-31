@@ -18,6 +18,7 @@ import UserLanguage from "./modules/users/checkLanguage/userLanguage";
 import "../src/components/multiLanguage/i18next/i18next";
 import Uploader from "./modules/users/uploader/Uploader";
 import AvatarUser from "./modules/users/avatar/AvatarUser";
+import VideoPlayer from "./modules/MaterialUI/MateriaUI";
 
 const router = createBrowserRouter([
   {
@@ -49,8 +50,12 @@ const router = createBrowserRouter([
     element: <Uploader />,
   },
   {
-    path: `/`,
+    path: `/user/AvatarUser`,
     element: <AvatarUser />,
+  },
+  {
+    path: `/`,
+    element: <VideoPlayer />,
   },
 ]);
 
