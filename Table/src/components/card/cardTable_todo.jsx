@@ -13,6 +13,7 @@ const Table_card = ({
     isCheck = false
 }) => {
     let counter = 0
+    console.log(listChecked)
 
     return (
         <table border="1" className={styles.table}>
@@ -113,5 +114,4 @@ const Table_card = ({
         </table>
     )
 }
-
 export default Table_card

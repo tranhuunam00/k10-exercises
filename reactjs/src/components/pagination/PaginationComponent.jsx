@@ -6,8 +6,31 @@ export default function PaginationComponent({
     itemPerPage,
     onChangeStartEnd = () => {},
 }) {
+    let totalPage = Math.ceil(total / itemPerPage)
+    function getWindowWidth() {
+        const { innerWidth: width } = window
+        return width
+    }
+
+    const [number, setNumber] = useState({
+        isChooseTable: 1,
+        isChoose: 0,
+        line: itemPerPage,
+        start: 0,
+        end: itemPerPage,
+        pageShow: getWindowWidth() < 400 ? 5 : pageShow,
+        page: totalPage,
+    })
+
+    // console.log(
+    //     'total',
+    //     total,
+    //     pageShow,
+    //     itemPerPage,
+    //     Math.ceil(total / itemPerPage)
+    // )
     const [inputValue, setInputValue] = useState({
-        value: 1,
+        value: total,
         isOk: '',
     })
 
@@ -20,27 +43,12 @@ export default function PaginationComponent({
             setInputValue({ ...inputValue, isOk: 'invalid' })
         }
     }
+
     const handleSave = () => {
         // console.log(inputValue)
         setNumber({ ...number, line: inputValue.value })
         handleSetPage(1)
     }
-
-    // console.log(
-    //     total,
-    //     pageShow,
-    //     inputValue.value,
-    //     Math.ceil(total / inputValue.value)
-    // )
-    const [number, setNumber] = useState({
-        isChooseTable: 1,
-        isChoose: 0,
-        line: total,
-        start: 0,
-        end: total,
-        pageShow: pageShow,
-        page: Math.ceil(total / inputValue.value),
-    })
 
     const PaginationSmall = Array.from(
         {
@@ -51,7 +59,7 @@ export default function PaginationComponent({
                           number.page - Math.round(number.pageShow / 2)
                         ? Math.round(number.pageShow / 2)
                         : Math.round(number.pageShow / 2) - 1
-                    : number.page-2,
+                    : number.page - 2,
         },
         (_, index_) => {
             let startLast = number.page - Math.round(number.pageShow / 2)
@@ -83,6 +91,21 @@ export default function PaginationComponent({
             )
         }
     )
+    const PaginationSmallerShow = Array.from(
+        { length: number.page },
+        (_, index_) => {
+            const index = index_ + 1
+            return (
+                <a
+                    onClick={() => handleSetPage(index)}
+                    className={number.isChooseTable === index ? 'active' : ''}
+                    key={index}
+                >
+                    {index}
+                </a>
+            )
+        }
+    )
 
     const handleSetPage = (index) => {
         // console.log(index)
@@ -98,7 +121,6 @@ export default function PaginationComponent({
             page: Math.ceil(total / inputValue.value),
         })
     }
-
     useEffect(() => {
         handleSetPage(number.isChooseTable)
         onChangeStartEnd(number.isChooseTable, number.start, number.end)
@@ -110,6 +132,7 @@ export default function PaginationComponent({
     useEffect(() => {
         handleSetPage()
     }, [number.line])
+
     return (
         <div className="PaginationDiv">
             <div class="pagination">
@@ -135,58 +158,70 @@ export default function PaginationComponent({
                 >
                     ‹
                 </a>
-                <a
-                    style={{
-                        display: number.page === 1 ? 'none' : '',
-                    }}
-                    href="#"
-                    onClick={() => handleSetPage(1)}
-                    className={number.isChooseTable === 1 ? 'active' : ''}
-                >
-                    1
-                </a>
-                <a
-                    style={{
-                        display:
-                            (number.page > number.pageShow &&
-                                number.isChooseTable <=
-                                    Math.round(number.pageShow / 2)) ||
-                            number.page <= number.pageShow
-                                ? 'none'
-                                : '',
-                    }}
-                    onClick={() => {
-                        handleSetPage(1)
-                    }}
-                >
-                    ...
-                </a>
-                {PaginationSmall}
-                <a
-                    style={{
-                        display:
-                            (number.page > number.pageShow &&
-                                number.isChooseTable >=
-                                    number.page -
-                                        Math.round(number.pageShow / 2)) ||
-                            number.page <= number.pageShow
-                                ? 'none'
-                                : '',
-                    }}
-                    href="#"
-                    onClick={() => handleSetPage(number.page)}
-                >
-                    ...
-                </a>
-                <a
-                    href="#"
-                    onClick={() => handleSetPage(number.page)}
-                    className={
-                        number.isChooseTable === number.page ? 'active' : ''
-                    }
-                >
-                    {number.page}
-                </a>
+                {number.page > number.pageShow ? (
+                    <>
+                        <a
+                            style={{
+                                display: number.page === 1 ? 'none' : '',
+                            }}
+                            href="#"
+                            onClick={() => handleSetPage(1)}
+                            className={
+                                number.isChooseTable === 1 ? 'active' : ''
+                            }
+                        >
+                            1
+                        </a>
+                        <a
+                            style={{
+                                display:
+                                    (number.page > number.pageShow &&
+                                        number.isChooseTable <=
+                                            Math.round(number.pageShow / 2)) ||
+                                    number.page <= number.pageShow
+                                        ? 'none'
+                                        : '',
+                            }}
+                            onClick={() => {
+                                handleSetPage(1)
+                            }}
+                        >
+                            . . .
+                        </a>
+                        {PaginationSmall}
+                        <a
+                            style={{
+                                display:
+                                    (number.page > number.pageShow &&
+                                        number.isChooseTable >=
+                                            number.page -
+                                                Math.round(
+                                                    number.pageShow / 2
+                                                )) ||
+                                    number.page <= number.pageShow
+                                        ? 'none'
+                                        : '',
+                            }}
+                            href="#"
+                            onClick={() => handleSetPage(number.page)}
+                        >
+                            . . .
+                        </a>
+                        <a
+                            href="#"
+                            onClick={() => handleSetPage(number.page)}
+                            className={
+                                number.isChooseTable === number.page
+                                    ? 'active'
+                                    : ''
+                            }
+                        >
+                            {number.page}
+                        </a>
+                    </>
+                ) : (
+                    PaginationSmallerShow
+                )}
                 <a
                     className="icon"
                     href="#"
@@ -210,14 +245,14 @@ export default function PaginationComponent({
                     &raquo;
                 </a>
             </div>
-            <div>
+            <div className="inputItemPerPage">
                 <input
                     className={inputValue.isOk}
                     type="text"
                     placeholder="item"
                     onChange={inputHandle}
                 />
-                <a onClick={handleSave}>OK</a>
+                <button onClick={handleSave}>OK</button>
             </div>
         </div>
     )

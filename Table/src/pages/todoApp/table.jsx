@@ -68,6 +68,7 @@ const Table = () => {
         let listId = []
         if (type == 'ALL') {
             listId = stateGlobal.listUser.map((user) => user.id)
+            console.log(listId)
         }
         if (type === 'NONE') listId = []
         if (type === 'ITEM_CHECK') {
